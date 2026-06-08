@@ -1,4 +1,10 @@
 allowBuilds:
   '@parcel/watcher': set this to true or false
+  bufferutil: set this to true or false
+  es5-ext: set this to true or false
+  utf-8-validate: set this to true or false
 minimumReleaseAgeExclude:
   - '@salla.sa/*'
+overrides:
+  '@salla.sa/ui-google-map-render': 'npm:lit@3.3.3'
+  '@salla.sa/ui-address-autocomplete-widget': 'npm:lit@3.3.3'
