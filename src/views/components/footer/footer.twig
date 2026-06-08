@@ -1,12 +1,15 @@
 {#
-  Giftology — Footer  (§5.9)  — ported from the reference design.
-  Logo / name / description / socials come from Salla store data; the
-  category column links come from twilight.json settings (gly_cat_*).
+  Giftology — Footer  (§5.9)
+  Brand (logo/name/description) from Salla store data. One link column = the
+  store sections (الأقسام), links from twilight.json settings (gly_cat_*).
+  Contact column = email / Instagram / WhatsApp (merchant-editable settings).
   Payment badges are design constants. Dark watermark = --gly-darkpat.
 #}
 {% set gly_home = store.url %}
-{% set gly_wa_number = theme.settings.get('gly_whatsapp') %}
-{% set gly_wa_general = gly_wa_number ? 'https://wa.me/' ~ gly_wa_number ~ '?text=' ~ trans('blocks.gly.wa.general_msg')|url_encode : '' %}
+{% set gly_wa_number = theme.settings.get('gly_whatsapp') ?: '966500000000' %}
+{% set gly_wa_general = 'https://wa.me/' ~ gly_wa_number ~ '?text=' ~ trans('blocks.gly.wa.general_msg')|url_encode %}
+{% set gly_email = theme.settings.get('gly_email') ?: store.email %}
+{% set gly_instagram = store.social.instagram ?: theme.settings.get('gly_instagram') %}
 
 {% set gly_cats = [
   { url: theme.settings.get('gly_cat_newborn'),  label: trans('blocks.gly.cats.newborn') },
@@ -17,7 +20,7 @@
   { url: theme.settings.get('gly_cat_cards'),    label: trans('blocks.gly.cats.cards') }
 ] %}
 
-<footer id="gly-story" class="gly-footer">
+<footer class="gly-footer">
   <div class="gly-footer__deco" aria-hidden="true"></div>
   <div class="gly-wrap">
     <div class="gly-fgrid">
@@ -26,37 +29,9 @@
       <div class="gly-fbrand">
         <img src="{{ store.logo|cdn(220) }}" alt="{{ store.name }}">
         <p>{{ store.description ?: trans('blocks.gly.footer.about') }}</p>
-        <div class="gly-social">
-          {% if store.social.instagram %}
-            <a href="{{ store.social.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-            </a>
-          {% endif %}
-          {% if theme.settings.get('gly_tiktok') %}
-            <a href="{{ theme.settings.get('gly_tiktok') }}" target="_blank" rel="noopener" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2.5 1.8 4 4 4.2v3c-1.5 0-2.9-.5-4-1.3V15a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v3.1a3 3 0 1 0 2 2.8V3h3Z"/></svg>
-            </a>
-          {% endif %}
-          {% if gly_wa_general %}
-            <a href="{{ gly_wa_general }}" target="_blank" rel="noopener" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5 13.6c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-3-.8-2.5-1.1-4-3.7-4.2-3.9-.1-.2-1-1.3-1-2.5s.6-1.7.8-2c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4 0 .5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.3.1.7-.1 1.2Z"/></svg>
-            </a>
-          {% endif %}
-        </div>
       </div>
 
-      {# shop #}
-      <div>
-        <h5>{{ trans('blocks.gly.footer.shop') }}</h5>
-        <ul>
-          <li><a href="{{ gly_home }}/#gly-cats">{{ trans('blocks.gly.nav.sections') }}</a></li>
-          <li><a href="{{ gly_home }}/#gly-custom">{{ trans('blocks.gly.nav.custom') }}</a></li>
-          <li><a href="{{ gly_home }}/#gly-finder">{{ trans('blocks.gly.nav.finder') }}</a></li>
-          <li><a href="{{ gly_home }}/#gly-how">{{ trans('blocks.gly.nav.how') }}</a></li>
-        </ul>
-      </div>
-
-      {# categories — links from settings #}
+      {# sections — links from settings #}
       <div>
         <h5>{{ trans('blocks.gly.footer.categories') }}</h5>
         <ul>
@@ -66,15 +41,32 @@
         </ul>
       </div>
 
-      {# help #}
+      {# contact methods — email / Instagram / WhatsApp #}
       <div>
-        <h5>{{ trans('blocks.gly.footer.help') }}</h5>
-        <ul>
-          <li><a href="{{ store.url }}/profile">{{ trans('blocks.gly.footer.track') }}</a></li>
-          <li><a href="{{ store.url }}/pages">{{ trans('blocks.gly.footer.shipping') }}</a></li>
-          <li><a href="{{ store.url }}/pages">{{ trans('blocks.gly.footer.faq') }}</a></li>
-          {% if gly_wa_general %}<li><a href="{{ gly_wa_general }}" target="_blank" rel="noopener">{{ trans('blocks.gly.footer.contact') }}</a></li>{% endif %}
-          <li><a href="{{ gly_home }}/#gly-story">{{ trans('blocks.gly.footer.about_link') }}</a></li>
+        <h5>{{ trans('blocks.gly.footer.contact') }}</h5>
+        <ul class="gly-fcontact">
+          {% if gly_email %}
+            <li>
+              <a href="mailto:{{ gly_email }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                <span>{{ gly_email }}</span>
+              </a>
+            </li>
+          {% endif %}
+          {% if gly_instagram %}
+            <li>
+              <a href="{{ gly_instagram }}" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+                <span>{{ trans('blocks.gly.footer.instagram') }}</span>
+              </a>
+            </li>
+          {% endif %}
+          <li>
+            <a href="{{ gly_wa_general }}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5 13.6c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-3-.8-2.5-1.1-4-3.7-4.2-3.9-.1-.2-1-1.3-1-2.5s.6-1.7.8-2c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4 0 .5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.3.1.7-.1 1.2Z"/></svg>
+              <span>{{ trans('blocks.gly.footer.whatsapp') }}</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

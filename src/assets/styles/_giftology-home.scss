@@ -88,7 +88,8 @@
 .gly-blob.teal{width:430px;height:430px;inset-inline-end:-30px;top:10px;background:radial-gradient(circle at 35% 30%,#7fd4cf,#3f9c96);box-shadow:var(--gly-shadow-teal);animation:gly-morph 12s ease-in-out infinite}
 .gly-blob.peach{width:170px;height:170px;inset-inline-start:-10px;bottom:20px;background:linear-gradient(140deg,var(--gly-peach),var(--gly-peach-deep));z-index:1;animation:gly-morph 9s ease-in-out infinite reverse}
 @keyframes gly-morph{0%,100%{border-radius:46% 54% 60% 40%/52% 48% 52% 48%}50%{border-radius:58% 42% 40% 60%/45% 55% 45% 55%}}
-.gly-hero__pattern{position:absolute;inset:14px;border-radius:38% 46% 52% 36%/44% 40% 56% 50%;background-image:var(--gly-pat);background-size:340px;opacity:.5;mix-blend-mode:soft-light;z-index:1}
+/* watermark sits exactly on the teal oval (same box + shape as .gly-blob.teal) */
+.gly-hero__pattern{position:absolute;width:430px;height:430px;inset-inline-end:-30px;top:10px;border-radius:46% 54% 60% 40%/52% 48% 52% 48%;background-image:var(--gly-pat);background-size:300px;opacity:.6;mix-blend-mode:soft-light;z-index:1;overflow:hidden;animation:gly-morph 12s ease-in-out infinite}
 .gly-fcard{position:absolute;background:#fff;border-radius:16px;box-shadow:var(--gly-shadow-md);padding:.7rem .9rem;display:flex;gap:.6rem;align-items:center;z-index:3;border:1px solid rgba(74,63,53,.06)}
 .gly-fcard__ph{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:1.3rem;flex:0 0 auto}
 .gly-fcard b{font-size:.92rem;font-family:var(--gly-font-display);font-weight:700}
@@ -194,7 +195,10 @@
    ============================================================ */
 .gly-footer{background:#22302d;color:#cfe2df;padding:3.4rem 0 1.6rem;position:relative;overflow:hidden;margin-top:1rem;font-family:var(--gly-font-body)}
 .gly-footer__deco{position:absolute;inset:0;background-image:var(--gly-darkpat);background-size:420px;opacity:.5}
-.gly-fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem;position:relative}
+.gly-fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:2rem;position:relative}
+.gly-fcontact a{display:flex;align-items:center;gap:.55rem}
+.gly-fcontact svg{width:18px;height:18px;flex:0 0 auto;color:var(--gly-gold-soft)}
+.gly-fcontact span{direction:ltr;unicode-bidi:plaintext;text-align:start}
 .gly-fbrand img{height:56px;width:auto;filter:brightness(0) invert(1) opacity(.95)}
 .gly-fbrand p{margin:1rem 0;opacity:.72;font-size:.94rem;max-width:36ch;line-height:1.8}
 .gly-social{display:flex;gap:.6rem}
