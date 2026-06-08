@@ -1,0 +1,41 @@
+/* ============================================================
+   Giftology — brand tokens layer
+   File: src/assets/styles/_giftology.scss
+   Fonts + design tokens + Raed theme-variable overrides.
+   Component styles live in _giftology-home.scss.
+   Values mirror design/giftology-reference.html (:root).
+   ============================================================ */
+
+/* ---- Arabic brand fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+:root {
+  /* ---- Raed theme variables (recolor the whole store) ---- */
+  --color-primary: #3f9c96;          /* deeper Tiffany — legible white text on buttons */
+  --color-primary-dark: #2c6f6a;
+  --color-primary-light: #61c5bf;    /* exact Tiffany as the light accent */
+  --color-primary-reverse: #ffffff;
+  --font-main: 'Tajawal', sans-serif;
+
+  /* ---- Giftology design tokens (used by all gly- components) ---- */
+  --gly-teal:#61c5bf; --gly-teal-deep:#3f9c96; --gly-teal-ink:#2c6f6a; --gly-teal-wash:#e7f5f3;
+  --gly-ink:#33302b; --gly-soft:#6b645c; --gly-line:#4a3f35;
+  --gly-gold:#c8a24a; --gly-gold-soft:#e7d39a;
+  --gly-peach:#f9e6da; --gly-peach-deep:#f4c9b3;
+  --gly-cream:#fdf9f3; --gly-paper:#ffffff;
+
+  --gly-shadow-sm:0 4px 18px rgba(74,63,53,.08);
+  --gly-shadow-md:0 16px 44px rgba(74,63,53,.14);
+  --gly-shadow-teal:0 18px 40px rgba(63,156,150,.28);
+
+  --gly-font-display:'Amiri',Georgia,serif;
+  --gly-font-body:'Tajawal',system-ui,-apple-system,sans-serif;
+  --gly-font-script:'Aref Ruqaa','Amiri',serif;
+  --gly-r:18px;
+}
+
+/* warm peach → cream page background (overall), like the reference mockup */
+body.theme-raed {
+  background: linear-gradient(200deg, var(--gly-cream) 0%, #fcf2ea 48%, var(--gly-peach) 100%);
+  background-attachment: fixed;
+}

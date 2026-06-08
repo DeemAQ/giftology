@@ -70,7 +70,7 @@
     <script data-cfasync="false">
         window.header_is_sticky = "{{theme.settings.get('header_is_sticky', 'Default Value')}}"
         window.imageZoom = "{{theme.settings.get('imageZoom')}}"
-        window.can_access_wallet = {{ user.can_access_wallet | json_encode }}
+        window.can_access_wallet = "{{ user.can_access_wallet | json_encode }}"
         window.enable_more_menu = "{{ theme.settings.get('enable_more_menu', true) }}"
         window.enable_add_product_toast = "{{ theme.settings.get('enable_add_product_toast', true) }}"
         window.notify_when_available_in_card = "{{ theme.settings.get('notify_when_available_in_card', true) }}"
@@ -90,6 +90,9 @@
             --color-primary-dark: {{ theme.color.darker(0.15) }};
             --color-primary-light: {{ theme.color.lighter(0.15) }};
             --color-primary-reverse: {{ theme.color.reverse_text }};
+            /* Giftology watermark patterns — real image files (not base64) */
+            --gly-pat: url('{{ 'images/teal_pattern_with_bg.jpg'|asset }}');
+            --gly-darkpat: url('{{ 'images/white_pattern.png'|asset }}');
         }
     </style>
     {# tracking services, custom css feature. #}
@@ -107,6 +110,8 @@
 </noscript>
 <div class="app-inner flex flex-col min-h-full">
     {% hook 'body:start' %}
+    {# Giftology — top promo bar (§5.1) #}
+    {% include 'components.gly-promo' %}
     {% component 'header.header' %}
     <main id="main-content" role="main"{{ (page.slug == 'product.single' or page.slug starts with 'product.index') ? ' class="flex flex-col space-y-8 sm:space-y-16"' : '' }}>
     {% block content %}{% endblock %}
@@ -117,7 +122,11 @@
 {% if theme.settings.get('enable_add_product_toast', true) %}
     <salla-add-product-toast></salla-add-product-toast>
 {% endif %}
+{# Giftology — global floating WhatsApp button (§5.10) #}
+{% include 'components.gly-whatsapp-float' %}
 <script defer crossorigin="anonymous" src="{{ 'app.js' | asset }}"></script>
+{# Giftology — theme behaviors (header scroll, mobile menu, reveal, gift finder, testimonials) #}
+<script defer src="{{ 'giftology.js' | asset }}"></script>
 
 {# Twilight Components #}
 <salla-offer-modal></salla-offer-modal>

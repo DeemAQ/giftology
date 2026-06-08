@@ -1,73 +1,73 @@
 {#
-| Variable         | Type    | Description                     |
-|------------------|---------|---------------------------------|
-| cart             | object  |                                 |
-| cart.items_count | int     |                                 |
-| cart.total       | string  | Formatted total ex: "١٠٠ ر.س"   |
+  Giftology — Header / nav  (§5.2)  — ported from the reference design.
+  Logo + cart + account come from Salla (store.logo, <salla-cart-summary>,
+  <salla-user-menu>); nav links jump to the homepage sections; search opens
+  Salla's global <salla-search> modal. Solid-on-scroll + mobile menu in giftology.js.
+
+  | Variable         | Type    | Description                   |
+  | cart.items_count | int     |                               |
+  | cart.total       | string  | Formatted total               |
 #}
-{% set important_links = theme.settings.get('important_links') %}
-<header class="store-header">
-  {# Top Nav #}
-  <div class="top-navbar">
-    <div class="container flex justify-between">
-      <div class="flex-1 flex items-center gap-2">
-          {# Footer Menu #}
-          {% if important_links %}
-            <salla-menu source="footer" topnav></salla-menu>
-          {% endif %}
+{% set gly_home = store.url %}
+{% set gly_nav = [
+  { url: gly_home ~ '/#gly-cats',   label: trans('blocks.gly.nav.sections') },
+  { url: gly_home ~ '/#gly-custom', label: trans('blocks.gly.nav.custom') },
+  { url: gly_home ~ '/#gly-finder', label: trans('blocks.gly.nav.finder') },
+  { url: gly_home ~ '/#gly-how',    label: trans('blocks.gly.nav.how') }
+] %}
 
-          {# Language & Currency Component #}
-          <div class="header-buttons">
-              {% if store.settings.is_multilingual or store.settings.currencies_enabled %}
-                  <salla-localization-modal show-trigger></salla-localization-modal>
-              {% endif %}
-          </div>
+<header id="gly-hdr" class="gly-header store-header">
+  <div class="gly-nav-bg"></div>
+  <nav class="gly-nav gly-wrap">
 
-          {# Scopes | Branches #}
-          {% if store.scope %}
-              <button class="btn--rounded-gray"
-                      onclick="salla.event.dispatch('scopes::open', {'mode': 'default'})">
-                  <i class="sicon-location rtl:ml-1 ltr:mr-1"></i> {{ store.scope.name }}
-              </button>
-          {% endif %}
+    {# logo + sections grouped on the inline-start (right in RTL) #}
+    <div class="gly-nav-start">
+      {# logo — Salla store data #}
+      <a href="{{ store.url }}" class="gly-brand">
+        <img fetchpriority="high" loading="eager" src="{{ 'images/teal_logo_trim.png'|asset }}" alt="{{ store.name }}">
+        {% if is_page('index') %}
+          <h1 class="sr-only">{{ store.name }}</h1>
+        {% else %}
+          <span class="sr-only">{{ store.name }}</span>
+        {% endif %}
+      </a>
 
-          {# Search bar #}
-          <div class="header-search flex-1">
-            <salla-search inline oval height="36"></salla-search>
-          </div>
+      {# desktop menu #}
+      <div class="gly-menu">
+        {% for item in gly_nav %}
+          <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.label }}</a>
+        {% endfor %}
       </div>
-
-      <salla-contacts is-header></salla-contacts>
     </div>
-  </div>
 
-  {# Main Nav #}
-  <div id="mainnav" class="main-nav-container shadow-default bg-white flex items-center">
-      <div class="inner bg-inherit w-full">
-          <div class="container">
-              <div class="flex items-stretch justify-between relative">
-                  <div class="flex items-center">
-                      <a class="lg:hidden mburger mburger--collapse leading-none rtl:ml-4 ltr:mr-4" href="#mobile-menu" aria-label="Open-menu">
-                        <i class="sicon-menu text-primary text-2xl"></i>
-                      </a>
-                      <a class="navbar-brand" href="{{ store.url }}">
-                          <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ store.logo|cdn(175) }}" alt="{{ store.name }} logo">
-                          {% if is_page('index') %}
-                            <h1 class="sr-only">{{ store.name }}</h1>
-                          {% else %}
-                            <h2 class="sr-only">{{ store.name }}</h2>
-                          {% endif %}
-                      </a>
-                      <custom-main-menu></custom-main-menu>
-                  </div>
-                  <div class="flex items-center justify-end my-2.5">
-                      <salla-user-menu avatar-only show-header show-trigger></salla-user-menu>
-                      <salla-cart-summary class="ml-4 rtl:ml-[unset] rtl:mr-4">
-                        <i slot="icon" class="header-btn__icon icon sicon-shopping-bag"></i>
-                      </salla-cart-summary>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+    {# action icons — pushed to the inline-end (left in RTL) #}
+    <div class="gly-icons">
+      <button type="button" class="gly-ibtn" aria-label="{{ trans('blocks.gly.nav.search') }}"
+        onclick="(function(){var s=document.querySelector('salla-search');if(s&&s.open){s.open()}else if(window.salla&&salla.event){salla.event.dispatch('search::open')}})()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+
+      {# account — Salla user menu (handles login / profile) #}
+      <salla-user-menu avatar-only show-trigger show-header></salla-user-menu>
+
+      {# cart — Salla cart summary (live count, opens real cart) #}
+      <salla-cart-summary>
+        <i slot="icon" class="sicon-shopping-bag"></i>
+      </salla-cart-summary>
+
+      <button type="button" class="gly-ibtn gly-burger" id="gly-burger" aria-label="{{ trans('blocks.gly.nav.menu') }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </nav>
 </header>
+
+{# mobile menu #}
+<div class="gly-mmenu" id="gly-mmenu">
+  <button type="button" class="gly-mclose" id="gly-mclose" aria-label="{{ trans('blocks.gly.nav.close') }}">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg>
+  </button>
+  {% for item in gly_nav %}
+    <a href="{{ item.url }}">{{ item.label }}</a>
+  {% endfor %}
+</div>
