@@ -26,5 +26,5 @@ pnpm-lock.yaml
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 .DS_Store
-
-
+/design
+CLAUDE.md

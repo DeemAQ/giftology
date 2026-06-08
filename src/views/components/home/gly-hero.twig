@@ -1,0 +1,50 @@
+{#
+  Giftology — Hero  (§5.3)  — faithful port of the reference.
+  Strings: blocks.gly.hero.*  ·  CTAs jump to #gly-cats / #gly-custom.
+#}
+<section class="gly-section gly-hero">
+  <div class="gly-wrap gly-hero__grid">
+
+    {# copy #}
+    <div class="gly-reveal">
+      <span class="gly-eyebrow">{{ trans('blocks.gly.hero.eyebrow') }}</span>
+      <h1>{{ trans('blocks.gly.hero.title_pre') }} <span class="gly-accent">{{ trans('blocks.gly.hero.title_em') }}</span> {{ trans('blocks.gly.hero.title_post') }}</h1>
+      <p class="gly-lede">{{ trans('blocks.gly.hero.lede') }}</p>
+      <div class="gly-cta-row">
+        <a href="#gly-cats" class="gly-btn gly-btn-primary">{{ trans('blocks.gly.hero.cta_shop') }}
+          <svg class="gly-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#gly-custom" class="gly-btn gly-btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/></svg>{{ trans('blocks.gly.hero.cta_custom') }}</a>
+      </div>
+      <div class="gly-hero-stats">
+        <div><b>+12 {{ trans('blocks.gly.hero.stat_k') }}</b><span>{{ trans('blocks.gly.hero.stat_gifts') }}</span></div>
+        <div><b>+40</b><span>{{ trans('blocks.gly.hero.stat_occasions') }}</span></div>
+        <div><b>4.9★</b><span>{{ trans('blocks.gly.hero.stat_rating') }}</span></div>
+        <div><b>2018</b><span>{{ trans('blocks.gly.hero.stat_since') }}</span></div>
+      </div>
+    </div>
+
+    {# visual #}
+    <div class="gly-hero__art gly-reveal" aria-hidden="true">
+      <div class="gly-blob teal"></div>
+      <div class="gly-hero__pattern"></div>
+      <div class="gly-blob peach"></div>
+
+      <svg class="gly-bow" viewBox="0 0 120 100" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M58 44C44 18 14 22 18 44s30 18 40 4" fill="rgba(255,255,255,.12)"/>
+        <path d="M62 44C76 18 106 22 102 44S72 62 62 48" fill="rgba(255,255,255,.12)"/>
+        <path d="M52 46c-8 14-10 28-14 42M58 48c-2 16-2 30-2 44"/>
+        <path d="M68 46c8 14 10 28 14 42M62 48c2 16 2 30 2 44"/>
+        <circle cx="98" cy="64" r="5" fill="#fff" stroke="none"/>
+      </svg>
+
+      <svg class="gly-sparkle" style="top:30px;inset-inline-end:60px;width:26px" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5z"/></svg>
+      <svg class="gly-sparkle" style="bottom:90px;inset-inline-start:30px;width:18px;animation-delay:1s" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5z"/></svg>
+
+      <div class="gly-fcard fc1"><div class="gly-fcard__ph" style="background:var(--gly-gold)">🎀</div><div><b>{{ trans('blocks.gly.hero.mini_wrap_t') }}</b><small>{{ trans('blocks.gly.hero.mini_wrap_d') }}</small></div></div>
+      <div class="gly-fcard fc2"><div class="gly-fcard__ph" style="background:var(--gly-teal-deep)">🚚</div><div><b>{{ trans('blocks.gly.hero.mini_fast_t') }}</b><small>{{ trans('blocks.gly.hero.mini_fast_d') }}</small></div></div>
+      <div class="gly-fcard fc3"><div class="gly-fcard__ph" style="background:#e2715f">💌</div><div><b>{{ trans('blocks.gly.hero.mini_card_t') }}</b><small>{{ trans('blocks.gly.hero.mini_card_d') }}</small></div></div>
+    </div>
+
+  </div>
+</section>

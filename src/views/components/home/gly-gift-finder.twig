@@ -1,0 +1,29 @@
+{#
+  Giftology — Gift finder  (§7)  — faithful port.
+  Quiz logic lives in giftology.js; this is the shell. Each answer scores a
+  category key and the result button links to that Salla category (or WhatsApp
+  for "custom"). Category links come from twilight.json settings via data-*.
+#}
+{% set gly_wa_number = theme.settings.get('gly_whatsapp') %}
+{% set gly_wa_custom = 'https://wa.me/' ~ gly_wa_number ~ '?text=' ~ trans('blocks.gly.wa.custom_msg')|url_encode %}
+
+<section id="gly-finder" class="gly-section gly-quiz">
+  <div class="gly-wrap">
+    <div class="gly-quiz-box gly-reveal"
+         data-newborn="{{ theme.settings.get('gly_cat_newborn') ?: store.url }}"
+         data-kids="{{ theme.settings.get('gly_cat_kids') ?: store.url }}"
+         data-men="{{ theme.settings.get('gly_cat_men') ?: store.url }}"
+         data-occasion="{{ theme.settings.get('gly_cat_occasion') ?: store.url }}"
+         data-favors="{{ theme.settings.get('gly_cat_favors') ?: store.url }}"
+         data-cards="{{ theme.settings.get('gly_cat_cards') ?: store.url }}"
+         data-custom="{{ gly_wa_custom }}">
+      <svg class="gly-quiz__mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <div>
+        <span class="gly-eyebrow">{{ trans('blocks.gly.finder.eyebrow') }}</span>
+        <h2>{{ trans('blocks.gly.finder.title_pre') }} <em>{{ trans('blocks.gly.finder.title_em') }}</em></h2>
+        <p class="gly-qlede">{{ trans('blocks.gly.finder.lede') }}</p>
+      </div>
+      <div class="gly-qcard"></div>
+    </div>
+  </div>
+</section>

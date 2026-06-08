@@ -4,9 +4,39 @@
 | page             | object     |                                                                     |
 | page.title       | string     | *could be html                                                      |
 | page.slug        | string     | ex: "cat.show"                                                      |
+
+  Giftology homepage — bespoke sections in the reference order
+  (hero → categories → custom → how → finder → testimonials), each behind a
+  merchant toggle. {% component home %} stays at the end so the merchant can
+  still add optional builder blocks (e.g. product sliders) below.
 #}
 {% extends "layouts.master" %}
 {% block content %}
+    {% if theme.settings.get('gly_show_hero', true) %}
+        {% include 'components.home.gly-hero' %}
+    {% endif %}
+
+    {% if theme.settings.get('gly_show_categories', true) %}
+        {% include 'components.home.gly-categories' %}
+    {% endif %}
+
+    {% if theme.settings.get('gly_show_custom', true) %}
+        {% include 'components.home.gly-custom-gift' %}
+    {% endif %}
+
+    {% if theme.settings.get('gly_show_how', true) %}
+        {% include 'components.home.gly-how-it-works' %}
+    {% endif %}
+
+    {% if theme.settings.get('gly_show_finder', true) %}
+        {% include 'components.home.gly-gift-finder' %}
+    {% endif %}
+
+    {% if theme.settings.get('gly_show_testimonials', true) %}
+        {% include 'components.home.gly-testimonials' %}
+    {% endif %}
+
+    {# Optional extra merchant blocks from the home builder (e.g. product sliders) #}
     {% component home %}
 {% endblock %}
 {% block scripts %}

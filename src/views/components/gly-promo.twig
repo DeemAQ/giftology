@@ -1,0 +1,9 @@
+{#
+  Giftology — Top promo bar  (§5.1)  — faithful port of the reference topbar.
+  Toggle via setting gly_show_promo (default on).
+#}
+{% if theme.settings.get('gly_show_promo', true) %}
+  <div class="gly-topbar" role="note">
+    ✦ {{ trans('blocks.gly.promo.wrap') }} &nbsp;·&nbsp; {{ trans('blocks.gly.promo.sameday') }} &nbsp;·&nbsp; <b>{{ trans('blocks.gly.promo.shipping') }}</b> ✦
+  </div>
+{% endif %}
