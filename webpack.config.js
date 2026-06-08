@@ -11,6 +11,7 @@ module.exports = {
     entry  : {
         app     : [asset('styles/app.scss'), asset('js/wishlist.js'), asset('js/app.js'), asset('js/blog.js')],
         home    : asset('js/home.js'),
+        giftology : asset('js/giftology.js'),
         'product-card' : asset('js/partials/product-card.js'),
         'main-menu' : asset('js/partials/main-menu.js'),
         'wishlist-card': asset('js/partials/wishlist-card.js'),

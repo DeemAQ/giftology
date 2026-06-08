@@ -1,0 +1,42 @@
+{#
+  Giftology — Custom gift section  (§5.5)  — faithful port.
+  Custom = "contact first via WhatsApp", NOT an add-to-cart product:
+  no price, no product-page button. WhatsApp number + custom message
+  come from twilight.json settings.
+#}
+{% set gly_wa_number = theme.settings.get('gly_whatsapp') %}
+{% set gly_wa_custom = 'https://wa.me/' ~ gly_wa_number ~ '?text=' ~ trans('blocks.gly.wa.custom_msg')|url_encode %}
+
+<section id="gly-custom" class="gly-section gly-custom">
+  <div class="gly-custom__deco" aria-hidden="true"></div>
+  <div class="gly-wrap gly-custom__grid">
+
+    {# copy + steps #}
+    <div class="gly-reveal">
+      <span class="gly-eyebrow">{{ trans('blocks.gly.custom.eyebrow') }}</span>
+      <h2>{{ trans('blocks.gly.custom.title_pre') }} <em>{{ trans('blocks.gly.custom.title_em') }}</em></h2>
+      <p class="gly-custom__lede">{{ trans('blocks.gly.custom.lede') }}</p>
+      <ol class="gly-csteps">
+        <li class="gly-cstep"><div class="gly-cstep__n">1</div><div><b>{{ trans('blocks.gly.custom.step1_t') }}</b><small>{{ trans('blocks.gly.custom.step1_d') }}</small></div></li>
+        <li class="gly-cstep"><div class="gly-cstep__n">2</div><div><b>{{ trans('blocks.gly.custom.step2_t') }}</b><small>{{ trans('blocks.gly.custom.step2_d') }}</small></div></li>
+        <li class="gly-cstep"><div class="gly-cstep__n">3</div><div><b>{{ trans('blocks.gly.custom.step3_t') }}</b><small>{{ trans('blocks.gly.custom.step3_d') }}</small></div></li>
+      </ol>
+    </div>
+
+    {# order card (WhatsApp, no price) #}
+    <div class="gly-qcard-c gly-reveal">
+      <span class="gly-badge-soft">{{ trans('blocks.gly.custom.card_badge') }}</span>
+      <h3>{{ trans('blocks.gly.custom.card_title') }}</h3>
+      <p>{{ trans('blocks.gly.custom.card_desc') }}</p>
+      <div class="gly-note">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        {{ trans('blocks.gly.custom.card_note') }}
+      </div>
+      <a class="gly-btn gly-btn-wa" href="{{ gly_wa_custom }}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5 13.6c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-3-.8-2.5-1.1-4-3.7-4.2-3.9-.1-.2-1-1.3-1-2.5s.6-1.7.8-2c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4 0 .5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.4.2.5.3.1.3.1.7-.1 1.2Z"/></svg>
+        {{ trans('blocks.gly.custom.card_btn') }}
+      </a>
+    </div>
+
+  </div>
+</section>

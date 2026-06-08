@@ -5,6 +5,133 @@
     },
     "appBanner": {
       "download_now": "download now"
+    },
+    "gly": {
+      "hero": {
+        "aria": "Giftology intro",
+        "eyebrow": "The art & science of gifting",
+        "title_pre": "Every gift",
+        "title_em": "thoughtfully",
+        "title_post": "crafted",
+        "lede": "Ready-to-buy gift boxes and fully custom ones — wrapped with care, made with love, delivered right on time.",
+        "cta_shop": "Shop sections",
+        "cta_custom": "Custom gift",
+        "stat_k": "K",
+        "stat_gifts": "gifts delivered",
+        "stat_occasions": "occasions",
+        "stat_rating": "customer rating",
+        "stat_since": "serving since",
+        "mini_wrap_t": "Hand wrapping",
+        "mini_wrap_d": "By our artists",
+        "mini_fast_t": "Fast delivery",
+        "mini_fast_d": "Within Riyadh",
+        "mini_card_t": "Free card",
+        "mini_card_d": "A personal note"
+      },
+      "cats": {
+        "aria": "Gift categories",
+        "eyebrow": "Shop by category",
+        "title_pre": "A gift for every",
+        "title_em": "occasion",
+        "sub": "Pick the right section and discover carefully curated gifts.",
+        "newborn": "Newborn gifts",
+        "occasion": "Gifts for any occasion",
+        "kids": "Kids party gifts",
+        "men": "Men's gifts",
+        "favors": "Party favors",
+        "cards": "Envelopes & cards"
+      },
+      "custom": {
+        "aria": "Custom gift",
+        "eyebrow": "Made just for you",
+        "title_pre": "A custom gift",
+        "title_em": "designed for them",
+        "lede": "Have a special idea? We turn it into a unique gift. Contact us first with your idea, we send a quote, then we craft and wrap it elegantly.",
+        "step1_t": "Share your idea",
+        "step1_d": "Tell us the occasion, the budget, and what they love.",
+        "step2_t": "We send a quote",
+        "step2_d": "Clear details before you confirm the order.",
+        "step3_t": "We make, wrap & deliver",
+        "step3_d": "A fully custom gift arrives at their door.",
+        "card_badge": "Made to order",
+        "card_title": "Order your custom gift",
+        "card_desc": "Tell us your idea on WhatsApp, we send a suitable quote, then we start crafting it.",
+        "card_note": "Contact us first, then we send your custom quote.",
+        "card_btn": "Contact via WhatsApp"
+      },
+      "finder": {
+        "aria": "Gift finder",
+        "eyebrow": "Gift finder",
+        "title_pre": "Not sure what to give?",
+        "title_em": "Let's find out",
+        "lede": "Answer three quick questions and we'll suggest the perfect section for your gift."
+      },
+      "how": {
+        "aria": "How we work",
+        "eyebrow": "The Giftology way",
+        "title_pre": "Gifting is...",
+        "title_em": "a science & an art",
+        "sub": "A simple method behind every happy moment.",
+        "discover_t": "Discover",
+        "discover_d": "Tell us the occasion, the person, and the budget.",
+        "pick_t": "Select",
+        "pick_d": "We pick pieces they'll truly love and remember.",
+        "wrap_t": "Wrap",
+        "wrap_d": "With a signature ribbon and a personal card, a luxe touch.",
+        "deliver_t": "Deliver",
+        "deliver_d": "It arrives at their door right on time."
+      },
+      "wa": {
+        "custom_msg": "Hello, I'd like to order a custom gift 🎁",
+        "general_msg": "Hello, I have a question 🌿",
+        "float_aria": "Contact us on WhatsApp",
+        "float_label": "Contact us"
+      },
+      "promo": {
+        "aria": "Offers and features",
+        "wrap": "Free luxury wrapping",
+        "sameday": "Same-day delivery in Riyadh",
+        "shipping": "Shipping across the Kingdom"
+      },
+      "nav": {
+        "sections": "Sections",
+        "custom": "Custom gifts",
+        "finder": "Gift finder",
+        "how": "How we work",
+        "story": "Our story",
+        "search": "Search",
+        "menu": "Menu",
+        "close": "Close"
+      },
+      "footer": {
+        "about": "The art & science of the perfect gift. Curated and custom gifts, wrapped with care and delivered across the Kingdom.",
+        "shop": "Shop",
+        "categories": "Sections",
+        "help": "Help",
+        "track": "Track order",
+        "shipping": "Shipping & returns",
+        "faq": "FAQ",
+        "contact": "Contact us",
+        "about_link": "About us",
+        "rights": "All rights reserved · Made with love in Riyadh"
+      },
+      "testi": {
+        "eyebrow": "Happy customers",
+        "title_pre": "Loved by",
+        "title_em": "thousands",
+        "r1_t": "The wrapping alone made me cry. My sister said it was the most beautiful gift she's ever received.",
+        "r1_w": "Reem A.",
+        "r1_l": "Riyadh",
+        "r2_t": "I ordered a custom box for our occasion — every detail was perfect and it arrived the same day.",
+        "r2_w": "Khaled M.",
+        "r2_l": "Jeddah",
+        "r3_t": "Giftology now handles all our company gifts. Easy, elegant, and our clients love them.",
+        "r3_w": "Noura S.",
+        "r3_l": "Dammam",
+        "r4_t": "I order from them for every occasion now. The gift finder helped me find the best newborn gift!",
+        "r4_w": "Sara T.",
+        "r4_l": "Riyadh"
+      }
     }
   },
   "pages": {
