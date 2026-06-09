@@ -1,0 +1,21 @@
+{#
+  Giftology — category-link resolver (include partial; outputs a URL string).
+
+  Usage:
+    href="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_newborn'), fallback: store.url} only %}"
+
+  `value` is a `gly_cat_*` theme setting (a Salla category picker,
+  twilight.json `source: categories`), so Salla hydrates it to the selected
+  category object(s). Defensive so it also tolerates a bare URL string (legacy
+  data) or an empty value:
+    • category object        → object.url
+    • list of objects        → first.url
+    • plain URL string        → returned as-is
+    • anything else / empty   → fallback (usually store.url)
+  This guarantees the link is never broken even before a category is picked.
+#}
+{%- if value.url is defined -%}{{ value.url }}
+{%- elseif value is iterable and (value|first).url is defined -%}{{ (value|first).url }}
+{%- elseif value is not iterable and value and (value starts with 'http' or value starts with '/') -%}{{ value }}
+{%- else -%}{{ fallback }}
+{%- endif -%}

@@ -1,7 +1,9 @@
 {#
   Giftology — Footer  (§5.9)
   Brand (logo/name/description) from Salla store data. One link column = the
-  store sections (الأقسام), links from twilight.json settings (gly_cat_*).
+  store sections (الأقسام), links from the `gly_cat_*` category pickers
+  resolved to real category-page URLs (same as the home circles / finder,
+  via the gly-cat-url partial).
   Contact column = email / Instagram / WhatsApp (merchant-editable settings).
   Payment badges are design constants. Dark watermark = --gly-darkpat.
 #}
@@ -11,13 +13,20 @@
 {% set gly_email = theme.settings.get('gly_email') ?: store.contacts.email %}
 {% set gly_instagram = store.social.instagram ?: theme.settings.get('gly_instagram') %}
 
+{% set u_newborn %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_newborn'), fallback: store.url} only %}{% endset %}
+{% set u_occasion %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_occasion'), fallback: store.url} only %}{% endset %}
+{% set u_kids %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_kids'), fallback: store.url} only %}{% endset %}
+{% set u_men %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_men'), fallback: store.url} only %}{% endset %}
+{% set u_favors %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_favors'), fallback: store.url} only %}{% endset %}
+{% set u_cards %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_cards'), fallback: store.url} only %}{% endset %}
+
 {% set gly_cats = [
-  { url: theme.settings.get('gly_cat_newborn'),  label: trans('blocks.gly.cats.newborn') },
-  { url: theme.settings.get('gly_cat_occasion'), label: trans('blocks.gly.cats.occasion') },
-  { url: theme.settings.get('gly_cat_kids'),     label: trans('blocks.gly.cats.kids') },
-  { url: theme.settings.get('gly_cat_men'),      label: trans('blocks.gly.cats.men') },
-  { url: theme.settings.get('gly_cat_favors'),   label: trans('blocks.gly.cats.favors') },
-  { url: theme.settings.get('gly_cat_cards'),    label: trans('blocks.gly.cats.cards') }
+  { url: u_newborn,  label: trans('blocks.gly.cats.newborn') },
+  { url: u_occasion, label: trans('blocks.gly.cats.occasion') },
+  { url: u_kids,     label: trans('blocks.gly.cats.kids') },
+  { url: u_men,      label: trans('blocks.gly.cats.men') },
+  { url: u_favors,   label: trans('blocks.gly.cats.favors') },
+  { url: u_cards,    label: trans('blocks.gly.cats.cards') }
 ] %}
 
 <footer class="gly-footer">
