@@ -1,13 +1,13 @@
 {#
   Giftology — Category circles  (§5.4)
-  In-slot, up to 8 tiles: 6 curated defaults + 2 optional extras (7th & 8th).
-  Each tile uses a brand icon from images/*.svg, rendered as a teal silhouette
-  via CSS mask (.gly-cat-ico) so the mixed source SVGs all read on-brand. Each
-  tile links to a real Salla category — the merchant picks the target per tile
-  from the dashboard (gly_cat_* category pickers); the gly-cat-url partial
-  resolves it to that category's page URL and falls back to the store home until
-  one is chosen. With 7–8 tiles the overflow wraps centered below the first 6.
-  Custom gifts is intentionally NOT a circle (it has its own section).
+  Up to 8 fully-editable, in-slot tiles (gly_tile1..8). Each tile is configured
+  from the dashboard: show/hide (gly_tileN_enabled), multilingual name
+  (gly_tileN_name), a brand icon (gly_tileN_icon dropdown) OR an uploaded image
+  that overrides it (gly_tileN_image), and a target Salla category
+  (gly_tileN_link, resolved to its page URL by the gly-cat-url partial).
+  Tiles 1–6 are shown by default with sensible name/icon fallbacks; 7–8 are off
+  until enabled and wrap into a centered second row under the first six.
+  Brand SVG icons are drawn as teal silhouettes via CSS mask (.gly-cat-ico).
 #}
 {% set gly_icons = {
   'baby':     'images/baby.svg',
@@ -18,23 +18,29 @@
   'envelope': 'images/envelope.svg'
 } %}
 
-{% set gly_tiles = [
-  { icon: 'baby',     label: trans('blocks.gly.cats.newborn'),  link: theme.settings.get('gly_cat_newborn') },
-  { icon: 'gift',     label: trans('blocks.gly.cats.occasion'), link: theme.settings.get('gly_cat_occasion') },
-  { icon: 'cake',     label: trans('blocks.gly.cats.kids'),     link: theme.settings.get('gly_cat_kids') },
-  { icon: 'tie',      label: trans('blocks.gly.cats.men'),      link: theme.settings.get('gly_cat_men') },
-  { icon: 'tag',      label: trans('blocks.gly.cats.favors'),   link: theme.settings.get('gly_cat_favors') },
-  { icon: 'envelope', label: trans('blocks.gly.cats.cards'),    link: theme.settings.get('gly_cat_cards') }
+{# defaults for the 6 curated tiles (used when the merchant leaves name/icon blank) #}
+{% set gly_defaults = [
+  { icon: 'baby',     name: trans('blocks.gly.cats.newborn')  },
+  { icon: 'gift',     name: trans('blocks.gly.cats.occasion') },
+  { icon: 'cake',     name: trans('blocks.gly.cats.kids')     },
+  { icon: 'tie',      name: trans('blocks.gly.cats.men')      },
+  { icon: 'tag',      name: trans('blocks.gly.cats.favors')   },
+  { icon: 'envelope', name: trans('blocks.gly.cats.cards')    }
 ] %}
 
-{# optional 7th & 8th tiles — appear only when the merchant fills a label or target #}
-{% for n in [7, 8] %}
-  {% set elabel = theme.settings.get('gly_cat' ~ n ~ '_label') %}
-  {% set elink  = theme.settings.get('gly_cat' ~ n ~ '_link') %}
-  {% if elabel or elink %}
-    {% set eicon = theme.settings.get('gly_cat' ~ n ~ '_icon') %}
-    {% if eicon is iterable %}{% set eicon = eicon.value is defined ? eicon.value : ((eicon|first).value is defined ? (eicon|first).value : eicon|first) %}{% endif %}
-    {% set gly_tiles = gly_tiles|merge([{ icon: (gly_icons[eicon] is defined ? eicon : 'gift'), label: elabel, link: elink }]) %}
+{% set gly_tiles = [] %}
+{% for i in 1..8 %}
+  {% set d = i <= 6 ? gly_defaults[i - 1] : null %}
+  {% if theme.settings.get('gly_tile' ~ i ~ '_enabled', i <= 6) %}
+    {% set name  = theme.settings.get('gly_tile' ~ i ~ '_name') ?: (d ? d.name : '') %}
+    {% set link  = theme.settings.get('gly_tile' ~ i ~ '_link') %}
+    {% set image = theme.settings.get('gly_tile' ~ i ~ '_image') %}
+    {% set ikey  = theme.settings.get('gly_tile' ~ i ~ '_icon') %}
+    {% if ikey is iterable %}{% set ikey = ikey.value is defined ? ikey.value : ((ikey|first).value is defined ? (ikey|first).value : ikey|first) %}{% endif %}
+    {% set ikey  = gly_icons[ikey] is defined ? ikey : (d ? d.icon : 'gift') %}
+    {% if name or link or image %}
+      {% set gly_tiles = gly_tiles|merge([{ name: name, link: link, image: image, icon: ikey }]) %}
+    {% endif %}
   {% endif %}
 {% endfor %}
 
@@ -50,8 +56,14 @@
       {% for t in gly_tiles %}
         {% set turl %}{% include 'components.home.gly-cat-url' with {value: t.link, fallback: store.url} only %}{% endset %}
         <a class="gly-cat" href="{{ turl }}">
-          <span class="gly-cat-ic"><i class="gly-cat-ico" style="--gly-ico:url('{{ gly_icons[t.icon]|asset }}')"></i></span>
-          <span>{{ t.label }}</span>
+          <span class="gly-cat-ic">
+            {% if t.image %}
+              <img class="gly-cat-img" src="{{ t.image }}" alt="{{ t.name }}" loading="lazy">
+            {% else %}
+              <i class="gly-cat-ico" style="--gly-ico:url('{{ gly_icons[t.icon]|asset }}')"></i>
+            {% endif %}
+          </span>
+          <span>{{ t.name }}</span>
         </a>
       {% endfor %}
     </div>

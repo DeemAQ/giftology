@@ -109,6 +109,8 @@
 .gly-cat-ic{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:var(--gly-shadow-sm);border:1.5px solid rgba(74,63,53,.07);transition:.3s;position:relative;overflow:hidden}
 /* brand SVG drawn as a teal silhouette via mask (source icons vary fill/stroke) */
 .gly-cat-ico{width:44px;height:44px;display:block;background:var(--gly-teal-deep);transition:.3s;-webkit-mask:var(--gly-ico) center/contain no-repeat;mask:var(--gly-ico) center/contain no-repeat}
+/* merchant-uploaded icon (overrides the preset) — shown in its own colours */
+.gly-cat-img{width:58px;height:58px;object-fit:contain;display:block}
 .gly-cat:hover .gly-cat-ic{transform:translateY(-7px);border-color:var(--gly-teal);box-shadow:var(--gly-shadow-teal)}
 .gly-cat:hover .gly-cat-ico{background:var(--gly-teal)}
 .gly-cat span{font-weight:700;font-size:.96rem;text-align:center}
