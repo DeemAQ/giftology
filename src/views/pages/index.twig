@@ -5,10 +5,11 @@
 | page.title       | string     | *could be html                                                      |
 | page.slug        | string     | ex: "cat.show"                                                      |
 
-  Giftology homepage — bespoke sections in the reference order
-  (hero → categories → custom → how → finder → testimonials), each behind a
-  merchant toggle. {% component home %} stays at the end so the merchant can
-  still add optional builder blocks (e.g. product sliders) below.
+  Giftology homepage — bespoke curated sections, each behind a merchant toggle:
+  hero → latest products → categories → custom → gift finder → how-it-works →
+  testimonials. The generic {% component home %} builder region was removed
+  because the demo store seeded it with a products block that duplicated our
+  Latest products section; the home is now deterministic.
 #}
 {% extends "layouts.master" %}
 {% block content %}
@@ -28,20 +29,17 @@
         {% include 'components.home.gly-custom-gift' %}
     {% endif %}
 
-    {% if theme.settings.get('gly_show_how', true) %}
-        {% include 'components.home.gly-how-it-works' %}
-    {% endif %}
-
     {% if theme.settings.get('gly_show_finder', true) %}
         {% include 'components.home.gly-gift-finder' %}
+    {% endif %}
+
+    {% if theme.settings.get('gly_show_how', true) %}
+        {% include 'components.home.gly-how-it-works' %}
     {% endif %}
 
     {% if theme.settings.get('gly_show_testimonials', true) %}
         {% include 'components.home.gly-testimonials' %}
     {% endif %}
-
-    {# Optional extra merchant blocks from the home builder (e.g. product sliders) #}
-    {% component home %}
 {% endblock %}
 {% block scripts %}
     <script defer src="{{ 'home.js' | asset }}"></script>

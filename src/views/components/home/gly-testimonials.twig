@@ -1,32 +1,17 @@
 {#
-  Giftology — Testimonials  (§5.8)  — faithful port.
-  Cards are rendered server-side (strings from locale); the slide/auto-play
-  logic lives in giftology.js. Merchant can edit the review copy in locales.
+  Giftology — Customer reviews  (§5.8)
+  Now AUTOMATIC: renders Salla's real store testimonials via <salla-reviews
+  type="store">. The merchant manages these in the Salla dashboard
+  (Settings → Store testimonials / آراء العملاء); they are NOT hardcoded.
+  Brand heading + section styling via .gly-testi; the cards inherit brand
+  colours from the Raed --color-* variables.
 #}
-{% set gly_reviews = [
-  { t: trans('blocks.gly.testi.r1_t'), w: trans('blocks.gly.testi.r1_w'), l: trans('blocks.gly.testi.r1_l') },
-  { t: trans('blocks.gly.testi.r2_t'), w: trans('blocks.gly.testi.r2_w'), l: trans('blocks.gly.testi.r2_l') },
-  { t: trans('blocks.gly.testi.r3_t'), w: trans('blocks.gly.testi.r3_w'), l: trans('blocks.gly.testi.r3_l') },
-  { t: trans('blocks.gly.testi.r4_t'), w: trans('blocks.gly.testi.r4_w'), l: trans('blocks.gly.testi.r4_l') }
-] %}
-
 <section id="gly-testi" class="gly-section gly-testi">
   <div class="gly-wrap">
     <div class="gly-shead gly-reveal">
       <span class="gly-eyebrow">{{ trans('blocks.gly.testi.eyebrow') }}</span>
       <h2>{{ trans('blocks.gly.testi.title_pre') }} <em>{{ trans('blocks.gly.testi.title_em') }}</em></h2>
     </div>
-    <div class="gly-tslider gly-reveal">
-      <div class="gly-ttrack">
-        {% for r in gly_reviews %}
-          <div class="gly-tcard">
-            <div class="stars">★★★★★</div>
-            <q>«{{ r.t }}»</q>
-            <div class="who">{{ r.w }}<small>{{ r.l }}</small></div>
-          </div>
-        {% endfor %}
-      </div>
-      <div class="gly-tdots"></div>
-    </div>
+    <salla-reviews type="store" limit="9" class="gly-reviews gly-reveal"></salla-reviews>
   </div>
 </section>

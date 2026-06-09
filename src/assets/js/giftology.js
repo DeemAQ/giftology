@@ -30,11 +30,15 @@
     var mmenu = document.getElementById('gly-mmenu');
     var burger = document.getElementById('gly-burger');
     var mclose = document.getElementById('gly-mclose');
+    var mscrim = document.getElementById('gly-mscrim');
     if (mmenu && burger) {
-      burger.addEventListener('click', function () { mmenu.classList.add('open'); });
-      if (mclose) mclose.addEventListener('click', function () { mmenu.classList.remove('open'); });
+      var openMenu = function () { mmenu.classList.add('open'); if (mscrim) mscrim.classList.add('open'); };
+      var closeMenu = function () { mmenu.classList.remove('open'); if (mscrim) mscrim.classList.remove('open'); };
+      burger.addEventListener('click', openMenu);
+      if (mclose) mclose.addEventListener('click', closeMenu);
+      if (mscrim) mscrim.addEventListener('click', closeMenu);
       mmenu.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () { mmenu.classList.remove('open'); });
+        a.addEventListener('click', closeMenu);
       });
       // "Sections" accordion (reveals the category links)
       mmenu.querySelectorAll('.gly-msub-toggle').forEach(function (btn) {

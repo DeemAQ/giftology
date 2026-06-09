@@ -11,7 +11,7 @@
 
 /* teal list header banner (.lhead) */
 .gly-lhead{position:relative;border-radius:28px;overflow:hidden;color:#fff;padding:2.6rem 2.2rem;margin:.4rem 0 1.8rem;background:linear-gradient(150deg,#3f9c96,#2c6f6a)}
-.gly-lhead__deco{position:absolute;inset:0;background-image:var(--gly-pat);background-size:360px;opacity:.18;mix-blend-mode:overlay}
+.gly-lhead__deco{position:absolute;inset:0;background-image:var(--gly-pat);background-size:360px;opacity:.5;mix-blend-mode:overlay}
 .gly-lhead>*{position:relative;z-index:1}
 .gly-lhead .gly-eyebrow{color:var(--gly-gold-soft)}
 .gly-lhead h1{font-family:var(--gly-font-display);font-weight:700;font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.2;margin:.4rem 0 .5rem;color:#fff}

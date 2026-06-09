@@ -42,12 +42,10 @@
     <div class="gly-ptoolbar">
       <div class="gly-pcount"><b id="gly-pcount">0</b> {{ trans('blocks.gly.plist.count_suffix') }}</div>
       <div class="gly-tools-right">
-        {% if filters %}
-          <a href="#filters-menu" class="gly-fbtn filters-trigger">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-            {{ trans('blocks.gly.plist.filter') }}
-          </a>
-        {% endif %}
+        <a href="#filters-menu" class="gly-fbtn filters-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          {{ trans('blocks.gly.plist.filter') }}
+        </a>
         {% if sort_options|length %}
           <div class="gly-psort">
             <label for="product-filter">{{ trans('pages.categories.sorting') }}</label>
@@ -69,14 +67,13 @@
   {# player: filters card + product grid #}
   <div class="container gly-wrap">
     <div class="gly-player container--products-list flex items-start flex-col md:flex-row">
-      {% if filters %}
-        <button class="btn--close-sm close-filters sicon-cancel hidden gly-fclose"></button>
-        <salla-filters class="gly-filters md:w-72 lg:sticky lg:top-24 flex-none" id="filters-menu"></salla-filters>
-      {% endif %}
+      {# always render the filter card (price slider + any category filters) #}
+      <button class="btn--close-sm close-filters sicon-cancel hidden gly-fclose"></button>
+      <salla-filters class="gly-filters md:w-72 lg:sticky lg:top-24 flex-none" id="filters-menu"></salla-filters>
 
-      <div class="main-content gly-pgrid-wrap flex-1 w-full {{ filters ? 'ltr:lg:ml-8 rtl:lg:mr-8' : '' }}">
+      <div class="main-content gly-pgrid-wrap flex-1 w-full ltr:lg:ml-8 rtl:lg:mr-8">
         {% hook 'product:index.items.start' %}
-        <salla-products-list class="gly-pgrid" source="{{ page.slug }}" source-value="{{ page.id }}" {{ filters ?'filters-Results':'' }}></salla-products-list>
+        <salla-products-list class="gly-pgrid" source="{{ page.slug }}" source-value="{{ page.id }}" filters-Results></salla-products-list>
         {% hook 'product:index.items.end' %}
       </div>
     </div>
