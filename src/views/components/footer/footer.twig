@@ -8,7 +8,7 @@
 {% set gly_home = store.url %}
 {% set gly_wa_number = theme.settings.get('gly_whatsapp') ?: '966500000000' %}
 {% set gly_wa_general = 'https://wa.me/' ~ gly_wa_number ~ '?text=' ~ trans('blocks.gly.wa.general_msg')|url_encode %}
-{% set gly_email = theme.settings.get('gly_email') ?: store.email %}
+{% set gly_email = theme.settings.get('gly_email') ?: store.contacts.email %}
 {% set gly_instagram = store.social.instagram ?: theme.settings.get('gly_instagram') %}
 
 {% set gly_cats = [

@@ -335,6 +335,48 @@
       "selected": true
     },
     {
+      "type": "string",
+      "icon": "sicon-format-text-alt",
+      "label": "الشريط الترويجي — العبارة الأولى",
+      "multilanguage": true,
+      "id": "gly_promo_1",
+      "value": null,
+      "required": false,
+      "format": "text",
+      "description": "النص الأول في الشريط العلوي. اتركه فارغاً لاستخدام النص الافتراضي.",
+      "placeholder": "تغليف فاخر مجاني",
+      "minLength": 0,
+      "maxLength": 120
+    },
+    {
+      "type": "string",
+      "icon": "sicon-format-text-alt",
+      "label": "الشريط الترويجي — العبارة الثانية",
+      "multilanguage": true,
+      "id": "gly_promo_2",
+      "value": null,
+      "required": false,
+      "format": "text",
+      "description": "النص الثاني في الشريط العلوي. اتركه فارغاً لاستخدام النص الافتراضي.",
+      "placeholder": "توصيل سريع في الرياض",
+      "minLength": 0,
+      "maxLength": 120
+    },
+    {
+      "type": "string",
+      "icon": "sicon-format-text-alt",
+      "label": "الشريط الترويجي — العبارة الثالثة",
+      "multilanguage": true,
+      "id": "gly_promo_3",
+      "value": null,
+      "required": false,
+      "format": "text",
+      "description": "النص الثالث في الشريط العلوي (يظهر بخط عريض). اتركه فارغاً لاستخدام النص الافتراضي.",
+      "placeholder": "شحن لكل مناطق المملكة",
+      "minLength": 0,
+      "maxLength": 120
+    },
+    {
       "type": "static",
       "id": "gly-label-جيفتول",
       "format": "label",

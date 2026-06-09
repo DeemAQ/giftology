@@ -1,9 +1,14 @@
 {#
   Giftology — Top promo bar  (§5.1)  — faithful port of the reference topbar.
-  Toggle via setting gly_show_promo (default on).
+  Toggle via setting gly_show_promo (default on). The three phrases are
+  merchant-editable from the dashboard (gly_promo_1/2/3, multilanguage),
+  falling back to the locale strings when left empty.
 #}
 {% if theme.settings.get('gly_show_promo', true) %}
+  {% set gly_promo_1 = theme.settings.get('gly_promo_1') ?: trans('blocks.gly.promo.wrap') %}
+  {% set gly_promo_2 = theme.settings.get('gly_promo_2') ?: trans('blocks.gly.promo.fast') %}
+  {% set gly_promo_3 = theme.settings.get('gly_promo_3') ?: trans('blocks.gly.promo.shipping') %}
   <div class="gly-topbar" role="note">
-    ✦ {{ trans('blocks.gly.promo.wrap') }} &nbsp;·&nbsp; {{ trans('blocks.gly.promo.fast') }} &nbsp;·&nbsp; <b>{{ trans('blocks.gly.promo.shipping') }}</b> ✦
+    ✦ {{ gly_promo_1 }} &nbsp;·&nbsp; {{ gly_promo_2 }} &nbsp;·&nbsp; <b>{{ gly_promo_3 }}</b> ✦
   </div>
 {% endif %}

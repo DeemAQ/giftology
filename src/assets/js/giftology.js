@@ -142,7 +142,9 @@
     }
     function go(n) {
       i = (n + slides) % slides;
-      track.style.transform = 'translateX(' + (i * 100) + '%)'; // RTL: positive shift
+      // RTL shifts positive (track moves right), LTR shifts negative
+      var rtl = getComputedStyle(track).direction === 'rtl';
+      track.style.transform = 'translateX(' + (rtl ? 1 : -1) * i * 100 + '%)';
       if (dotsBox) dotsBox.querySelectorAll('b').forEach(function (b, j) { b.classList.toggle('on', j === i); });
     }
     if (dotsBox) dotsBox.addEventListener('click', function (e) {
