@@ -8,7 +8,6 @@
     },
     "gly": {
       "hero": {
-        "aria": "Giftology intro",
         "eyebrow": "The art & science of gifting",
         "title_pre": "Every gift",
         "title_em": "thoughtfully",
@@ -29,7 +28,6 @@
         "mini_card_d": "A personal note"
       },
       "cats": {
-        "aria": "Gift categories",
         "eyebrow": "Shop by category",
         "title_pre": "A gift for every",
         "title_em": "occasion",
@@ -42,7 +40,6 @@
         "cards": "Envelopes & cards"
       },
       "custom": {
-        "aria": "Custom gift",
         "eyebrow": "Made just for you",
         "title_pre": "A custom gift",
         "title_em": "designed for them",
@@ -60,14 +57,12 @@
         "card_btn": "Contact via WhatsApp"
       },
       "finder": {
-        "aria": "Gift finder",
         "eyebrow": "Gift finder",
         "title_pre": "Not sure what to give?",
         "title_em": "Let's find out",
         "lede": "Answer three quick questions and we'll suggest the perfect section for your gift."
       },
       "how": {
-        "aria": "How we work",
         "eyebrow": "The Giftology way",
         "title_pre": "Gifting is...",
         "title_em": "a science & an art",
@@ -88,7 +83,6 @@
         "float_label": "Contact us"
       },
       "promo": {
-        "aria": "Offers and features",
         "wrap": "Luxury wrapping by our Artisans",
         "fast": "Fast delivery in Riyadh",
         "shipping": "Shipping across the Kingdom"
@@ -98,23 +92,16 @@
         "custom": "Custom gifts",
         "finder": "Gift finder",
         "how": "How we work",
-        "story": "Our story",
         "search": "Search",
         "menu": "Menu",
         "close": "Close"
       },
       "footer": {
         "about": "The art & science of the perfect gift. Curated and custom gifts, wrapped with care and delivered across the Kingdom.",
-        "shop": "Shop",
         "categories": "Sections",
-        "help": "Help",
-        "track": "Track order",
-        "shipping": "Shipping & returns",
-        "faq": "FAQ",
         "contact": "Contact us",
         "instagram": "Instagram",
         "whatsapp": "WhatsApp",
-        "about_link": "About us",
         "rights": "All rights reserved · Made with love in Riyadh"
       },
       "testi": {
