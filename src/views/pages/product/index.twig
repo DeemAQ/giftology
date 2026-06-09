@@ -47,7 +47,7 @@
   {# product grid #}
   <div class="container gly-wrap">
     {% hook 'product:index.items.start' %}
-    <salla-products-list class="gly-pgrid" source="{{ page.slug }}" source-value="{{ page.id }}"></salla-products-list>
+    <salla-products-list class="gly-pgrid" source="{{ page.slug }}" source-value="{{ page.id }}" {{ filters ? 'filters-Results' : '' }}></salla-products-list>
     {% hook 'product:index.items.end' %}
   </div>
 
