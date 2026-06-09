@@ -112,7 +112,7 @@
    ============================================================ */
 .gly-custom{padding:4rem 0;color:#fff;overflow:hidden}
 .gly-custom::before{content:"";position:absolute;inset:0;background:linear-gradient(150deg,#3f9c96,#2c6f6a);z-index:-2}
-.gly-custom__deco{position:absolute;inset:0;z-index:-1;background-image:var(--gly-darkpat);background-size:380px;opacity:.75;mix-blend-mode:overlay}
+.gly-custom__deco{position:absolute;inset:0;z-index:-1;background-image:var(--gly-darkpat);background-size:380px;mix-blend-mode:overlay}
 .gly-custom__grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;align-items:center}
 .gly-custom h2{font-family:var(--gly-font-display);font-weight:700;font-size:clamp(2rem,3.8vw,3rem);line-height:1.25;margin:.4rem 0 .7rem}
 .gly-custom h2 em{font-family:var(--gly-font-script);font-style:normal;color:var(--gly-gold-soft)}
