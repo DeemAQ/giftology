@@ -54,7 +54,7 @@
 
     <div class="gly-cat-grid gly-reveal">
       {% for t in gly_tiles %}
-        {% set turl %}{% include 'components.home.gly-cat-url' with {value: t.link, fallback: store.url} only %}{% endset %}
+        {% set turl %}{% include 'components.home.gly-cat-url' with {value: t.link, fallback: store.url, lang: language.code} only %}{% endset %}
         <a class="gly-cat" href="{{ turl }}">
           <span class="gly-cat-ic">
             {% if t.image %}

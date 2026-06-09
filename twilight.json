@@ -480,7 +480,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "رابط زر \"عرض الكل\"",
       "id": "gly_latest_url",
@@ -586,7 +586,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "الدائرة 1 — القسم",
       "id": "gly_tile1_link",
@@ -686,7 +686,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "الدائرة 2 — القسم",
       "id": "gly_tile2_link",
@@ -786,7 +786,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "الدائرة 3 — القسم",
       "id": "gly_tile3_link",
@@ -886,7 +886,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "الدائرة 4 — القسم",
       "id": "gly_tile4_link",
@@ -986,7 +986,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "الدائرة 5 — القسم",
       "id": "gly_tile5_link",
@@ -1086,7 +1086,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "الدائرة 6 — القسم",
       "id": "gly_tile6_link",
@@ -1186,7 +1186,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "الدائرة 7 — القسم",
       "id": "gly_tile7_link",
@@ -1286,7 +1286,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "الدائرة 8 — القسم",
       "id": "gly_tile8_link",
@@ -1305,7 +1305,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "قسم: هدايا مواليد",
       "id": "gly_cat_newborn",
@@ -1318,7 +1318,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "قسم: هدايا لكل مناسبة",
       "id": "gly_cat_occasion",
@@ -1331,7 +1331,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "قسم: هدايا حفلات أطفال",
       "id": "gly_cat_kids",
@@ -1344,7 +1344,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "قسم: هدايا رجالية",
       "id": "gly_cat_men",
@@ -1357,7 +1357,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "قسم: توزيعات",
       "id": "gly_cat_favors",
@@ -1370,7 +1370,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "قسم: أظرف وبطاقات",
       "id": "gly_cat_cards",
@@ -1417,7 +1417,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "رابط منصة X (تويتر)",
       "id": "gly_x",
@@ -1429,7 +1429,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "رابط سناب شات",
       "id": "gly_snapchat",
@@ -1441,7 +1441,7 @@
     },
     {
       "type": "string",
-      "format": "url",
+      "format": "text",
       "icon": "sicon-link",
       "label": "رابط فيسبوك",
       "id": "gly_facebook",

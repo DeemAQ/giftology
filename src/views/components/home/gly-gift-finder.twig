@@ -12,12 +12,12 @@
 <section id="gly-finder" class="gly-section gly-quiz">
   <div class="gly-wrap">
     <div class="gly-quiz-box gly-reveal"
-         data-newborn="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_newborn'), fallback: store.url} only %}"
-         data-kids="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_kids'), fallback: store.url} only %}"
-         data-men="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_men'), fallback: store.url} only %}"
-         data-occasion="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_occasion'), fallback: store.url} only %}"
-         data-favors="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_favors'), fallback: store.url} only %}"
-         data-cards="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_cards'), fallback: store.url} only %}"
+         data-newborn="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_newborn'), fallback: store.url, lang: language.code} only %}"
+         data-kids="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_kids'), fallback: store.url, lang: language.code} only %}"
+         data-men="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_men'), fallback: store.url, lang: language.code} only %}"
+         data-occasion="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_occasion'), fallback: store.url, lang: language.code} only %}"
+         data-favors="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_favors'), fallback: store.url, lang: language.code} only %}"
+         data-cards="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_cards'), fallback: store.url, lang: language.code} only %}"
          data-custom="{{ gly_wa_custom }}">
       <svg class="gly-quiz__mag" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-miterlimit="10"><path d="M21,21L21,21c1.105-1.105,2.895-1.105,4,0l5.172,5.172c0.53,0.53,0.828,1.25,0.828,2v0C31,29.734,29.734,31,28.172,31h0c-0.75,0-1.47-0.298-2-0.828L21,25C19.895,23.895,19.895,22.105,21,21z"/><circle cx="11" cy="11" r="10"/><path d="M11,5c-3.314,0-6,2.686-6,6"/><line x1="18" x2="21" y1="18" y2="21"/></svg>
       <div>

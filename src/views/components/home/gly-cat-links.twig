@@ -14,7 +14,7 @@
   {% if theme.settings.get('gly_tile' ~ i ~ '_enabled', i <= 6) %}
     {% set name = theme.settings.get('gly_tile' ~ i ~ '_name') ?: (i <= 6 ? gly_def_names[i - 1] : '') %}
     {% if name %}
-      {% set href %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_tile' ~ i ~ '_link'), fallback: store.url} only %}{% endset %}
+      {% set href %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_tile' ~ i ~ '_link'), fallback: store.url, lang: language.code} only %}{% endset %}
       <a href="{{ href }}">{{ name }}</a>
     {% endif %}
   {% endif %}
