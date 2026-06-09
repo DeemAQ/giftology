@@ -150,7 +150,7 @@
    ============================================================ */
 .gly-quiz{padding:2rem 0 4rem}
 .gly-quiz-box{background:linear-gradient(135deg,var(--gly-peach),#fff);border-radius:30px;padding:3rem;display:grid;grid-template-columns:1fr 1.1fr;gap:2rem;align-items:center;box-shadow:var(--gly-shadow-sm);border:1px solid rgba(74,63,53,.06);overflow:hidden;position:relative}
-.gly-quiz__mag{position:absolute;inset-inline-start:-30px;top:-30px;width:200px;color:var(--gly-teal);opacity:.18;transform:rotate(12deg)}
+.gly-quiz__mag{position:absolute;inset-inline-end:-30px;top:-30px;width:200px;color:var(--gly-teal);opacity:.18;transform:rotate(-12deg)}
 .gly-quiz h2{font-family:var(--gly-font-display);font-weight:700;font-size:clamp(1.9rem,3.6vw,2.7rem);line-height:1.25;margin:.4rem 0 .6rem}
 .gly-quiz h2 em{font-family:var(--gly-font-script);font-style:normal;color:var(--gly-teal-deep)}
 .gly-qlede{color:var(--gly-soft);margin-bottom:1.4rem;max-width:42ch}
