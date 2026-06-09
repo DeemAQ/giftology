@@ -1,0 +1,21 @@
+{#
+  Giftology — category links list (shared partial).
+  Renders the enabled category tiles (gly_tile1..8) as plain <a> links:
+  name → resolved category URL (via gly-cat-url). Mirrors the tile logic in
+  gly-categories.twig. Used by the footer "الأقسام" column and the mobile-menu
+  "الأقسام" accordion so both stay in sync with the home circles.
+#}
+{% set gly_def_names = [
+  trans('blocks.gly.cats.newborn'), trans('blocks.gly.cats.occasion'),
+  trans('blocks.gly.cats.kids'),    trans('blocks.gly.cats.men'),
+  trans('blocks.gly.cats.favors'),  trans('blocks.gly.cats.cards')
+] %}
+{% for i in 1..8 %}
+  {% if theme.settings.get('gly_tile' ~ i ~ '_enabled', i <= 6) %}
+    {% set name = theme.settings.get('gly_tile' ~ i ~ '_name') ?: (i <= 6 ? gly_def_names[i - 1] : '') %}
+    {% if name %}
+      {% set href %}{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_tile' ~ i ~ '_link'), fallback: store.url} only %}{% endset %}
+      <a href="{{ href }}">{{ name }}</a>
+    {% endif %}
+  {% endif %}
+{% endfor %}

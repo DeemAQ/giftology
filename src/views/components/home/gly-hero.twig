@@ -15,6 +15,10 @@
           <svg class="gly-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a href="#gly-custom" class="gly-btn gly-btn-ghost">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/></svg>{{ trans('blocks.gly.hero.cta_custom') }}</a>
+        {% if theme.settings.get('gly_show_latest', true) %}
+        <a href="#gly-latest" class="gly-btn gly-btn-ghost">{{ trans('blocks.gly.hero.cta_latest') }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        {% endif %}
       </div>
       <div class="gly-hero-stats">
         <div><b>+12 {{ trans('blocks.gly.hero.stat_k') }}</b><span>{{ trans('blocks.gly.hero.stat_gifts') }}</span></div>

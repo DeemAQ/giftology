@@ -1,0 +1,23 @@
+{#
+  Giftology — Latest products  (home section)
+  Salla's latest products grid; brand heading + a "view all" button that links
+  to gly_latest_url (merchant-set). id="gly-latest" so the hero button and the
+  mobile menu can scroll down to it.
+#}
+<section id="gly-latest" class="gly-section gly-latest">
+  <div class="gly-wrap">
+    <div class="gly-shead gly-reveal">
+      <span class="gly-eyebrow">{{ trans('blocks.gly.latest.eyebrow') }}</span>
+      <h2>{{ theme.settings.get('gly_latest_title') ?: trans('blocks.gly.latest.title') }}</h2>
+    </div>
+
+    <salla-products-list source="latest" limit="8" class="gly-latest-grid gly-reveal"></salla-products-list>
+
+    <div class="gly-latest-more gly-reveal">
+      <a class="gly-btn gly-btn-primary" href="{{ theme.settings.get('gly_latest_url') ?: store.url }}">
+        {{ trans('blocks.gly.latest.view_all') }}
+        <svg class="gly-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>

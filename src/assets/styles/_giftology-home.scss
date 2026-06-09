@@ -51,18 +51,38 @@
 .gly-ibtn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--gly-ink);transition:.25s;position:relative;background:none;border:none}
 .gly-ibtn:hover{background:var(--gly-teal-wash);color:var(--gly-teal-ink)}
 .gly-ibtn svg{width:21px;height:21px}
+/* burger is HIDDEN on the home page (it has the full inline nav) and SHOWN on
+   every other page (.gly-header--inner) + on mobile (≤920px, see media query) */
 .gly-burger{display:none}
 .gly-header--inner .gly-menu{display:none}
 .gly-header--inner .gly-burger{display:grid}
 /* style the Salla cart/user web-components to fit the icon row */
 .gly-icons salla-cart-summary,.gly-icons salla-user-menu{display:inline-flex}
 .gly-icons .sicon-shopping-bag,.gly-icons .sicon-user{font-size:21px}
+/* hide the cart total (keep icon + item count) */
+.gly-icons salla-cart-summary .s-cart-summary-total{display:none!important}
+/* round the logged-in account avatar (Salla renders it as a square card) */
+.gly-icons salla-user-menu .s-user-menu-toggler,
+.gly-icons salla-user-menu .s-user-menu-trigger,
+.gly-icons salla-user-menu .s-user-menu-avatar-wrap{border-radius:50%!important;overflow:hidden;background:transparent!important;padding:0!important;border:none!important;box-shadow:none!important}
+.gly-icons salla-user-menu .s-user-menu-trigger-avatar,
+.gly-icons salla-user-menu .s-user-menu-avatar-wrap img,
+.gly-icons salla-user-menu img[class*="avatar"]{width:38px!important;height:38px!important;border-radius:50%!important;object-fit:cover;display:block}
 
-/* mobile menu */
+/* mobile menu — full-screen overlay */
 .gly-mmenu{position:fixed;inset:0;z-index:85;background:var(--gly-cream);transform:translateX(100%);transition:.4s;display:flex;flex-direction:column;padding:5rem 2rem 2rem}
 .gly-mmenu.open{transform:none}
 .gly-mmenu a{font-family:var(--gly-font-display);font-size:1.7rem;font-weight:700;padding:.7rem 0;border-bottom:1px solid rgba(74,63,53,.08);color:var(--gly-ink)}
 .gly-mclose{position:absolute;top:1.4rem;inset-inline-end:1.4rem;width:44px;height:44px;border-radius:50%;background:var(--gly-teal-wash);display:grid;place-items:center;border:none}
+/* mobile "Sections" accordion */
+.gly-msub{border-bottom:1px solid rgba(74,63,53,.08)}
+.gly-msub-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;font-family:var(--gly-font-display);font-size:1.7rem;font-weight:700;padding:.7rem 0;color:var(--gly-ink)}
+.gly-msub-chev{width:24px;height:24px;transition:transform .3s}
+.gly-msub.open .gly-msub-chev{transform:rotate(180deg)}
+.gly-msub-panel{max-height:0;overflow:hidden;transition:max-height .35s ease;display:flex;flex-direction:column}
+.gly-msub.open .gly-msub-panel{max-height:60vh}
+.gly-msub-panel a{font-family:var(--gly-font-body)!important;font-size:1.12rem!important;font-weight:600!important;padding:.5rem 0 .5rem 1rem!important;border-bottom:none!important;color:var(--gly-soft)!important}
+.gly-msub-panel a:hover{color:var(--gly-teal-deep)!important}
 
 /* ============================================================
    Hero (§5.3)
@@ -102,11 +122,17 @@
    Categories (§5.4) — links from settings, icons are design
    ============================================================ */
 .gly-cats{padding:1rem 0 3.4rem}
-.gly-cat-grid{display:flex;flex-wrap:wrap;gap:1.4rem 1.8rem;justify-content:center}
+/* width caps the row to exactly 6 tiles (120px + 1.8rem gaps); a 7th/8th wrap
+   to a second line that justify-content:center keeps centered under the six. */
+.gly-cat-grid{display:flex;flex-wrap:wrap;gap:1.8rem 1.8rem;justify-content:center;max-width:880px;margin-inline:auto}
 .gly-cat{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.8rem;cursor:pointer;width:120px;color:var(--gly-ink)}
 .gly-cat-ic{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:var(--gly-shadow-sm);border:1.5px solid rgba(74,63,53,.07);transition:.3s;position:relative;overflow:hidden}
-.gly-cat-ic svg{width:40px;height:40px;color:var(--gly-teal-deep);transition:.3s;position:relative;z-index:1}
+/* brand SVG drawn as a teal silhouette via mask (source icons vary fill/stroke) */
+.gly-cat-ico{width:44px;height:44px;display:block;background:var(--gly-teal-deep);transition:.3s;-webkit-mask:var(--gly-ico) center/contain no-repeat;mask:var(--gly-ico) center/contain no-repeat}
+/* merchant-uploaded icon (overrides the preset) — shown in its own colours */
+.gly-cat-img{width:58px;height:58px;object-fit:contain;display:block}
 .gly-cat:hover .gly-cat-ic{transform:translateY(-7px);border-color:var(--gly-teal);box-shadow:var(--gly-shadow-teal)}
+.gly-cat:hover .gly-cat-ico{background:var(--gly-teal)}
 .gly-cat span{font-weight:700;font-size:.96rem;text-align:center}
 
 /* ============================================================
@@ -136,7 +162,7 @@
 /* ============================================================
    How it works / science (§5.7)
    ============================================================ */
-.gly-how{padding:4rem 0 3.4rem;text-align:center}
+.gly-how{padding:2rem 0 3.4rem;text-align:center}
 .gly-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:1rem}
 .gly-step{padding:1.4rem 1rem;position:relative}
 .gly-step__num{font-family:var(--gly-font-display);font-size:1rem;color:var(--gly-gold);font-weight:700}
@@ -205,6 +231,10 @@
 .gly-footer ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0}
 .gly-footer ul a{opacity:.74;font-size:.94rem;transition:.2s}
 .gly-footer ul a:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
+/* footer section links (gly-cat-links partial) */
+.gly-flinks{display:flex;flex-direction:column;gap:.55rem}
+.gly-flinks a{opacity:.74;font-size:.94rem;transition:.2s}
+.gly-flinks a:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
 .gly-fbottom{position:relative;margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.86rem;opacity:.78}
 .gly-pays{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
 .gly-pays span{background:rgba(255,255,255,.92);color:#22302d;font-weight:800;font-size:.68rem;padding:.3rem .55rem;border-radius:6px}
@@ -229,7 +259,7 @@
   .gly-steps{grid-template-columns:repeat(2,1fr)}
   .gly-step:not(:last-child)::after{display:none}
   .gly-menu{display:none}
-  .gly-burger{display:grid}
+  /* burger stays home-excluded: it only shows via .gly-header--inner (never home) */
   .gly-quiz__mag{display:none}
   .gly-fgrid{grid-template-columns:1fr 1fr}
 }
@@ -241,3 +271,8 @@
   .gly-cat{width:104px}
   .gly-cat-ic{width:90px;height:90px}
 }
+
+/* ---- Latest products section ---- */
+.gly-latest{padding:1rem 0 3.4rem}
+.gly-latest-grid{display:block;margin-top:.4rem}
+.gly-latest-more{display:flex;justify-content:center;margin-top:2.2rem}

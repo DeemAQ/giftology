@@ -1,9 +1,49 @@
 {#
-  Giftology — Category circles  (§5.4)  — faithful port.
-  Icons + labels are part of the design; each tile's URL is merchant-
-  configurable via twilight.json settings (gly_cat_*). Custom gifts is
-  intentionally NOT a circle (it has its own section).
+  Giftology — Category circles  (§5.4)
+  Up to 8 fully-editable, in-slot tiles (gly_tile1..8). Each tile is configured
+  from the dashboard: show/hide (gly_tileN_enabled), multilingual name
+  (gly_tileN_name), a brand icon (gly_tileN_icon dropdown) OR an uploaded image
+  that overrides it (gly_tileN_image), and a target Salla category
+  (gly_tileN_link, resolved to its page URL by the gly-cat-url partial).
+  Tiles 1–6 are shown by default with sensible name/icon fallbacks; 7–8 are off
+  until enabled and wrap into a centered second row under the first six.
+  Brand SVG icons are drawn as teal silhouettes via CSS mask (.gly-cat-ico).
 #}
+{% set gly_icons = {
+  'baby':     'images/baby.svg',
+  'gift':     'images/gift.svg',
+  'cake':     'images/cake.svg',
+  'tie':      'images/tie.svg',
+  'tag':      'images/tag.svg',
+  'envelope': 'images/envelope.svg'
+} %}
+
+{# defaults for the 6 curated tiles (used when the merchant leaves name/icon blank) #}
+{% set gly_defaults = [
+  { icon: 'baby',     name: trans('blocks.gly.cats.newborn')  },
+  { icon: 'gift',     name: trans('blocks.gly.cats.occasion') },
+  { icon: 'cake',     name: trans('blocks.gly.cats.kids')     },
+  { icon: 'tie',      name: trans('blocks.gly.cats.men')      },
+  { icon: 'tag',      name: trans('blocks.gly.cats.favors')   },
+  { icon: 'envelope', name: trans('blocks.gly.cats.cards')    }
+] %}
+
+{% set gly_tiles = [] %}
+{% for i in 1..8 %}
+  {% set d = i <= 6 ? gly_defaults[i - 1] : null %}
+  {% if theme.settings.get('gly_tile' ~ i ~ '_enabled', i <= 6) %}
+    {% set name  = theme.settings.get('gly_tile' ~ i ~ '_name') ?: (d ? d.name : '') %}
+    {% set link  = theme.settings.get('gly_tile' ~ i ~ '_link') %}
+    {% set image = theme.settings.get('gly_tile' ~ i ~ '_image') %}
+    {% set ikey  = theme.settings.get('gly_tile' ~ i ~ '_icon') %}
+    {% if ikey is iterable %}{% set ikey = ikey.value is defined ? ikey.value : ((ikey|first).value is defined ? (ikey|first).value : ikey|first) %}{% endif %}
+    {% set ikey  = gly_icons[ikey] is defined ? ikey : (d ? d.icon : 'gift') %}
+    {% if name or link or image %}
+      {% set gly_tiles = gly_tiles|merge([{ name: name, link: link, image: image, icon: ikey }]) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
 <section id="gly-cats" class="gly-section gly-cats">
   <div class="gly-wrap">
     <div class="gly-shead gly-reveal">
@@ -13,30 +53,19 @@
     </div>
 
     <div class="gly-cat-grid gly-reveal">
-      <a class="gly-cat" href="{{ theme.settings.get('gly_cat_newborn') ?: store.url }}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5M10 8h.01M14 8h.01M10.5 10.5c1 .8 2 .8 3 0"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.newborn') }}</span>
-      </a>
-      <a class="gly-cat" href="{{ theme.settings.get('gly_cat_occasion') ?: store.url }}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v11H4zM4 9l2-5h12l2 5M12 4v16"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.occasion') }}</span>
-      </a>
-      <a class="gly-cat" href="{{ theme.settings.get('gly_cat_kids') ?: store.url }}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h14v9H5zM3 20h18M7 11V8M12 11V8M17 11V8M7 6c0-1 .8-1.6 0-3M12 6c0-1 .8-1.6 0-3M17 6c0-1 .8-1.6 0-3"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.kids') }}</span>
-      </a>
-      <a class="gly-cat" href="{{ theme.settings.get('gly_cat_men') ?: store.url }}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1.5 3 2 11L12 20l-3.5-3 2-11L9 3Z"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.men') }}</span>
-      </a>
-      <a class="gly-cat" href="{{ theme.settings.get('gly_cat_favors') ?: store.url }}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13l-8 8-9-9V4h8l9 9ZM7.5 7.5h.01M13 4c1.5-1 3 .5 2 2M13 4c-1.5-1-3 .5-2 2"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.favors') }}</span>
-      </a>
-      <a class="gly-cat" href="{{ theme.settings.get('gly_cat_cards') ?: store.url }}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.cards') }}</span>
-      </a>
+      {% for t in gly_tiles %}
+        {% set turl %}{% include 'components.home.gly-cat-url' with {value: t.link, fallback: store.url} only %}{% endset %}
+        <a class="gly-cat" href="{{ turl }}">
+          <span class="gly-cat-ic">
+            {% if t.image %}
+              <img class="gly-cat-img" src="{{ t.image }}" alt="{{ t.name }}" loading="lazy">
+            {% else %}
+              <i class="gly-cat-ico" style="--gly-ico:url('{{ gly_icons[t.icon]|asset }}')"></i>
+            {% endif %}
+          </span>
+          <span>{{ t.name }}</span>
+        </a>
+      {% endfor %}
     </div>
   </div>
 </section>

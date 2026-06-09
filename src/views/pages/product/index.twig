@@ -10,73 +10,72 @@
 | sort_options[].id          | string      | ourSuggest, bestSell, topRated, priceFromTopToLow, priceFromLowToTop |
 | sort_options[].name        | string      |                                                                      |
 | sort_options[].is_selected | bool        | Is current page sorted by it                                         |
+
+  Category page (stock-Raed structure that loads products reliably): toolbar
+  (count + filter btn + sort) lives INSIDE .main-content next to the products
+  list; container--products-list is the direct flex container; Salla's default
+  filter shows only when applicable.
 #}
 {% extends "layouts.master" %}
 {% block content %}
-<div class="gly-section gly-plist">
-	<div class="container">
-		{% if theme.settings.get('product_index_show_breadcrumbs', true) %}
-			<nav class="gly-crumbs breadcrumbs w-full" aria-label="breadcrumb">
-				<salla-breadcrumb></salla-breadcrumb>
-			</nav>
-		{% endif %}
+<section class="gly-section gly-plist">
+  <div class="container gly-wrap">
+    {% if theme.settings.get('product_index_show_breadcrumbs', true) %}
+      <nav class="gly-crumbs breadcrumbs w-full" aria-label="breadcrumb">
+        <salla-breadcrumb></salla-breadcrumb>
+      </nav>
+    {% endif %}
+    {# kept for products.js (it sets the title on fetch); visually hidden #}
+    <h1 id="page-main-title" class="sr-only">{{ (category and category.name) ? category.name : page.title|raw }}</h1>
+  </div>
 
-		<div class="gly-lhead">
-			<div class="gly-lhead__deco" aria-hidden="true"></div>
-			<span class="gly-eyebrow">{{ trans('blocks.gly.cats.eyebrow') }}</span>
-			<h1 id="page-main-title">{{ page.title|raw }}</h1>
-			{% if category and category.description %}<p>{{ category.description }}</p>{% endif %}
-		</div>
-	</div>
+  <div class="s-blocks-wrapper s-before-products-list !mt-0">{% hook 'product.index.before_products_group_with_filter' %}</div>
 
-	<div class="s-blocks-wrapper s-before-products-list !mt-0">{% hook 'product.index.before_products_group_with_filter' %}</div>
+  <div class="container container--products-list flex items-start flex-col md:flex-row">
+    {% if filters %}
+      <button class="btn--close-sm close-filters sicon-cancel hidden"></button>
+      <salla-filters class="gly-filters md:w-72 lg:sticky lg:top-20 flex-none" id="filters-menu"></salla-filters>
+    {% endif %}
 
-	<div class="container container--products-list flex items-start flex-col md:flex-row">
-		{% if filters %}
-			<button class="btn--close-sm close-filters sicon-cancel hidden"></button>
-			<salla-filters class="gly-filters md:w-72 lg:sticky lg:top-20 flex-none" id="filters-menu"></salla-filters>
-		{% endif %}
+    <div class="main-content flex-1 w-full {{ filters ? 'ltr:lg:ml-8 rtl:lg:mr-8' : '' }}">
+      <div class="gly-ptoolbar">
+        <div class="gly-pcount"><b id="gly-pcount">0</b> {{ trans('blocks.gly.plist.count_suffix') }}</div>
+        <div class="gly-tools-right">
+          {% if filters %}
+            <a href="#filters-menu" class="gly-fbtn filters-trigger">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+              {{ trans('blocks.gly.plist.filter') }}
+            </a>
+          {% endif %}
+          {% if sort_options|length %}
+            <div class="gly-psort">
+              <label for="product-filter">{{ trans('pages.categories.sorting') }}</label>
+              <div class="gly-selwrap">
+                <select id="product-filter">
+                  {% for sort in sort_options %}
+                    <option value="{{ sort.id }}" {{ sort.is_selected?'selected':'' }}>{{ sort.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
 
-		<div class="main-content flex-1 w-full {{ filters ? 'ltr:lg:ml-8 rtl:lg:mr-8' : '' }}">
-			<div class="gly-ptoolbar">
-				<div class="gly-tools-right">
-					{% if filters %}
-						<a href="#filters-menu" class="gly-fbtn filters-trigger lg:hidden">
-							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-							{{ trans('blocks.gly.plist.filter') }}
-						</a>
-					{% endif %}
-					{% if sort_options|length %}
-						<div class="gly-psort">
-							<label for="product-filter">{{ trans('pages.categories.sorting') }}</label>
-							<div class="gly-selwrap">
-								<select id="product-filter">
-									{% for sort in sort_options %}
-										<option value="{{ sort.id }}" {{ sort.is_selected?'selected':'' }}>{{ sort.name }}</option>
-									{% endfor %}
-								</select>
-							</div>
-						</div>
-					{% endif %}
-				</div>
-			</div>
+      {% hook 'product:index.items.start' %}
+      <salla-products-list class="gly-pgrid" source="{{ page.slug }}" source-value="{{ page.id }}" {{ filters ?'filters-Results':'' }}></salla-products-list>
+      {% hook 'product:index.items.end' %}
+    </div>
+  </div>
 
-			{% hook 'product:index.items.start' %}
+  <div class="s-blocks-wrapper s-after-products-list">{% hook 'product.index.after_products_group_with_filter' %}</div>
 
-			<salla-products-list class="gly-pgrid" source="{{ page.slug }}" source-value="{{ page.id }}" {{ filters ?'filters-Results':'' }}></salla-products-list>
-
-			{% hook 'product:index.items.end' %}
-		</div>
-	</div>
-
-	<div class="s-blocks-wrapper s-after-products-list">{% hook 'product.index.after_products_group_with_filter' %}</div>
-
-	{% if store.settings.category.testimonial_enabled %}
-		{% component 'home.testimonials' %}
-	{% endif %}
-</div>
+  {% if store.settings.category.testimonial_enabled %}
+    {% component 'home.testimonials' %}
+  {% endif %}
+</section>
 {% endblock %}
 
 {% block scripts %}
-	<script defer src="{{ 'product.js' | asset }}"></script>
+  <script defer src="{{ 'product.js' | asset }}"></script>
 {% endblock %}

@@ -1,20 +1,23 @@
 {#
   Giftology — Header / nav  (§5.2)  — ported from the reference design.
   Logo + cart + account come from Salla (store.logo, <salla-cart-summary>,
-  <salla-user-menu>); nav links jump to the homepage sections; search opens
-  Salla's global <salla-search> modal. Solid-on-scroll + mobile menu in giftology.js.
+  <salla-user-menu>). The nav (desktop bar + bespoke mobile drawer) lists the
+  homepage sections and is built from the section visibility toggles, so it
+  grows/shrinks automatically as the merchant enables/disables sections.
+  Search opens Salla's global <salla-search> modal.
+  Solid-on-scroll + mobile drawer toggle in giftology.js.
 
   | Variable         | Type    | Description                   |
   | cart.items_count | int     |                               |
   | cart.total       | string  | Formatted total               |
 #}
 {% set gly_home = store.url %}
-{% set gly_nav = [
-  { url: gly_home ~ '/#gly-cats',   label: trans('blocks.gly.nav.sections') },
-  { url: gly_home ~ '/#gly-custom', label: trans('blocks.gly.nav.custom') },
-  { url: gly_home ~ '/#gly-finder', label: trans('blocks.gly.nav.finder') },
-  { url: gly_home ~ '/#gly-how',    label: trans('blocks.gly.nav.how') }
-] %}
+{% set gly_nav = [] %}
+{% if theme.settings.get('gly_show_categories', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-cats',   title: trans('blocks.gly.nav.sections') }]) %}{% endif %}
+{% if theme.settings.get('gly_show_custom', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-custom', title: trans('blocks.gly.nav.custom') }]) %}{% endif %}
+{% if theme.settings.get('gly_show_finder', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-finder', title: trans('blocks.gly.nav.finder') }]) %}{% endif %}
+{% if theme.settings.get('gly_show_how', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-how',    title: trans('blocks.gly.nav.how') }]) %}{% endif %}
+{% if theme.settings.get('gly_show_testimonials', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-testi',  title: trans('blocks.gly.nav.testimonials') }]) %}{% endif %}
 
 <header id="gly-hdr" class="gly-header store-header{{ is_page('index') ? '' : ' gly-header--inner' }}">
   <div class="gly-nav-bg"></div>
@@ -32,10 +35,10 @@
         {% endif %}
       </a>
 
-      {# desktop menu #}
+      {# desktop menu — store header menu (dashboard-managed) with fallback #}
       <div class="gly-menu">
         {% for item in gly_nav %}
-          <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.label }}</a>
+          <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.title }}</a>
         {% endfor %}
       </div>
     </div>
@@ -61,13 +64,5 @@
     </div>
   </nav>
 </header>
-
-{# mobile menu #}
-<div class="gly-mmenu" id="gly-mmenu">
-  <button type="button" class="gly-mclose" id="gly-mclose" aria-label="{{ trans('blocks.gly.nav.close') }}">
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg>
-  </button>
-  {% for item in gly_nav %}
-    <a href="{{ item.url }}">{{ item.label }}</a>
-  {% endfor %}
-</div>
+{# The mobile drawer (#gly-mmenu) is rendered in master.twig OUTSIDE .app-inner
+   so its position:fixed is relative to the viewport (like the WhatsApp float). #}
