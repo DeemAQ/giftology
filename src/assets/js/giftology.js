@@ -164,8 +164,6 @@
   // price <input>s (.s-price-range-number-input). The native inputs stay as a
   // fallback so filtering keeps working even if the slider can't wire up.
   function initPriceSlider() {
-    if (!window.salla || !salla.event) return;
-
     function build() {
       document.querySelectorAll('salla-filters .s-price-range-inputs').forEach(function (wrap) {
         if (wrap.dataset.glyslider) return;
@@ -215,8 +213,20 @@
       });
     }
 
-    salla.event.on('salla-filters::fetched', function () { setTimeout(build, 60); });
-    setTimeout(build, 700);
+    // Salla fires these around filter render / change / reset (note: the
+    // initial render event is 'filters::fetched', NOT 'salla-filters::fetched').
+    if (window.salla && salla.event) {
+      ['filters::fetched', 'salla-filters::changed', 'salla-filters::reset'].forEach(function (ev) {
+        salla.event.on(ev, function () { setTimeout(build, 80); });
+      });
+    }
+    // DOM fallback: the filter markup is injected asynchronously and can
+    // re-render, so rebuild (debounced) whenever the page subtree changes.
+    var t;
+    new MutationObserver(function () { clearTimeout(t); t = setTimeout(build, 120); })
+      .observe(document.body, { childList: true, subtree: true });
+    // initial attempts in case everything is already in place
+    [200, 600, 1200, 2000].forEach(function (ms) { setTimeout(build, ms); });
   }
 
 })();
