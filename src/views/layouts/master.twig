@@ -125,9 +125,8 @@
 {# Giftology — global floating WhatsApp button (§5.10) #}
 {% include 'components.gly-whatsapp-float' %}
 
-{# Giftology — mobile nav drawer (kept OUTSIDE .app-inner so position:fixed is
-   viewport-relative; the burger #gly-burger in the header toggles it by id) #}
-<div class="gly-mscrim" id="gly-mscrim"></div>
+{# Giftology — full-screen mobile nav menu (OUTSIDE .app-inner so position:fixed
+   is viewport-relative; the burger #gly-burger in the header toggles it by id) #}
 <div class="gly-mmenu" id="gly-mmenu">
   <button type="button" class="gly-mclose" id="gly-mclose" aria-label="{{ trans('blocks.gly.nav.close') }}">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg>
