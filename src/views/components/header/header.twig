@@ -16,7 +16,7 @@
   { url: gly_home ~ '/#gly-how',    label: trans('blocks.gly.nav.how') }
 ] %}
 
-<header id="gly-hdr" class="gly-header store-header">
+<header id="gly-hdr" class="gly-header store-header{{ is_page('index') ? '' : ' gly-header--inner' }}">
   <div class="gly-nav-bg"></div>
   <nav class="gly-nav gly-wrap">
 

@@ -52,6 +52,8 @@
 .gly-ibtn:hover{background:var(--gly-teal-wash);color:var(--gly-teal-ink)}
 .gly-ibtn svg{width:21px;height:21px}
 .gly-burger{display:none}
+.gly-header--inner .gly-menu{display:none}
+.gly-header--inner .gly-burger{display:grid}
 /* style the Salla cart/user web-components to fit the icon row */
 .gly-icons salla-cart-summary,.gly-icons salla-user-menu{display:inline-flex}
 .gly-icons .sicon-shopping-bag,.gly-icons .sicon-user{font-size:21px}
