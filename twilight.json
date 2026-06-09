@@ -488,7 +488,7 @@
       "required": false,
       "placeholder": "https://your-store.com/...",
       "minLength": 0,
-      "maxLength": 300,
+      "maxLength": 600,
       "description": "الصفحة التي يفتحها زر \"عرض الكل\" (مثلاً صفحة كل المنتجات)."
     },
     {
@@ -595,7 +595,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
@@ -695,7 +695,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
@@ -795,7 +795,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
@@ -895,7 +895,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
@@ -995,7 +995,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
@@ -1095,7 +1095,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
@@ -1195,7 +1195,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
@@ -1295,7 +1295,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
@@ -1314,7 +1314,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "string",
@@ -1327,7 +1327,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "string",
@@ -1340,7 +1340,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "string",
@@ -1353,7 +1353,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "string",
@@ -1366,7 +1366,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "string",
@@ -1379,7 +1379,7 @@
       "placeholder": "https://your-store.com/.../c123456",
       "description": "افتح القسم في متجرك وانسخ رابط الصفحة والصقه هنا.",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "string",
@@ -1425,7 +1425,7 @@
       "required": false,
       "placeholder": "https://x.com/...",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "string",
@@ -1437,7 +1437,7 @@
       "required": false,
       "placeholder": "https://snapchat.com/add/...",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "string",
@@ -1449,7 +1449,7 @@
       "required": false,
       "placeholder": "https://facebook.com/...",
       "minLength": 0,
-      "maxLength": 300
+      "maxLength": 600
     },
     {
       "type": "static",
