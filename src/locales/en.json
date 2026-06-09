@@ -126,7 +126,8 @@
                 "r4_l": "Riyadh"
             },
             "plist": {
-                "count_suffix": "items in this category"
+                "count_suffix": "items in this category",
+                "filter": "Filter"
             },
             "latest": {
                 "eyebrow": "Just arrived",

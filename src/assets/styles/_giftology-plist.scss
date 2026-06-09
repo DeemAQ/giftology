@@ -18,6 +18,15 @@
 .gly-selwrap{position:relative}
 .gly-selwrap select{appearance:none;font-family:inherit;font-weight:700;color:var(--gly-ink);padding:.62rem 2.4rem .62rem 1rem;border-radius:50px;border:1.6px solid rgba(74,63,53,.16);background:#fff;cursor:pointer}
 .gly-selwrap::after{content:"";position:absolute;inset-inline-start:1rem;top:50%;width:7px;height:7px;border-left:2px solid var(--gly-ink);border-bottom:2px solid var(--gly-ink);transform:translateY(-65%) rotate(-45deg);pointer-events:none}
+/* filter button (.fbtn) — ghost pill, shown on mobile */
+.gly-fbtn{display:none;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;padding:.62rem 1.2rem;border-radius:50px;border:1.6px solid rgba(74,63,53,.22);background:transparent;color:var(--gly-ink);cursor:pointer;transition:.25s}
+.gly-fbtn:hover{border-color:var(--gly-teal-deep);color:var(--gly-teal-ink);background:var(--gly-teal-wash)}
+.gly-fbtn svg{width:18px;height:18px}
+@media(max-width:1024px){.gly-fbtn{display:inline-flex}}
+
+/* Salla's default filter, framed in a light giftology card */
+.gly-filters{background:#fff;border:1px solid rgba(74,63,53,.08);border-radius:22px;padding:1.2rem 1.4rem;box-shadow:var(--gly-shadow-sm)}
+.gly-filters .s-filters-widget-title{font-family:var(--gly-font-display);color:var(--gly-ink)}
 
 /* Salla product cards → giftology frame (.pcard) */
 .gly-plist .s-product-card-entry{border-radius:22px;border:1px solid rgba(74,63,53,.07);box-shadow:var(--gly-shadow-sm);overflow:hidden;background:#fff;transition:transform .3s,box-shadow .3s,border-color .3s}

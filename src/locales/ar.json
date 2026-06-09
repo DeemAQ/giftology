@@ -126,7 +126,8 @@
                 "r4_l": "الرياض"
             },
             "plist": {
-                "count_suffix": "هدية في هذا القسم"
+                "count_suffix": "هدية في هذا القسم",
+                "filter": "تصفية"
             },
             "latest": {
                 "eyebrow": "وصل حديثاً",

@@ -10,6 +10,10 @@
 | sort_options[].id          | string      | ourSuggest, bestSell, topRated, priceFromTopToLow, priceFromLowToTop |
 | sort_options[].name        | string      |                                                                      |
 | sort_options[].is_selected | bool        | Is current page sorted by it                                         |
+
+  Category page: toolbar (count + sort) + product grid. Salla's DEFAULT filter
+  is shown only when the category supports it (`filters` bool) — standard Raed
+  structure (salla-filters + filters-Results) so products load correctly.
 #}
 {% extends "layouts.master" %}
 {% block content %}
@@ -22,10 +26,16 @@
       </nav>
     {% endif %}
 
-    {# toolbar: product count + sort #}
+    {# toolbar: product count + filter button (if applicable) + sort #}
     <div class="gly-ptoolbar">
       <div class="gly-pcount"><b id="gly-pcount">0</b> {{ trans('blocks.gly.plist.count_suffix') }}</div>
       <div class="gly-tools-right">
+        {% if filters %}
+          <a href="#filters-menu" class="gly-fbtn filters-trigger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+            {{ trans('blocks.gly.plist.filter') }}
+          </a>
+        {% endif %}
         {% if sort_options|length %}
           <div class="gly-psort">
             <label for="product-filter">{{ trans('pages.categories.sorting') }}</label>
@@ -44,11 +54,19 @@
 
   <div class="s-blocks-wrapper s-before-products-list !mt-0">{% hook 'product.index.before_products_group_with_filter' %}</div>
 
-  {# product grid #}
+  {# product grid (with Salla's default filter sidebar when applicable) #}
   <div class="container gly-wrap">
-    {% hook 'product:index.items.start' %}
-    <salla-products-list class="gly-pgrid" source="{{ page.slug }}" source-value="{{ page.id }}" {{ filters ? 'filters-Results' : '' }}></salla-products-list>
-    {% hook 'product:index.items.end' %}
+    <div class="container--products-list flex items-start flex-col md:flex-row">
+      {% if filters %}
+        <button class="btn--close-sm close-filters sicon-cancel hidden"></button>
+        <salla-filters class="gly-filters md:w-72 lg:sticky lg:top-24 flex-none" id="filters-menu"></salla-filters>
+      {% endif %}
+      <div class="main-content flex-1 w-full {{ filters ? 'ltr:lg:ml-8 rtl:lg:mr-8' : '' }}">
+        {% hook 'product:index.items.start' %}
+        <salla-products-list class="gly-pgrid" source="{{ page.slug }}" source-value="{{ page.id }}" {{ filters ? 'filters-Results' : '' }}></salla-products-list>
+        {% hook 'product:index.items.end' %}
+      </div>
+    </div>
   </div>
 
   <div class="s-blocks-wrapper s-after-products-list">{% hook 'product.index.after_products_group_with_filter' %}</div>
