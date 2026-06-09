@@ -25,7 +25,8 @@
                 "mini_fast_t": "Fast delivery",
                 "mini_fast_d": "Within Riyadh",
                 "mini_card_t": "Free card",
-                "mini_card_d": "A personal note"
+                "mini_card_d": "A personal note",
+                "cta_latest": "Latest products"
             },
             "cats": {
                 "eyebrow": "Shop by category",
@@ -95,7 +96,9 @@
                 "search": "Search",
                 "menu": "Menu",
                 "close": "Close",
-                "testimonials": "Reviews"
+                "testimonials": "Reviews",
+                "home": "Home",
+                "latest": "Latest products"
             },
             "footer": {
                 "about": "The art & science of the perfect gift. Curated and custom gifts, wrapped with care and delivered across the Kingdom.",
@@ -123,7 +126,15 @@
                 "r4_l": "Riyadh"
             },
             "plist": {
-                "filter": "Filter"
+                "filter": "Filter",
+                "count_suffix": "items in this category",
+                "clear": "Clear all",
+                "filter_title": "Filter"
+            },
+            "latest": {
+                "eyebrow": "Just arrived",
+                "title": "Latest products",
+                "view_all": "View all"
             }
         }
     },

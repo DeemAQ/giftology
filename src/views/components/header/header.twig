@@ -70,8 +70,27 @@
   <button type="button" class="gly-mclose" id="gly-mclose" aria-label="{{ trans('blocks.gly.nav.close') }}">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg>
   </button>
-  {# store header menu — same source as the desktop bar #}
-  {% for item in gly_nav %}
-    <a href="{{ item.url }}">{{ item.title }}</a>
-  {% endfor %}
+  {# mobile order: Home · Latest products · Sections (expandable) · Custom · rest #}
+  <a href="{{ store.url }}">{{ trans('blocks.gly.nav.home') }}</a>
+
+  {% if theme.settings.get('gly_show_latest', true) %}
+    <a href="{{ gly_home }}/#gly-latest">{{ trans('blocks.gly.nav.latest') }}</a>
+  {% endif %}
+
+  {% if theme.settings.get('gly_show_categories', true) %}
+    <div class="gly-msub">
+      <button type="button" class="gly-msub-toggle" aria-expanded="false">
+        {{ trans('blocks.gly.nav.sections') }}
+        <svg class="gly-msub-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="gly-msub-panel">
+        {% include 'components.home.gly-cat-links' %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if theme.settings.get('gly_show_custom', true) %}<a href="{{ gly_home }}/#gly-custom">{{ trans('blocks.gly.nav.custom') }}</a>{% endif %}
+  {% if theme.settings.get('gly_show_finder', true) %}<a href="{{ gly_home }}/#gly-finder">{{ trans('blocks.gly.nav.finder') }}</a>{% endif %}
+  {% if theme.settings.get('gly_show_how', true) %}<a href="{{ gly_home }}/#gly-how">{{ trans('blocks.gly.nav.how') }}</a>{% endif %}
+  {% if theme.settings.get('gly_show_testimonials', true) %}<a href="{{ gly_home }}/#gly-testi">{{ trans('blocks.gly.nav.testimonials') }}</a>{% endif %}
 </div>

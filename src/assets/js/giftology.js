@@ -36,6 +36,14 @@
       mmenu.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', function () { mmenu.classList.remove('open'); });
       });
+      // "Sections" accordion (reveals the category links)
+      mmenu.querySelectorAll('.gly-msub-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var sub = btn.closest('.gly-msub');
+          var open = sub.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
     }
 
     /* ---- reveal-on-scroll ---- */
@@ -59,7 +67,25 @@
 
     /* ---- price range slider (enhances Salla's price filter) ---- */
     initPriceSlider();
+
+    /* ---- product-list count ("X في هذا القسم") ---- */
+    initProductCount();
   });
+
+  /* keep the toolbar count in sync with the rendered product grid */
+  function initProductCount() {
+    var label = document.getElementById('gly-pcount');
+    var grid = document.querySelector('.gly-pgrid');
+    if (!label || !grid) return;
+    var update = function () {
+      var n = grid.querySelectorAll('.s-product-card-entry').length;
+      if (n) label.textContent = n;
+    };
+    update();
+    var t;
+    new MutationObserver(function () { clearTimeout(t); t = setTimeout(update, 120); })
+      .observe(grid, { childList: true, subtree: true });
+  }
 
   /* ===================== GIFT FINDER ===================== */
   function initFinder() {

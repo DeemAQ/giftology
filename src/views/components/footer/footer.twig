@@ -1,8 +1,8 @@
 {#
   Giftology — Footer  (§5.9)
   Brand logo from store; about text from gly_footer_about (falls back to store
-  description / locale). Sections column = the merchant's store footer menu
-  (<salla-menu source="footer">, dashboard → Menus). Social row + contact +
+  description / locale). Sections column = the same category tiles as the home
+  circles (gly-cat-links partial). Social row + contact +
   payment badges are all merchant-configurable via theme settings.
   Dark watermark = --gly-darkpat.
 #}
@@ -46,10 +46,10 @@
         </div>
       </div>
 
-      {# sections — store footer menu (dashboard-managed) #}
+      {# sections — same category tiles as the home circles #}
       <div>
         <h5>{{ trans('blocks.gly.footer.categories') }}</h5>
-        <salla-menu source="footer" class="gly-salla-menu gly-footer-menu"></salla-menu>
+        <nav class="gly-flinks">{% include 'components.home.gly-cat-links' %}</nav>
       </div>
 
       {# contact methods — email / WhatsApp #}

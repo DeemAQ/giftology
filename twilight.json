@@ -394,6 +394,16 @@
       "selected": true
     },
     {
+      "type": "boolean",
+      "icon": "sicon-toggle-on",
+      "format": "switch",
+      "label": "إظهار قسم أحدث المنتجات",
+      "id": "gly_show_latest",
+      "required": false,
+      "value": true,
+      "selected": true
+    },
+    {
       "id": "gly_show_categories",
       "label": "إظهار دوائر الأقسام",
       "description": null,
@@ -447,6 +457,39 @@
       "required": false,
       "value": true,
       "selected": true
+    },
+    {
+      "type": "static",
+      "id": "gly-label-latest",
+      "format": "label",
+      "labelHTML": "<b style='font-size:14px'>جيفتولوجي — قسم أحدث المنتجات</b>"
+    },
+    {
+      "type": "string",
+      "format": "text",
+      "icon": "sicon-format-text-alt",
+      "label": "عنوان القسم",
+      "id": "gly_latest_title",
+      "multilanguage": true,
+      "value": null,
+      "required": false,
+      "placeholder": "أحدث المنتجات",
+      "minLength": 0,
+      "maxLength": 60,
+      "description": "اتركه فارغاً لاستخدام العنوان الافتراضي."
+    },
+    {
+      "type": "string",
+      "format": "url",
+      "icon": "sicon-link",
+      "label": "رابط زر \"عرض الكل\"",
+      "id": "gly_latest_url",
+      "value": null,
+      "required": false,
+      "placeholder": "https://your-store.com/...",
+      "minLength": 0,
+      "maxLength": 300,
+      "description": "الصفحة التي يفتحها زر \"عرض الكل\" (مثلاً صفحة كل المنتجات)."
     },
     {
       "type": "static",

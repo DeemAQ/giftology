@@ -16,6 +16,10 @@
         {% include 'components.home.gly-hero' %}
     {% endif %}
 
+    {% if theme.settings.get('gly_show_latest', true) %}
+        {% include 'components.home.gly-latest-products' %}
+    {% endif %}
+
     {% if theme.settings.get('gly_show_categories', true) %}
         {% include 'components.home.gly-categories' %}
     {% endif %}

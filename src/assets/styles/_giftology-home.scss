@@ -57,12 +57,27 @@
 /* style the Salla cart/user web-components to fit the icon row */
 .gly-icons salla-cart-summary,.gly-icons salla-user-menu{display:inline-flex}
 .gly-icons .sicon-shopping-bag,.gly-icons .sicon-user{font-size:21px}
+/* hide the cart total (keep icon + item count) */
+.gly-icons salla-cart-summary .s-cart-summary-total{display:none!important}
+/* round the logged-in account avatar (Salla renders it square) */
+.gly-icons salla-user-menu .s-user-menu-avatar-wrap,
+.gly-icons salla-user-menu .s-user-menu-avatar-wrap img,
+.gly-icons salla-user-menu img[class*="avatar"]{border-radius:50%!important;overflow:hidden;object-fit:cover}
 
 /* mobile menu */
 .gly-mmenu{position:fixed;inset:0;z-index:85;background:var(--gly-cream);transform:translateX(100%);transition:.4s;display:flex;flex-direction:column;padding:5rem 2rem 2rem}
 .gly-mmenu.open{transform:none}
 .gly-mmenu a{font-family:var(--gly-font-display);font-size:1.7rem;font-weight:700;padding:.7rem 0;border-bottom:1px solid rgba(74,63,53,.08);color:var(--gly-ink)}
 .gly-mclose{position:absolute;top:1.4rem;inset-inline-end:1.4rem;width:44px;height:44px;border-radius:50%;background:var(--gly-teal-wash);display:grid;place-items:center;border:none}
+/* mobile "Sections" accordion */
+.gly-msub{border-bottom:1px solid rgba(74,63,53,.08)}
+.gly-msub-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;font-family:var(--gly-font-display);font-size:1.7rem;font-weight:700;padding:.7rem 0;color:var(--gly-ink)}
+.gly-msub-chev{width:24px;height:24px;transition:transform .3s}
+.gly-msub.open .gly-msub-chev{transform:rotate(180deg)}
+.gly-msub-panel{max-height:0;overflow:hidden;transition:max-height .35s ease;display:flex;flex-direction:column}
+.gly-msub.open .gly-msub-panel{max-height:60vh}
+.gly-msub-panel a{font-family:var(--gly-font-body)!important;font-size:1.12rem!important;font-weight:600!important;padding:.5rem 0 .5rem 1rem!important;border-bottom:none!important;color:var(--gly-soft)!important}
+.gly-msub-panel a:hover{color:var(--gly-teal-deep)!important}
 
 /* ============================================================
    Hero (§5.3)
@@ -211,11 +226,10 @@
 .gly-footer ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0}
 .gly-footer ul a{opacity:.74;font-size:.94rem;transition:.2s}
 .gly-footer ul a:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
-/* <salla-menu source="footer"> rendered inside the footer column */
-.gly-footer-menu{display:block}
-.gly-footer-menu .s-menu-footer-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0}
-.gly-footer-menu .s-menu-footer-item{opacity:.74;font-size:.94rem;color:inherit;transition:.2s}
-.gly-footer-menu .s-menu-footer-item:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
+/* footer section links (gly-cat-links partial) */
+.gly-flinks{display:flex;flex-direction:column;gap:.55rem}
+.gly-flinks a{opacity:.74;font-size:.94rem;transition:.2s}
+.gly-flinks a:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
 .gly-fbottom{position:relative;margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.86rem;opacity:.78}
 .gly-pays{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
 .gly-pays span{background:rgba(255,255,255,.92);color:#22302d;font-weight:800;font-size:.68rem;padding:.3rem .55rem;border-radius:6px}
@@ -252,3 +266,8 @@
   .gly-cat{width:104px}
   .gly-cat-ic{width:90px;height:90px}
 }
+
+/* ---- Latest products section ---- */
+.gly-latest{padding:1rem 0 3.4rem}
+.gly-latest-grid{display:block;margin-top:.4rem}
+.gly-latest-more{display:flex;justify-content:center;margin-top:2.2rem}
