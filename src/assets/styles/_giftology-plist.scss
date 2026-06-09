@@ -11,7 +11,7 @@
 
 /* teal list header banner (.lhead) */
 .gly-lhead{position:relative;border-radius:28px;overflow:hidden;color:#fff;padding:2.6rem 2.2rem;margin:.4rem 0 1.8rem;background:linear-gradient(150deg,#3f9c96,#2c6f6a)}
-.gly-lhead__deco{position:absolute;inset:0;background-image:var(--gly-pat);background-size:360px;opacity:.5;mix-blend-mode:overlay}
+.gly-lhead__deco{position:absolute;inset:0;background-image:var(--gly-darkpat);background-size:340px;opacity:.55;mix-blend-mode:soft-light}
 .gly-lhead>*{position:relative;z-index:1}
 .gly-lhead .gly-eyebrow{color:var(--gly-gold-soft)}
 .gly-lhead h1{font-family:var(--gly-font-display);font-weight:700;font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.2;margin:.4rem 0 .5rem;color:#fff}
@@ -36,28 +36,11 @@
 /* player layout (.player) */
 .gly-player{gap:1.8rem}
 
-/* ---- Salla filter sidebar → giftology card with chip options (.filters) ---- */
-.gly-filters{background:#fff;border:1px solid rgba(74,63,53,.08);border-radius:22px;padding:1.4rem;box-shadow:var(--gly-shadow-sm)}
-/* each filter group (.fgroup) */
-.gly-filters .s-filters-widget-container{padding:1rem 0;border-top:1px dashed rgba(74,63,53,.14)}
-.gly-filters .s-filters-widget-container:first-of-type{padding-top:.4rem;border-top:none}
-/* group heading (.fgroup h4) */
-.gly-filters .s-filters-widget-title{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gly-soft);font-weight:800;margin-bottom:.5rem}
-/* options laid out as chips (.chips) */
-.gly-filters .s-filters-widget-values,
-.gly-filters .s-filters-widget-content{display:flex;flex-wrap:wrap;gap:.5rem}
-/* each option → chip (.chip) */
-.gly-filters .s-filters-label{display:inline-flex;align-items:center;gap:.35rem;margin:0;padding:.5rem .9rem;border-radius:50px;border:1.6px solid rgba(74,63,53,.14);background:#fff;font-weight:700;font-size:.88rem;color:var(--gly-ink);cursor:pointer;transition:.2s;line-height:1.1}
-.gly-filters .s-filters-label:hover{border-color:var(--gly-teal-deep);transform:translateY(-1px)}
-.gly-filters .s-filters-radio{position:absolute;opacity:0;width:0;height:0;margin:0}
-.gly-filters .s-filters-label:has(input:checked){background:var(--gly-teal-deep);color:#fff;border-color:var(--gly-teal-deep)}
-.gly-filters .s-filters-option-name{font:inherit;color:inherit}
-/* search box inside a filter group */
-.gly-filters .s-filters-widget-search-input{border-radius:12px;border:1.5px solid rgba(74,63,53,.16);font-family:inherit}
-/* apply / reset footer */
-.gly-filters .s-filters-footer{border-top:1px dashed rgba(74,63,53,.14);padding-top:1rem;margin-top:.4rem}
-/* mobile close button (.fclose) */
-.gly-fclose{color:var(--gly-ink)}
+/* ---- Salla DEFAULT filter, in a light giftology card frame ----
+   (no chip/radio overrides — let Salla render its own filter UI so it works) */
+.gly-filters{background:#fff;border:1px solid rgba(74,63,53,.08);border-radius:22px;padding:1.2rem 1.4rem;box-shadow:var(--gly-shadow-sm)}
+/* subtle brand tint on the group titles only (safe, cosmetic) */
+.gly-filters .s-filters-widget-title{font-family:var(--gly-font-display);color:var(--gly-ink)}
 
 /* dual-handle price slider (drives Salla's price inputs) (.range) */
 .gly-prange{position:relative;height:34px;margin:.4rem .4rem 1rem}

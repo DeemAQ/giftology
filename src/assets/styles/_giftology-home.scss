@@ -51,8 +51,8 @@
 .gly-ibtn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--gly-ink);transition:.25s;position:relative;background:none;border:none}
 .gly-ibtn:hover{background:var(--gly-teal-wash);color:var(--gly-teal-ink)}
 .gly-ibtn svg{width:21px;height:21px}
-.gly-burger{display:none}
-/* desktop always shows the nav (home + inner); burger is mobile-only (≤920px) */
+/* hamburger is ALWAYS visible (desktop + mobile); opens the side drawer */
+.gly-burger{display:grid}
 /* style the Salla cart/user web-components to fit the icon row */
 .gly-icons salla-cart-summary,.gly-icons salla-user-menu{display:inline-flex}
 .gly-icons .sicon-shopping-bag,.gly-icons .sicon-user{font-size:21px}
@@ -163,7 +163,7 @@
 /* ============================================================
    How it works / science (§5.7)
    ============================================================ */
-.gly-how{padding:4rem 0 3.4rem;text-align:center}
+.gly-how{padding:2rem 0 3.4rem;text-align:center}
 .gly-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:1rem}
 .gly-step{padding:1.4rem 1rem;position:relative}
 .gly-step__num{font-family:var(--gly-font-display);font-size:1rem;color:var(--gly-gold);font-weight:700}
