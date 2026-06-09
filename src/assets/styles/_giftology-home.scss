@@ -1,11 +1,3 @@
-/* ============================================================
-   Giftology — components layer (faithful port of
-   design/giftology-reference.html, gly- namespaced).
-   Tokens live in _giftology.scss. RTL-first, logical properties,
-   Western numerals. Base64 patterns replaced by --gly-pat /
-   --gly-darkpat (real images injected from master.twig).
-   ============================================================ */
-
 /* ---- shared ---- */
 .gly-wrap{width:min(1200px,92vw);margin-inline:auto}
 .gly-eyebrow{font-size:.82rem;letter-spacing:.06em;font-weight:700;color:var(--gly-teal-deep)}
