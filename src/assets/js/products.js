@@ -24,22 +24,6 @@ class Products extends BasePage {
             res.title && (app.element('#page-main-title').innerHTML = res.title);
         });
 
-        // Kick off the first load: a products-list in `filters-Results` mode can
-        // stay empty until the first sort/filter change, so force an initial load.
-        if (productsList) {
-            const kickoff = () => {
-                if (typeof productsList.reload === 'function') {
-                    const sel = app.element('#product-filter');
-                    if (sel) productsList.sortBy = sel.value;
-                    productsList.reload();
-                }
-            };
-            if (window.customElements && customElements.whenDefined) {
-                customElements.whenDefined('salla-products-list').then(kickoff);
-            } else {
-                setTimeout(kickoff, 500);
-            }
-        }
 
         this.initiateMobileMenu()
     }
