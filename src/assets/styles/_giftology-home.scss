@@ -102,11 +102,15 @@
    Categories (§5.4) — links from settings, icons are design
    ============================================================ */
 .gly-cats{padding:1rem 0 3.4rem}
-.gly-cat-grid{display:flex;flex-wrap:wrap;gap:1.4rem 1.8rem;justify-content:center}
+/* width caps the row to exactly 6 tiles (120px + 1.8rem gaps); a 7th/8th wrap
+   to a second line that justify-content:center keeps centered under the six. */
+.gly-cat-grid{display:flex;flex-wrap:wrap;gap:1.8rem 1.8rem;justify-content:center;max-width:880px;margin-inline:auto}
 .gly-cat{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:.8rem;cursor:pointer;width:120px;color:var(--gly-ink)}
 .gly-cat-ic{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:var(--gly-shadow-sm);border:1.5px solid rgba(74,63,53,.07);transition:.3s;position:relative;overflow:hidden}
-.gly-cat-ic svg{width:40px;height:40px;color:var(--gly-teal-deep);transition:.3s;position:relative;z-index:1}
+/* brand SVG drawn as a teal silhouette via mask (source icons vary fill/stroke) */
+.gly-cat-ico{width:44px;height:44px;display:block;background:var(--gly-teal-deep);transition:.3s;-webkit-mask:var(--gly-ico) center/contain no-repeat;mask:var(--gly-ico) center/contain no-repeat}
 .gly-cat:hover .gly-cat-ic{transform:translateY(-7px);border-color:var(--gly-teal);box-shadow:var(--gly-shadow-teal)}
+.gly-cat:hover .gly-cat-ico{background:var(--gly-teal)}
 .gly-cat span{font-weight:700;font-size:.96rem;text-align:center}
 
 /* ============================================================
@@ -205,6 +209,11 @@
 .gly-footer ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0}
 .gly-footer ul a{opacity:.74;font-size:.94rem;transition:.2s}
 .gly-footer ul a:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
+/* <salla-menu source="footer"> rendered inside the footer column */
+.gly-footer-menu{display:block}
+.gly-footer-menu .s-menu-footer-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0}
+.gly-footer-menu .s-menu-footer-item{opacity:.74;font-size:.94rem;color:inherit;transition:.2s}
+.gly-footer-menu .s-menu-footer-item:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
 .gly-fbottom{position:relative;margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.86rem;opacity:.78}
 .gly-pays{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
 .gly-pays span{background:rgba(255,255,255,.92);color:#22302d;font-weight:800;font-size:.68rem;padding:.3rem .55rem;border-radius:6px}

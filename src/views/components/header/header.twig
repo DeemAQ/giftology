@@ -1,19 +1,25 @@
 {#
   Giftology — Header / nav  (§5.2)  — ported from the reference design.
   Logo + cart + account come from Salla (store.logo, <salla-cart-summary>,
-  <salla-user-menu>); nav links jump to the homepage sections; search opens
-  Salla's global <salla-search> modal. Solid-on-scroll + mobile menu in giftology.js.
+  <salla-user-menu>). The nav is the merchant's store header menu, managed in
+  the Salla dashboard (Settings → Menus) and exposed here as the `menus` Twig
+  variable — adding/removing items there flows straight into both the desktop
+  bar and the bespoke mobile drawer below. Until a store menu exists it falls
+  back to the in-page section links so the nav is never empty.
+  Search opens Salla's global <salla-search> modal.
+  Solid-on-scroll + mobile drawer toggle in giftology.js.
 
   | Variable         | Type    | Description                   |
+  | menus            | Menu[]  | store header menu (url/title) |
   | cart.items_count | int     |                               |
   | cart.total       | string  | Formatted total               |
 #}
 {% set gly_home = store.url %}
-{% set gly_nav = [
-  { url: gly_home ~ '/#gly-cats',   label: trans('blocks.gly.nav.sections') },
-  { url: gly_home ~ '/#gly-custom', label: trans('blocks.gly.nav.custom') },
-  { url: gly_home ~ '/#gly-finder', label: trans('blocks.gly.nav.finder') },
-  { url: gly_home ~ '/#gly-how',    label: trans('blocks.gly.nav.how') }
+{% set gly_nav = menus ?: [
+  { url: gly_home ~ '/#gly-cats',   title: trans('blocks.gly.nav.sections') },
+  { url: gly_home ~ '/#gly-custom', title: trans('blocks.gly.nav.custom') },
+  { url: gly_home ~ '/#gly-finder', title: trans('blocks.gly.nav.finder') },
+  { url: gly_home ~ '/#gly-how',    title: trans('blocks.gly.nav.how') }
 ] %}
 
 <header id="gly-hdr" class="gly-header store-header{{ is_page('index') ? '' : ' gly-header--inner' }}">
@@ -32,10 +38,10 @@
         {% endif %}
       </a>
 
-      {# desktop menu #}
+      {# desktop menu — store header menu (dashboard-managed) with fallback #}
       <div class="gly-menu">
         {% for item in gly_nav %}
-          <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.label }}</a>
+          <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.title }}</a>
         {% endfor %}
       </div>
     </div>
@@ -67,7 +73,8 @@
   <button type="button" class="gly-mclose" id="gly-mclose" aria-label="{{ trans('blocks.gly.nav.close') }}">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 6 12 12M18 6 6 18"/></svg>
   </button>
+  {# store header menu — same source as the desktop bar #}
   {% for item in gly_nav %}
-    <a href="{{ item.url }}">{{ item.label }}</a>
+    <a href="{{ item.url }}">{{ item.title }}</a>
   {% endfor %}
 </div>

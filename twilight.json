@@ -452,7 +452,7 @@
       "type": "static",
       "id": "gly-label-جيفتول",
       "format": "label",
-      "labelHTML": "<b style='font-size:14px'>جيفتولوجي — أقسام المتجر (لدوائر الأقسام ومكتشف الهدايا)</b><br><span style='font-size:12px;opacity:.75'>اختر القسم المناسب لكل دائرة؛ يفتح صفحة القسم في متجرك مباشرة.</span>"
+      "labelHTML": "<b style='font-size:14px'>جيفتولوجي — أقسام المتجر (لدوائر الأقسام ومكتشف الهدايا)</b><br><span style='font-size:12px;opacity:.75'>اختر القسم المناسب لكل دائرة؛ يفتح صفحة القسم في متجرك مباشرة. يمكنك عرض حتى 8 دوائر: 6 أساسية + دائرتان اختياريتان تظهران موسّطتين أسفل الصف.</span>"
     },
     {
       "type": "items",
@@ -537,6 +537,112 @@
       "options": [],
       "required": false,
       "description": "اختر القسم من متجرك ليفتح عند الضغط على هذه الدائرة."
+    },
+    {
+      "type": "static",
+      "id": "gly-label-extra7",
+      "format": "label",
+      "labelHTML": "<b style='font-size:13px'>دائرة إضافية 7 (اختياري) — تظهر فقط عند تعبئة الاسم أو القسم</b>"
+    },
+    {
+      "type": "items",
+      "format": "dropdown-list",
+      "icon": "sicon-keyboard_arrow_down",
+      "label": "الدائرة الإضافية 7 — القسم",
+      "id": "gly_cat7_link",
+      "source": "categories",
+      "multichoice": false,
+      "searchable": true,
+      "selected": [],
+      "options": [],
+      "required": false,
+      "description": "اختر القسم المستهدف من متجرك."
+    },
+    {
+      "type": "string",
+      "icon": "sicon-format-text-alt",
+      "format": "text",
+      "label": "الدائرة الإضافية 7 — الاسم",
+      "id": "gly_cat7_label",
+      "multilanguage": true,
+      "value": null,
+      "required": false,
+      "placeholder": "مثال: هدايا فاخرة",
+      "minLength": 0,
+      "maxLength": 40
+    },
+    {
+      "type": "items",
+      "format": "dropdown-list",
+      "icon": "sicon-image",
+      "label": "الدائرة الإضافية 7 — الأيقونة",
+      "id": "gly_cat7_icon",
+      "source": "Manual",
+      "required": false,
+      "selected": [
+        { "label": "هدية", "value": "gift", "key": "gly-ico-gift-7" }
+      ],
+      "options": [
+        { "label": "هدية", "value": "gift", "key": "gly-ico-gift-7" },
+        { "label": "مولود", "value": "baby", "key": "gly-ico-baby-7" },
+        { "label": "كيك / حفلة", "value": "cake", "key": "gly-ico-cake-7" },
+        { "label": "ربطة عنق", "value": "tie", "key": "gly-ico-tie-7" },
+        { "label": "بطاقة", "value": "tag", "key": "gly-ico-tag-7" },
+        { "label": "ظرف", "value": "envelope", "key": "gly-ico-envelope-7" }
+      ]
+    },
+    {
+      "type": "static",
+      "id": "gly-label-extra8",
+      "format": "label",
+      "labelHTML": "<b style='font-size:13px'>دائرة إضافية 8 (اختياري) — تظهر فقط عند تعبئة الاسم أو القسم</b>"
+    },
+    {
+      "type": "items",
+      "format": "dropdown-list",
+      "icon": "sicon-keyboard_arrow_down",
+      "label": "الدائرة الإضافية 8 — القسم",
+      "id": "gly_cat8_link",
+      "source": "categories",
+      "multichoice": false,
+      "searchable": true,
+      "selected": [],
+      "options": [],
+      "required": false,
+      "description": "اختر القسم المستهدف من متجرك."
+    },
+    {
+      "type": "string",
+      "icon": "sicon-format-text-alt",
+      "format": "text",
+      "label": "الدائرة الإضافية 8 — الاسم",
+      "id": "gly_cat8_label",
+      "multilanguage": true,
+      "value": null,
+      "required": false,
+      "placeholder": "مثال: عروض موسمية",
+      "minLength": 0,
+      "maxLength": 40
+    },
+    {
+      "type": "items",
+      "format": "dropdown-list",
+      "icon": "sicon-image",
+      "label": "الدائرة الإضافية 8 — الأيقونة",
+      "id": "gly_cat8_icon",
+      "source": "Manual",
+      "required": false,
+      "selected": [
+        { "label": "هدية", "value": "gift", "key": "gly-ico-gift-8" }
+      ],
+      "options": [
+        { "label": "هدية", "value": "gift", "key": "gly-ico-gift-8" },
+        { "label": "مولود", "value": "baby", "key": "gly-ico-baby-8" },
+        { "label": "كيك / حفلة", "value": "cake", "key": "gly-ico-cake-8" },
+        { "label": "ربطة عنق", "value": "tie", "key": "gly-ico-tie-8" },
+        { "label": "بطاقة", "value": "tag", "key": "gly-ico-tag-8" },
+        { "label": "ظرف", "value": "envelope", "key": "gly-ico-envelope-8" }
+      ]
     },
     {
       "type": "string",

@@ -1,12 +1,43 @@
 {#
-  Giftology — Category circles  (§5.4)  — faithful port.
-  Icons + labels are part of the design; each tile links to a real Salla
-  category page (the product-list page). The merchant picks the target
-  category per circle from the dashboard (twilight.json `gly_cat_*`,
-  source: categories); the gly-cat-url partial resolves it to that category's
-  URL and falls back to the store home until one is chosen. Custom gifts is
-  intentionally NOT a circle (it has its own section).
+  Giftology — Category circles  (§5.4)
+  In-slot, up to 8 tiles: 6 curated defaults + 2 optional extras (7th & 8th).
+  Each tile uses a brand icon from images/*.svg, rendered as a teal silhouette
+  via CSS mask (.gly-cat-ico) so the mixed source SVGs all read on-brand. Each
+  tile links to a real Salla category — the merchant picks the target per tile
+  from the dashboard (gly_cat_* category pickers); the gly-cat-url partial
+  resolves it to that category's page URL and falls back to the store home until
+  one is chosen. With 7–8 tiles the overflow wraps centered below the first 6.
+  Custom gifts is intentionally NOT a circle (it has its own section).
 #}
+{% set gly_icons = {
+  'baby':     'images/baby.svg',
+  'gift':     'images/gift.svg',
+  'cake':     'images/cake.svg',
+  'tie':      'images/tie.svg',
+  'tag':      'images/tag.svg',
+  'envelope': 'images/envelope.svg'
+} %}
+
+{% set gly_tiles = [
+  { icon: 'baby',     label: trans('blocks.gly.cats.newborn'),  link: theme.settings.get('gly_cat_newborn') },
+  { icon: 'gift',     label: trans('blocks.gly.cats.occasion'), link: theme.settings.get('gly_cat_occasion') },
+  { icon: 'cake',     label: trans('blocks.gly.cats.kids'),     link: theme.settings.get('gly_cat_kids') },
+  { icon: 'tie',      label: trans('blocks.gly.cats.men'),      link: theme.settings.get('gly_cat_men') },
+  { icon: 'tag',      label: trans('blocks.gly.cats.favors'),   link: theme.settings.get('gly_cat_favors') },
+  { icon: 'envelope', label: trans('blocks.gly.cats.cards'),    link: theme.settings.get('gly_cat_cards') }
+] %}
+
+{# optional 7th & 8th tiles — appear only when the merchant fills a label or target #}
+{% for n in [7, 8] %}
+  {% set elabel = theme.settings.get('gly_cat' ~ n ~ '_label') %}
+  {% set elink  = theme.settings.get('gly_cat' ~ n ~ '_link') %}
+  {% if elabel or elink %}
+    {% set eicon = theme.settings.get('gly_cat' ~ n ~ '_icon') %}
+    {% if eicon is iterable %}{% set eicon = eicon.value is defined ? eicon.value : ((eicon|first).value is defined ? (eicon|first).value : eicon|first) %}{% endif %}
+    {% set gly_tiles = gly_tiles|merge([{ icon: (gly_icons[eicon] is defined ? eicon : 'gift'), label: elabel, link: elink }]) %}
+  {% endif %}
+{% endfor %}
+
 <section id="gly-cats" class="gly-section gly-cats">
   <div class="gly-wrap">
     <div class="gly-shead gly-reveal">
@@ -16,30 +47,13 @@
     </div>
 
     <div class="gly-cat-grid gly-reveal">
-      <a class="gly-cat" href="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_newborn'), fallback: store.url} only %}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5M10 8h.01M14 8h.01M10.5 10.5c1 .8 2 .8 3 0"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.newborn') }}</span>
-      </a>
-      <a class="gly-cat" href="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_occasion'), fallback: store.url} only %}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v11H4zM4 9l2-5h12l2 5M12 4v16"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.occasion') }}</span>
-      </a>
-      <a class="gly-cat" href="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_kids'), fallback: store.url} only %}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h14v9H5zM3 20h18M7 11V8M12 11V8M17 11V8M7 6c0-1 .8-1.6 0-3M12 6c0-1 .8-1.6 0-3M17 6c0-1 .8-1.6 0-3"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.kids') }}</span>
-      </a>
-      <a class="gly-cat" href="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_men'), fallback: store.url} only %}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1.5 3 2 11L12 20l-3.5-3 2-11L9 3Z"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.men') }}</span>
-      </a>
-      <a class="gly-cat" href="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_favors'), fallback: store.url} only %}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13l-8 8-9-9V4h8l9 9ZM7.5 7.5h.01M13 4c1.5-1 3 .5 2 2M13 4c-1.5-1-3 .5-2 2"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.favors') }}</span>
-      </a>
-      <a class="gly-cat" href="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_cards'), fallback: store.url} only %}">
-        <div class="gly-cat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg></div>
-        <span>{{ trans('blocks.gly.cats.cards') }}</span>
-      </a>
+      {% for t in gly_tiles %}
+        {% set turl %}{% include 'components.home.gly-cat-url' with {value: t.link, fallback: store.url} only %}{% endset %}
+        <a class="gly-cat" href="{{ turl }}">
+          <span class="gly-cat-ic"><i class="gly-cat-ico" style="--gly-ico:url('{{ gly_icons[t.icon]|asset }}')"></i></span>
+          <span>{{ t.label }}</span>
+        </a>
+      {% endfor %}
     </div>
   </div>
 </section>
