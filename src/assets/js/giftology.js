@@ -66,9 +66,6 @@
     /* ---- testimonials slider (§5.8) ---- */
     initTestimonials();
 
-    /* ---- price range slider (enhances Salla's price filter) ---- */
-    initPriceSlider();
-
     /* ---- product-list count ("X في هذا القسم") ---- */
     initProductCount();
   });
@@ -184,76 +181,6 @@
     slider.addEventListener('mouseenter', function () { clearInterval(timer); });
     slider.addEventListener('mouseleave', restart);
     if (slides > 1) restart();
-  }
-
-  /* ===================== PRICE RANGE SLIDER ===================== */
-  // Additive enhancement: a dual-handle slider that drives Salla's own
-  // price <input>s (.s-price-range-number-input). The native inputs stay as a
-  // fallback so filtering keeps working even if the slider can't wire up.
-  function initPriceSlider() {
-    function build() {
-      document.querySelectorAll('salla-filters .s-price-range-inputs').forEach(function (wrap) {
-        if (wrap.dataset.glyslider) return;
-        var inputs = wrap.querySelectorAll('.s-price-range-number-input');
-        if (inputs.length < 2) return;
-        var fromI = inputs[0], toI = inputs[1];
-        var lo = parseFloat(fromI.getAttribute('min')) || 0;
-        var hi = parseFloat(toI.getAttribute('max')) || parseFloat(toI.getAttribute('placeholder')) || 1000;
-        if (hi <= lo) hi = lo + 1000;
-        wrap.dataset.glyslider = '1';
-
-        var box = document.createElement('div');
-        box.className = 'gly-prange';
-        box.innerHTML =
-          '<div class="gly-prange__track"><div class="gly-prange__fill"></div></div>' +
-          '<input type="range" class="gly-prange__h gly-prange__min" min="' + lo + '" max="' + hi + '" value="' + lo + '" aria-label="min price">' +
-          '<input type="range" class="gly-prange__h gly-prange__max" min="' + lo + '" max="' + hi + '" value="' + hi + '" aria-label="max price">';
-        wrap.parentNode.insertBefore(box, wrap);
-
-        var sMin = box.querySelector('.gly-prange__min');
-        var sMax = box.querySelector('.gly-prange__max');
-        var fill = box.querySelector('.gly-prange__fill');
-
-        function paint() {
-          var l = (+sMin.value - lo) / (hi - lo) * 100;
-          var r = (+sMax.value - lo) / (hi - lo) * 100;
-          fill.style.insetInlineStart = l + '%';
-          fill.style.insetInlineEnd = (100 - r) + '%';
-        }
-        function drive(input, val) {
-          input.value = val;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-          input.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-        sMin.addEventListener('input', function () {
-          if (+sMin.value > +sMax.value - 1) sMin.value = +sMax.value - 1;
-          paint(); drive(fromI, sMin.value);
-        });
-        sMax.addEventListener('input', function () {
-          if (+sMax.value < +sMin.value + 1) sMax.value = +sMin.value + 1;
-          paint(); drive(toI, sMax.value);
-        });
-        // keep slider in sync when the merchant types in the native inputs
-        fromI.addEventListener('change', function () { sMin.value = fromI.value || lo; paint(); });
-        toI.addEventListener('change', function () { sMax.value = toI.value || hi; paint(); });
-        paint();
-      });
-    }
-
-    // Salla fires these around filter render / change / reset (note: the
-    // initial render event is 'filters::fetched', NOT 'salla-filters::fetched').
-    if (window.salla && salla.event) {
-      ['filters::fetched', 'salla-filters::changed', 'salla-filters::reset'].forEach(function (ev) {
-        salla.event.on(ev, function () { setTimeout(build, 80); });
-      });
-    }
-    // DOM fallback: the filter markup is injected asynchronously and can
-    // re-render, so rebuild (debounced) whenever the page subtree changes.
-    var t;
-    new MutationObserver(function () { clearTimeout(t); t = setTimeout(build, 120); })
-      .observe(document.body, { childList: true, subtree: true });
-    // initial attempts in case everything is already in place
-    [200, 600, 1200, 2000].forEach(function (ms) { setTimeout(build, ms); });
   }
 
 })();
