@@ -1,26 +1,23 @@
 {#
   Giftology — Header / nav  (§5.2)  — ported from the reference design.
   Logo + cart + account come from Salla (store.logo, <salla-cart-summary>,
-  <salla-user-menu>). The nav is the merchant's store header menu, managed in
-  the Salla dashboard (Settings → Menus) and exposed here as the `menus` Twig
-  variable — adding/removing items there flows straight into both the desktop
-  bar and the bespoke mobile drawer below. Until a store menu exists it falls
-  back to the in-page section links so the nav is never empty.
+  <salla-user-menu>). The nav (desktop bar + bespoke mobile drawer) lists the
+  homepage sections and is built from the section visibility toggles, so it
+  grows/shrinks automatically as the merchant enables/disables sections.
   Search opens Salla's global <salla-search> modal.
   Solid-on-scroll + mobile drawer toggle in giftology.js.
 
   | Variable         | Type    | Description                   |
-  | menus            | Menu[]  | store header menu (url/title) |
   | cart.items_count | int     |                               |
   | cart.total       | string  | Formatted total               |
 #}
 {% set gly_home = store.url %}
-{% set gly_nav = menus ?: [
-  { url: gly_home ~ '/#gly-cats',   title: trans('blocks.gly.nav.sections') },
-  { url: gly_home ~ '/#gly-custom', title: trans('blocks.gly.nav.custom') },
-  { url: gly_home ~ '/#gly-finder', title: trans('blocks.gly.nav.finder') },
-  { url: gly_home ~ '/#gly-how',    title: trans('blocks.gly.nav.how') }
-] %}
+{% set gly_nav = [] %}
+{% if theme.settings.get('gly_show_categories', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-cats',   title: trans('blocks.gly.nav.sections') }]) %}{% endif %}
+{% if theme.settings.get('gly_show_custom', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-custom', title: trans('blocks.gly.nav.custom') }]) %}{% endif %}
+{% if theme.settings.get('gly_show_finder', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-finder', title: trans('blocks.gly.nav.finder') }]) %}{% endif %}
+{% if theme.settings.get('gly_show_how', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-how',    title: trans('blocks.gly.nav.how') }]) %}{% endif %}
+{% if theme.settings.get('gly_show_testimonials', true) %}{% set gly_nav = gly_nav|merge([{ url: gly_home ~ '/#gly-testi',  title: trans('blocks.gly.nav.testimonials') }]) %}{% endif %}
 
 <header id="gly-hdr" class="gly-header store-header{{ is_page('index') ? '' : ' gly-header--inner' }}">
   <div class="gly-nav-bg"></div>

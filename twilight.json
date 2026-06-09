@@ -1351,6 +1351,138 @@
       "placeholder": "https://www.tiktok.com/@...",
       "minLength": 0,
       "maxLength": 300
+    },
+    {
+      "type": "static",
+      "id": "gly-label-footer",
+      "format": "label",
+      "labelHTML": "<b style='font-size:14px'>جيفتولوجي — التذييل (الفوتر)</b><br><span style='font-size:12px;opacity:.75'>نبذة المتجر، روابط التواصل الاجتماعي، ووسائل الدفع الظاهرة بالأسفل.</span>"
+    },
+    {
+      "type": "string",
+      "format": "textarea",
+      "icon": "sicon-typography",
+      "label": "نبذة المتجر (تظهر في الفوتر)",
+      "id": "gly_footer_about",
+      "multilanguage": true,
+      "value": null,
+      "required": false,
+      "placeholder": "فنّ وعِلم الهدية المثالية…",
+      "minLength": 0,
+      "maxLength": 300,
+      "description": "اتركها فارغة لاستخدام وصف المتجر الافتراضي."
+    },
+    {
+      "type": "string",
+      "format": "url",
+      "icon": "sicon-link",
+      "label": "رابط منصة X (تويتر)",
+      "id": "gly_x",
+      "value": null,
+      "required": false,
+      "placeholder": "https://x.com/...",
+      "minLength": 0,
+      "maxLength": 300
+    },
+    {
+      "type": "string",
+      "format": "url",
+      "icon": "sicon-link",
+      "label": "رابط سناب شات",
+      "id": "gly_snapchat",
+      "value": null,
+      "required": false,
+      "placeholder": "https://snapchat.com/add/...",
+      "minLength": 0,
+      "maxLength": 300
+    },
+    {
+      "type": "string",
+      "format": "url",
+      "icon": "sicon-link",
+      "label": "رابط فيسبوك",
+      "id": "gly_facebook",
+      "value": null,
+      "required": false,
+      "placeholder": "https://facebook.com/...",
+      "minLength": 0,
+      "maxLength": 300
+    },
+    {
+      "type": "static",
+      "id": "gly-label-pays",
+      "format": "label",
+      "labelHTML": "<b style='font-size:13px'>وسائل الدفع الظاهرة في الفوتر</b>"
+    },
+    {
+      "type": "boolean",
+      "icon": "sicon-toggle-on",
+      "format": "switch",
+      "label": "عرض: مدى",
+      "id": "gly_pay_mada",
+      "required": false,
+      "value": true,
+      "selected": true
+    },
+    {
+      "type": "boolean",
+      "icon": "sicon-toggle-on",
+      "format": "switch",
+      "label": "عرض: Apple Pay",
+      "id": "gly_pay_applepay",
+      "required": false,
+      "value": true,
+      "selected": true
+    },
+    {
+      "type": "boolean",
+      "icon": "sicon-toggle-on",
+      "format": "switch",
+      "label": "عرض: VISA",
+      "id": "gly_pay_visa",
+      "required": false,
+      "value": true,
+      "selected": true
+    },
+    {
+      "type": "boolean",
+      "icon": "sicon-toggle-on",
+      "format": "switch",
+      "label": "عرض: Mastercard",
+      "id": "gly_pay_mastercard",
+      "required": false,
+      "value": true,
+      "selected": true
+    },
+    {
+      "type": "boolean",
+      "icon": "sicon-toggle-on",
+      "format": "switch",
+      "label": "عرض: tabby",
+      "id": "gly_pay_tabby",
+      "required": false,
+      "value": true,
+      "selected": true
+    },
+    {
+      "type": "boolean",
+      "icon": "sicon-toggle-on",
+      "format": "switch",
+      "label": "عرض: تمارا",
+      "id": "gly_pay_tamara",
+      "required": false,
+      "value": false,
+      "selected": false
+    },
+    {
+      "type": "boolean",
+      "icon": "sicon-toggle-on",
+      "format": "switch",
+      "label": "عرض: STC Pay",
+      "id": "gly_pay_stcpay",
+      "required": false,
+      "value": true,
+      "selected": true
     }
   ],
   "components": [
