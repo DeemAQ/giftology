@@ -22,7 +22,7 @@
 
     {# logo — Salla store data #}
     <a href="{{ store.url }}" class="gly-brand">
-      <img fetchpriority="high" loading="eager" src="{{ store.logo|cdn(220) }}" alt="{{ store.name }}">
+      <img fetchpriority="high" loading="eager" src="{{ 'images/teal_logo_trim.png'|asset }}" alt="{{ store.name }}">
       {% if is_page('index') %}
         <h1 class="sr-only">{{ store.name }}</h1>
       {% else %}

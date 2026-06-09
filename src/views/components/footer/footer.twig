@@ -27,7 +27,7 @@
 
       {# brand #}
       <div class="gly-fbrand">
-        <img src="{{ store.logo|cdn(220) }}" alt="{{ store.name }}">
+        <img src="{{ 'images/white_logo_trim.png'|asset }}" alt="{{ store.name }}">
         <p>{{ store.description ?: trans('blocks.gly.footer.about') }}</p>
       </div>
 
