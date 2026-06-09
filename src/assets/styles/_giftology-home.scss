@@ -194,12 +194,12 @@
    Footer (§5.9)
    ============================================================ */
 .gly-footer{background:#22302d;color:#cfe2df;padding:3.4rem 0 1.6rem;position:relative;overflow:hidden;margin-top:1rem;font-family:var(--gly-font-body)}
-.gly-footer__deco{position:absolute;inset:0;background-image:var(--gly-darkpat);background-size:420px;opacity:.5}
+.gly-footer__deco{position:absolute;inset:0;background-image:var(--gly-pat);background-size:420px;opacity:.5}
 .gly-fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:2rem;position:relative}
 .gly-fcontact a{display:flex;align-items:center;gap:.55rem}
 .gly-fcontact svg{width:18px;height:18px;flex:0 0 auto;color:var(--gly-gold-soft)}
 .gly-fcontact span{direction:ltr;unicode-bidi:plaintext;text-align:start}
-.gly-fbrand img{height:56px;width:auto;filter:brightness(0) invert(1) opacity(.95)}
+.gly-fbrand img{height:56px;width:auto;opacity:.95}
 .gly-fbrand p{margin:1rem 0;opacity:.72;font-size:.94rem;max-width:36ch;line-height:1.8}
 .gly-social{display:flex;gap:.6rem}
 .gly-social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:.25s}
