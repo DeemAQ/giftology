@@ -20,24 +20,27 @@
   <div class="gly-nav-bg"></div>
   <nav class="gly-nav gly-wrap">
 
-    {# logo — Salla store data #}
-    <a href="{{ store.url }}" class="gly-brand">
-      <img fetchpriority="high" loading="eager" src="{{ 'images/teal_logo_trim.png'|asset }}" alt="{{ store.name }}">
-      {% if is_page('index') %}
-        <h1 class="sr-only">{{ store.name }}</h1>
-      {% else %}
-        <span class="sr-only">{{ store.name }}</span>
-      {% endif %}
-    </a>
+    {# logo + sections grouped on the inline-start (right in RTL) #}
+    <div class="gly-nav-start">
+      {# logo — Salla store data #}
+      <a href="{{ store.url }}" class="gly-brand">
+        <img fetchpriority="high" loading="eager" src="{{ 'images/teal_logo_trim.png'|asset }}" alt="{{ store.name }}">
+        {% if is_page('index') %}
+          <h1 class="sr-only">{{ store.name }}</h1>
+        {% else %}
+          <span class="sr-only">{{ store.name }}</span>
+        {% endif %}
+      </a>
 
-    {# desktop menu #}
-    <div class="gly-menu">
-      {% for item in gly_nav %}
-        <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.label }}</a>
-      {% endfor %}
+      {# desktop menu #}
+      <div class="gly-menu">
+        {% for item in gly_nav %}
+          <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.label }}</a>
+        {% endfor %}
+      </div>
     </div>
 
-    {# action icons #}
+    {# action icons — pushed to the inline-end (left in RTL) #}
     <div class="gly-icons">
       <button type="button" class="gly-ibtn" aria-label="{{ trans('blocks.gly.nav.search') }}"
         onclick="(function(){var s=document.querySelector('salla-search');if(s&&s.open){s.open()}else if(window.salla&&salla.event){salla.event.dispatch('search::open')}})()">
