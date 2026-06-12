@@ -1,10 +1,13 @@
 {#
   Giftology — Gift finder  (§7)  — faithful port.
   Quiz logic lives in giftology.js; this is the shell. Each answer scores a
-  category key and the result button links to that Salla category (or WhatsApp
-  for "custom"). Category links come from the same `gly_cat_*` category
-  pickers as the category circles, resolved to real category-page URLs via
-  the gly-cat-url partial.
+  category key. The result shows a RANDOM real product from the winning
+  category (giftology.js parses the /c{id} from the category URL and queries
+  Salla's <salla-products-list source="categories">), falling back to a link
+  to the category page if no product is available. Picking "custom" in any
+  question overrides everything and shows the WhatsApp custom-order result.
+  Category links come from the same `gly_cat_*` settings as the category
+  circles, resolved to real category-page URLs via the gly-cat-url partial.
 #}
 {% set gly_wa_number = theme.settings.get('gly_whatsapp') %}
 {% set gly_wa_custom = 'https://wa.me/' ~ gly_wa_number ~ '?text=' ~ trans('blocks.gly.wa.custom_msg')|url_encode %}

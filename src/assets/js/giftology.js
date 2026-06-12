@@ -5,7 +5,8 @@
    - header solid-on-scroll
    - mobile menu open/close
    - reveal-on-scroll
-   - gift finder (§7)  — category links come from data-* (Salla settings)
+   - gift finder (§7)  — shows a random product from the winning category
+     (or WhatsApp custom); category URLs come from data-* (Salla settings)
    - testimonials slider (§5.8) — cards are rendered server-side
    ============================================================ */
 (function () {
@@ -109,28 +110,111 @@
     // order breaks scoring ties deterministically
     var ORDER = ['newborn', 'kids', 'men', 'occasion', 'favors', 'cards', 'custom'];
 
-    var step = 0, score = {};
+    var step = 0, score = {}, forcedCustom = false;
 
     function linkFor(key) {
       // data-* on the box hold the merchant category URLs + the WhatsApp link
       return root.dataset[key] || root.dataset.occasion || '#';
     }
 
+    // Salla category-page URLs end with /c{id} — pull that id so we can query products
+    function categoryIdFromUrl(url) {
+      var m = String(url || '').match(/\/c(\d+)(?:[\/?#]|$)/);
+      return m ? m[1] : null;
+    }
+
+    function restart() { step = 0; score = {}; forcedCustom = false; render(); }
+
+    function resultShell(r, inner) {
+      card.innerHTML =
+        '<div class="gly-qresult"><div class="em">' + r.em + '</div>' +
+        '<b>' + r.t + '</b>' + inner +
+        '<button type="button" class="gly-restart">↺ ابدأ من جديد</button></div>';
+      card.querySelector('.gly-restart').addEventListener('click', restart);
+    }
+
+    // custom = contact-first via WhatsApp, never a product
+    function renderCustom() {
+      var r = RESULTS.custom;
+      resultShell(r, '<p>' + r.d + '</p>' +
+        '<a class="gly-btn gly-btn-wa" style="width:100%;justify-content:center" href="' + linkFor('custom') + '" target="_blank" rel="noopener">تواصل عبر واتساب</a>');
+    }
+
+    // fallback: just link to the winning category page
+    function renderCategoryLink(best) {
+      var r = RESULTS[best];
+      resultShell(r, '<p>' + r.d + '</p>' +
+        '<a class="gly-btn gly-btn-primary" style="width:100%;justify-content:center" href="' + linkFor(best) + '">تسوّق هذا القسم</a>');
+    }
+
+    // winning category → pick a random real product from it (via Salla's products-list)
+    function renderProduct(best) {
+      var r = RESULTS[best];
+      var catUrl = linkFor(best);
+      var catId = categoryIdFromUrl(catUrl);
+      if (!catId) { renderCategoryLink(best); return; } // no id → safe fallback
+
+      resultShell(r, '<p class="gly-qloading">نبحث لك عن هدية مثالية…</p><div class="gly-qpwrap"></div>');
+      var wrap = card.querySelector('.gly-qpwrap');
+
+      // hidden host so Salla fetches + renders the category's products off-screen
+      var host = document.createElement('div');
+      host.setAttribute('aria-hidden', 'true');
+      host.style.cssText = 'position:absolute;left:-9999px;top:0;width:320px;height:1px;overflow:hidden';
+      var list = document.createElement('salla-products-list');
+      list.setAttribute('source', 'categories');
+      list.setAttribute('source-value', '[' + catId + ']'); // Salla wants a JSON array of ids
+      host.appendChild(list);
+      document.body.appendChild(host);
+
+      var done = false;
+      function cleanup() { if (host.parentNode) host.parentNode.removeChild(host); }
+      function finish(entries) {
+        if (done) return; done = true;
+        var loading = card.querySelector('.gly-qloading'); if (loading) loading.remove();
+        if (!entries || !entries.length) { cleanup(); renderCategoryLink(best); return; }
+        var pick = entries[Math.floor(Math.random() * entries.length)];
+        // resolve any lazy image before we detach it from the (about-to-be-removed) list
+        Array.prototype.forEach.call(pick.querySelectorAll('img[data-src]'), function (im) {
+          if (!im.getAttribute('src') || im.src.indexOf('data:') === 0) im.src = im.dataset.src;
+        });
+        wrap.appendChild(pick); // move the real, interactive card into the result
+        cleanup();
+        var a = pick.querySelector('a[href]');
+        var btn = document.createElement('a');
+        btn.className = 'gly-btn gly-btn-primary';
+        btn.style.cssText = 'width:100%;justify-content:center;margin-top:1rem';
+        btn.href = a ? a.getAttribute('href') : catUrl;
+        btn.textContent = 'تسوّق هذه الهدية';
+        wrap.appendChild(btn);
+      }
+
+      var obs = new MutationObserver(function () {
+        var entries = list.querySelectorAll('.s-product-card-entry');
+        if (entries.length) {
+          obs.disconnect();
+          // let the rest of the first page inject so we randomise across all of it
+          setTimeout(function () {
+            finish(Array.prototype.slice.call(list.querySelectorAll('.s-product-card-entry')));
+          }, 350);
+        }
+      });
+      obs.observe(host, { childList: true, subtree: true });
+      // safety net: if nothing renders in time, fall back to the category link
+      setTimeout(function () {
+        if (done) return;
+        obs.disconnect();
+        finish(Array.prototype.slice.call(list.querySelectorAll('.s-product-card-entry')));
+      }, 6000);
+    }
+
     function render() {
+      if (forcedCustom) { renderCustom(); return; }
       if (step >= QUESTIONS.length) {
         var best = ORDER[0], bestScore = -1;
         ORDER.forEach(function (k) { var s = score[k] || 0; if (s > bestScore) { bestScore = s; best = k; } });
-        var r = RESULTS[best];
-        var isCustom = best === 'custom';
-        var url = isCustom ? linkFor('custom') : linkFor(best);
-        var ext = isCustom; // custom opens WhatsApp in a new tab
-        card.innerHTML =
-          '<div class="gly-qresult"><div class="em">' + r.em + '</div>' +
-          '<b>' + r.t + '</b><p>' + r.d + '</p>' +
-          '<a class="gly-btn ' + (ext ? 'gly-btn-wa' : 'gly-btn-primary') + '" style="width:100%;justify-content:center" href="' + url + '"' +
-          (ext ? ' target="_blank" rel="noopener"' : '') + '>' + (ext ? 'تواصل عبر واتساب' : 'تسوّق هذا القسم') + '</a>' +
-          '<button type="button" class="gly-restart">↺ ابدأ من جديد</button></div>';
-        card.querySelector('.gly-restart').addEventListener('click', function () { step = 0; score = {}; render(); });
+        if (best === 'custom') { renderCustom(); return; }
+        renderProduct(best);
         return;
       }
       var Q = QUESTIONS[step];
@@ -143,6 +227,7 @@
       var o = e.target.closest('.gly-qopt');
       if (!o) return;
       var v = o.dataset.v;
+      if (v === 'custom') { forcedCustom = true; render(); return; } // custom overrides everything
       score[v] = (score[v] || 0) + 1;
       step++;
       render();
