@@ -184,16 +184,9 @@
         var loading = card.querySelector('.gly-qloading'); if (loading) loading.remove();
         if (!entries || !entries.length) { cleanup(); renderCategoryLink(best); return; }
         var pick = entries[Math.floor(Math.random() * entries.length)];
-        var purl = (pick.product && pick.product.url) || catUrl;
         pick.compact = true; pick.setAttribute('compact', ''); // keep it the compact size
-        wrap.appendChild(pick); // move the real card element (its .product prop survives → it re-renders)
+        wrap.appendChild(pick); // move the real card in — it's clickable to the product itself
         cleanup();
-        var btn = document.createElement('a');
-        btn.className = 'gly-btn gly-btn-primary';
-        btn.style.cssText = 'width:100%;justify-content:center;margin-top:1rem';
-        btn.href = purl;
-        btn.textContent = 'تسوّق هذه الهدية';
-        wrap.appendChild(btn);
       }
 
       var obs = new MutationObserver(function () {
