@@ -6,8 +6,9 @@
   Salla's <salla-products-list source="categories">), falling back to a link
   to the category page if no product is available. Picking "custom" in any
   question overrides everything and shows the WhatsApp custom-order result.
-  Category links come from the same `gly_cat_*` settings as the category
-  circles, resolved to real category-page URLs via the gly-cat-url partial.
+  Each category link uses its own `gly_cat_*` setting if set, else falls back to
+  the matching category-circle/tile link (`gly_tileN_link`) so one config powers
+  both, resolved to real category-page URLs via the gly-cat-url partial.
 #}
 {% set gly_wa_number = theme.settings.get('gly_whatsapp') %}
 {% set gly_wa_custom = 'https://wa.me/' ~ gly_wa_number ~ '?text=' ~ trans('blocks.gly.wa.custom_msg')|url_encode %}
@@ -15,12 +16,13 @@
 <section id="gly-finder" class="gly-section gly-quiz">
   <div class="gly-wrap">
     <div class="gly-quiz-box gly-reveal"
-         data-newborn="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_newborn'), fallback: store.url, lang: language.code} only %}"
-         data-kids="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_kids'), fallback: store.url, lang: language.code} only %}"
-         data-men="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_men'), fallback: store.url, lang: language.code} only %}"
-         data-occasion="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_occasion'), fallback: store.url, lang: language.code} only %}"
-         data-favors="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_favors'), fallback: store.url, lang: language.code} only %}"
-         data-cards="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_cards'), fallback: store.url, lang: language.code} only %}"
+         {# each finder link = its own gly_cat_* setting, else the matching category-circle/tile link (so one config powers both); tile order: 1 newborn · 2 occasion · 3 kids · 4 men · 5 favors · 6 cards #}
+         data-newborn="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_newborn') ?: theme.settings.get('gly_tile1_link'), fallback: store.url, lang: language.code} only %}"
+         data-kids="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_kids') ?: theme.settings.get('gly_tile3_link'), fallback: store.url, lang: language.code} only %}"
+         data-men="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_men') ?: theme.settings.get('gly_tile4_link'), fallback: store.url, lang: language.code} only %}"
+         data-occasion="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_occasion') ?: theme.settings.get('gly_tile2_link'), fallback: store.url, lang: language.code} only %}"
+         data-favors="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_favors') ?: theme.settings.get('gly_tile5_link'), fallback: store.url, lang: language.code} only %}"
+         data-cards="{% include 'components.home.gly-cat-url' with {value: theme.settings.get('gly_cat_cards') ?: theme.settings.get('gly_tile6_link'), fallback: store.url, lang: language.code} only %}"
          data-custom="{{ gly_wa_custom }}">
       <svg class="gly-quiz__mag" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-miterlimit="10"><path d="M21,21L21,21c1.105-1.105,2.895-1.105,4,0l5.172,5.172c0.53,0.53,0.828,1.25,0.828,2v0C31,29.734,29.734,31,28.172,31h0c-0.75,0-1.47-0.298-2-0.828L21,25C19.895,23.895,19.895,22.105,21,21z"/><circle cx="11" cy="11" r="10"/><path d="M11,5c-3.314,0-6,2.686-6,6"/><line x1="18" x2="21" y1="18" y2="21"/></svg>
       <div>

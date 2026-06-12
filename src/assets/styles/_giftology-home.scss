@@ -126,7 +126,7 @@
 /* ============================================================
    Categories (§5.4) — links from settings, icons are design
    ============================================================ */
-.gly-cats{padding:1rem 0 3.4rem}
+.gly-cats{padding:1.6rem 0 3.4rem}
 /* width caps the row to exactly 6 tiles (120px + 1.8rem gaps); a 7th/8th wrap
    to a second line that justify-content:center keeps centered under the six. */
 .gly-cat-grid{display:flex;flex-wrap:wrap;gap:1.8rem 1.8rem;justify-content:center;max-width:880px;margin-inline:auto}
@@ -167,7 +167,7 @@
 /* ============================================================
    How it works / science (§5.7)
    ============================================================ */
-.gly-how{padding:2rem 0 3.4rem;text-align:center}
+.gly-how{padding:1rem 0 3.4rem;text-align:center}
 .gly-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:1rem}
 .gly-step{padding:1.4rem 1rem;position:relative}
 .gly-step__num{font-family:var(--gly-font-display);font-size:1rem;color:var(--gly-gold);font-weight:700}
@@ -182,7 +182,7 @@
 /* ============================================================
    Gift finder / quiz (§7)
    ============================================================ */
-.gly-quiz{padding:2rem 0 4rem}
+.gly-quiz{padding:3rem 0 4rem}
 .gly-quiz-box{background:linear-gradient(135deg,var(--gly-peach),#fff);border-radius:30px;padding:3rem;display:grid;grid-template-columns:1fr 1.1fr;gap:2rem;align-items:center;box-shadow:var(--gly-shadow-sm);border:1px solid rgba(74,63,53,.06);overflow:hidden;position:relative}
 .gly-quiz__mag{position:absolute;inset-inline-end:-30px;top:-30px;width:200px;color:var(--gly-teal);opacity:.18;transform:rotate(-12deg)}
 .gly-quiz h2{font-family:var(--gly-font-display);font-weight:700;font-size:clamp(1.9rem,3.6vw,2.7rem);line-height:1.25;margin:.4rem 0 .6rem}
@@ -211,7 +211,7 @@
 /* ============================================================
    Testimonials (§5.8)
    ============================================================ */
-.gly-testi{padding:1rem 0 4rem}
+.gly-testi{padding:1.6rem 0 4rem}
 .gly-tslider{position:relative;max-width:760px;margin:0 auto;overflow:hidden}
 .gly-ttrack{display:flex;transition:transform .5s cubic-bezier(.7,0,.2,1)}
 .gly-tcard{flex:0 0 100%;text-align:center;padding:1rem 2rem}
@@ -226,19 +226,19 @@
 /* ============================================================
    Footer (§5.9)
    ============================================================ */
-.gly-footer{background:#22302d;color:#cfe2df;padding:3.4rem 0 1.6rem;position:relative;overflow:hidden;margin-top:1rem;font-family:var(--gly-font-body)}
+.gly-footer{background:#22302d;color:#cfe2df;padding:2.6rem 0 1.4rem;position:relative;overflow:hidden;margin-top:1rem;font-family:var(--gly-font-body)}
 .gly-footer__deco{position:absolute;inset:0;background-image:var(--gly-pat);background-size:420px;opacity:.5}
 .gly-fgrid{display:grid;grid-template-columns:1.6fr 1fr;gap:2rem;position:relative}
 .gly-fcontact a{display:flex;align-items:center;gap:.55rem}
 .gly-fcontact svg{width:18px;height:18px;flex:0 0 auto;color:var(--gly-gold-soft)}
 .gly-fcontact span{direction:ltr;unicode-bidi:plaintext;text-align:start}
-.gly-fbrand img{height:56px;width:auto;opacity:.95}
-.gly-fbrand p{margin:1rem 0;opacity:.72;font-size:.94rem;max-width:36ch;line-height:1.8}
-.gly-footer h5{font-family:var(--gly-font-display);color:#fff;font-size:1.15rem;margin-bottom:1rem;font-weight:700}
+.gly-fbrand img{height:46px;width:auto;opacity:.95}
+.gly-fbrand p{margin:.7rem 0 0;opacity:.72;font-size:.94rem;max-width:36ch;line-height:1.65}
+.gly-footer h5{font-family:var(--gly-font-display);color:#fff;font-size:1.15rem;margin-bottom:.7rem;font-weight:700}
 .gly-footer ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0}
 .gly-footer ul a{opacity:.74;font-size:.94rem;transition:.2s}
 .gly-footer ul a:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
-.gly-fbottom{position:relative;margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.86rem;opacity:.78}
+.gly-fbottom{position:relative;margin-top:1.8rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.86rem;opacity:.78}
 .gly-pays{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
 .gly-pays span{background:rgba(255,255,255,.92);color:#22302d;font-weight:800;font-size:.68rem;padding:.3rem .55rem;border-radius:6px}
 
@@ -283,6 +283,6 @@
 }
 
 /* ---- Latest products section ---- */
-.gly-latest{padding:1rem 0 3.4rem}
+.gly-latest{padding:1.6rem 0 3.4rem}
 .gly-latest-grid{display:block;margin-top:.4rem}
 .gly-latest-more{display:flex;justify-content:center;margin-top:2.2rem}
