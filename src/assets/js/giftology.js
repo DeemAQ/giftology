@@ -170,6 +170,12 @@
       host.appendChild(list);
       document.body.appendChild(host);
 
+      // Salla renders each product as a <salla-product-card>/<custom-salla-product-card>
+      // element carrying its data on the `.product` property (see getItemHTML).
+      function cards() {
+        return Array.prototype.slice.call(list.querySelectorAll('salla-product-card,custom-salla-product-card'));
+      }
+
       var done = false;
       function cleanup() { if (host.parentNode) host.parentNode.removeChild(host); }
       function finish(entries) {
@@ -177,38 +183,26 @@
         var loading = card.querySelector('.gly-qloading'); if (loading) loading.remove();
         if (!entries || !entries.length) { cleanup(); renderCategoryLink(best); return; }
         var pick = entries[Math.floor(Math.random() * entries.length)];
-        // resolve any lazy image before we detach it from the (about-to-be-removed) list
-        Array.prototype.forEach.call(pick.querySelectorAll('img[data-src]'), function (im) {
-          if (!im.getAttribute('src') || im.src.indexOf('data:') === 0) im.src = im.dataset.src;
-        });
-        wrap.appendChild(pick); // move the real, interactive card into the result
+        var purl = (pick.product && pick.product.url) || catUrl;
+        wrap.appendChild(pick); // move the real card element (its .product prop survives → it re-renders)
         cleanup();
-        var a = pick.querySelector('a[href]');
         var btn = document.createElement('a');
         btn.className = 'gly-btn gly-btn-primary';
         btn.style.cssText = 'width:100%;justify-content:center;margin-top:1rem';
-        btn.href = a ? a.getAttribute('href') : catUrl;
+        btn.href = purl;
         btn.textContent = 'تسوّق هذه الهدية';
         wrap.appendChild(btn);
       }
 
       var obs = new MutationObserver(function () {
-        var entries = list.querySelectorAll('.s-product-card-entry');
-        if (entries.length) {
+        if (cards().length) {
           obs.disconnect();
-          // let the rest of the first page inject so we randomise across all of it
-          setTimeout(function () {
-            finish(Array.prototype.slice.call(list.querySelectorAll('.s-product-card-entry')));
-          }, 350);
+          setTimeout(function () { finish(cards()); }, 250); // let the full first page inject
         }
       });
       obs.observe(host, { childList: true, subtree: true });
       // safety net: if nothing renders in time, fall back to the category link
-      setTimeout(function () {
-        if (done) return;
-        obs.disconnect();
-        finish(Array.prototype.slice.call(list.querySelectorAll('.s-product-card-entry')));
-      }, 6000);
+      setTimeout(function () { if (!done) { obs.disconnect(); finish(cards()); } }, 6000);
     }
 
     function render() {
