@@ -153,14 +153,6 @@
   {% if theme.settings.get('gly_show_finder', true) %}<a href="{{ store.url }}/#gly-finder">{{ trans('blocks.gly.nav.finder') }}</a>{% endif %}
   {% if theme.settings.get('gly_show_how', true) %}<a href="{{ store.url }}/#gly-how">{{ trans('blocks.gly.nav.how') }}</a>{% endif %}
   {% if theme.settings.get('gly_show_testimonials', true) %}<a href="{{ store.url }}/#gly-testi">{{ trans('blocks.gly.nav.testimonials') }}</a>{% endif %}
-
-  {# language switcher (mobile) — Salla native modal; shown only when 2+ store languages exist #}
-  {% if store.settings.is_multilingual %}
-    <div class="gly-mlang">
-      <span>{{ trans('blocks.gly.nav.language') }}</span>
-      <salla-localization-modal class="gly-loc" show-trigger></salla-localization-modal>
-    </div>
-  {% endif %}
 </div>
 <script defer crossorigin="anonymous" src="{{ 'app.js' | asset }}"></script>
 {# Giftology — theme behaviors (header scroll, mobile menu, reveal, gift finder, testimonials) #}
