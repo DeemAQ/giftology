@@ -167,6 +167,7 @@
       // limit disables infinite-scroll → forces an immediate API fetch (otherwise the
       // off-screen list waits for the viewport to reach it and never loads here)
       list.setAttribute('limit', '24');
+      list.setAttribute('compact-cards', ''); // render the compact card variant in the result
       host.appendChild(list);
       document.body.appendChild(host);
 
@@ -184,6 +185,7 @@
         if (!entries || !entries.length) { cleanup(); renderCategoryLink(best); return; }
         var pick = entries[Math.floor(Math.random() * entries.length)];
         var purl = (pick.product && pick.product.url) || catUrl;
+        pick.compact = true; pick.setAttribute('compact', ''); // keep it the compact size
         wrap.appendChild(pick); // move the real card element (its .product prop survives → it re-renders)
         cleanup();
         var btn = document.createElement('a');
