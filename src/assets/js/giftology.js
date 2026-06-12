@@ -164,6 +164,9 @@
       var list = document.createElement('salla-products-list');
       list.setAttribute('source', 'categories');
       list.setAttribute('source-value', '[' + catId + ']'); // Salla wants a JSON array of ids
+      // limit disables infinite-scroll → forces an immediate API fetch (otherwise the
+      // off-screen list waits for the viewport to reach it and never loads here)
+      list.setAttribute('limit', '24');
       host.appendChild(list);
       document.body.appendChild(host);
 
