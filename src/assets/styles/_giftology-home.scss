@@ -268,10 +268,10 @@
   .gly-hero h1{font-size:2.5rem}
   .gly-cat{width:104px}
   .gly-cat-ic{width:90px;height:90px}
-  /* tighten the crowded mobile header so the logo keeps its aspect ratio */
+  /* mobile header: logo pinned right (RTL inline-start), icons spaced neatly on the left */
   .gly-nav{gap:.5rem}
-  .gly-icons{gap:.25rem}
-  .gly-ibtn{width:38px;height:38px}
+  .gly-icons{gap:.7rem}
+  .gly-ibtn{width:40px;height:40px}
   .gly-brand img{height:42px}
   .gly-header.solid .gly-brand img{height:38px}
 }
