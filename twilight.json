@@ -1382,24 +1382,10 @@
             "maxLength": 600
         },
         {
-            "type": "string",
-            "icon": "sicon-link",
-            "label": "رابط حساب تيك توك (اختياري)",
-            "multilanguage": false,
-            "id": "gly_tiktok",
-            "value": null,
-            "required": false,
-            "format": "text",
-            "description": "يظهر في تذييل الصفحة بجانب إنستغرام وواتساب.",
-            "placeholder": "https://www.tiktok.com/@...",
-            "minLength": 0,
-            "maxLength": 300
-        },
-        {
             "type": "static",
             "id": "gly-label-footer",
             "format": "label",
-            "labelHTML": "<b style='font-size:14px'>جيفتولوجي — التذييل (الفوتر)</b><br><span style='font-size:12px;opacity:.75'>نبذة المتجر، روابط التواصل الاجتماعي، ووسائل الدفع الظاهرة بالأسفل.</span>"
+            "labelHTML": "<b style='font-size:14px'>جيفتولوجي — التذييل (الفوتر)</b><br><span style='font-size:12px;opacity:.75'>نبذة المتجر، طرق التواصل (بريد/واتساب/إنستغرام)، ووسائل الدفع الظاهرة بالأسفل.</span>"
         },
         {
             "type": "string",
@@ -1414,42 +1400,6 @@
             "minLength": 0,
             "maxLength": 300,
             "description": "اتركها فارغة لاستخدام وصف المتجر الافتراضي."
-        },
-        {
-            "type": "string",
-            "format": "text",
-            "icon": "sicon-link",
-            "label": "رابط منصة X (تويتر)",
-            "id": "gly_x",
-            "value": null,
-            "required": false,
-            "placeholder": "https://x.com/...",
-            "minLength": 0,
-            "maxLength": 600
-        },
-        {
-            "type": "string",
-            "format": "text",
-            "icon": "sicon-link",
-            "label": "رابط سناب شات",
-            "id": "gly_snapchat",
-            "value": null,
-            "required": false,
-            "placeholder": "https://snapchat.com/add/...",
-            "minLength": 0,
-            "maxLength": 600
-        },
-        {
-            "type": "string",
-            "format": "text",
-            "icon": "sicon-link",
-            "label": "رابط فيسبوك",
-            "id": "gly_facebook",
-            "value": null,
-            "required": false,
-            "placeholder": "https://facebook.com/...",
-            "minLength": 0,
-            "maxLength": 600
         },
         {
             "type": "static",

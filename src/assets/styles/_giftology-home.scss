@@ -69,6 +69,11 @@
 .gly-icons salla-user-menu .s-user-menu-avatar-wrap img,
 .gly-icons salla-user-menu img[class*="avatar"]{width:38px!important;height:38px!important;border-radius:50%!important;object-fit:cover;display:block}
 
+/* language / currency switcher (Salla native modal) — match the icon row */
+.gly-icons salla-localization-modal{display:inline-flex;align-items:center;color:var(--gly-ink)}
+.gly-icons salla-localization-modal button{background:none!important;border:none!important;color:inherit!important;font:inherit;cursor:pointer;padding:.3rem .5rem;border-radius:999px;transition:.25s}
+.gly-icons salla-localization-modal button:hover{background:var(--gly-teal-wash);color:var(--gly-teal-ink)}
+
 /* mobile menu — full-screen overlay */
 .gly-mmenu{position:fixed;inset:0;z-index:85;background:var(--gly-cream);transform:translateX(100%);transition:.4s;display:flex;flex-direction:column;padding:5rem 2rem 2rem}
 .gly-mmenu.open{transform:none}
@@ -83,6 +88,11 @@
 .gly-msub.open .gly-msub-panel{max-height:60vh}
 .gly-msub-panel a{font-family:var(--gly-font-body)!important;font-size:1.12rem!important;font-weight:600!important;padding:.5rem 0 .5rem 1rem!important;border-bottom:none!important;color:var(--gly-soft)!important}
 .gly-msub-panel a:hover{color:var(--gly-teal-deep)!important}
+/* mobile language / currency row */
+.gly-mlang{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid rgba(74,63,53,.12)}
+.gly-mlang>span{font-family:var(--gly-font-display);font-size:1.4rem;font-weight:700;color:var(--gly-ink)}
+.gly-mlang salla-localization-modal{flex:0 0 auto}
+.gly-mlang salla-localization-modal button{background:var(--gly-teal-wash)!important;border:none!important;color:var(--gly-teal-ink)!important;font:inherit;cursor:pointer;padding:.5rem .9rem;border-radius:999px}
 
 /* ============================================================
    Hero (§5.3)
@@ -217,24 +227,16 @@
    ============================================================ */
 .gly-footer{background:#22302d;color:#cfe2df;padding:3.4rem 0 1.6rem;position:relative;overflow:hidden;margin-top:1rem;font-family:var(--gly-font-body)}
 .gly-footer__deco{position:absolute;inset:0;background-image:var(--gly-pat);background-size:420px;opacity:.5}
-.gly-fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:2rem;position:relative}
+.gly-fgrid{display:grid;grid-template-columns:1.6fr 1fr;gap:2rem;position:relative}
 .gly-fcontact a{display:flex;align-items:center;gap:.55rem}
 .gly-fcontact svg{width:18px;height:18px;flex:0 0 auto;color:var(--gly-gold-soft)}
 .gly-fcontact span{direction:ltr;unicode-bidi:plaintext;text-align:start}
 .gly-fbrand img{height:56px;width:auto;opacity:.95}
 .gly-fbrand p{margin:1rem 0;opacity:.72;font-size:.94rem;max-width:36ch;line-height:1.8}
-.gly-social{display:flex;gap:.6rem}
-.gly-social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:.25s}
-.gly-social a:hover{background:var(--gly-teal-deep);transform:translateY(-3px)}
-.gly-social svg{width:19px;height:19px;color:#fff}
 .gly-footer h5{font-family:var(--gly-font-display);color:#fff;font-size:1.15rem;margin-bottom:1rem;font-weight:700}
 .gly-footer ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:0;padding:0}
 .gly-footer ul a{opacity:.74;font-size:.94rem;transition:.2s}
 .gly-footer ul a:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
-/* footer section links (gly-cat-links partial) */
-.gly-flinks{display:flex;flex-direction:column;gap:.55rem}
-.gly-flinks a{opacity:.74;font-size:.94rem;transition:.2s}
-.gly-flinks a:hover{opacity:1;color:var(--gly-gold-soft);padding-inline-start:4px}
 .gly-fbottom{position:relative;margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.86rem;opacity:.78}
 .gly-pays{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
 .gly-pays span{background:rgba(255,255,255,.92);color:#22302d;font-weight:800;font-size:.68rem;padding:.3rem .55rem;border-radius:6px}
@@ -259,7 +261,8 @@
   .gly-steps{grid-template-columns:repeat(2,1fr)}
   .gly-step:not(:last-child)::after{display:none}
   .gly-menu{display:none}
-  /* burger stays home-excluded: it only shows via .gly-header--inner (never home) */
+  /* mobile (incl. home): the inline nav is hidden, so the burger takes over */
+  .gly-burger{display:grid}
   .gly-quiz__mag{display:none}
   .gly-fgrid{grid-template-columns:1fr 1fr}
 }
