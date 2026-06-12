@@ -11,14 +11,14 @@
 
 :root {
   /* ---- Raed theme variables (recolor the whole store) ---- */
-  --color-primary: #3f9c96;          /* deeper Tiffany — legible white text on buttons */
-  --color-primary-dark: #2c6f6a;
+  --color-primary: #35837d;          /* darker Tiffany — legible white text on buttons */
+  --color-primary-dark: #25605c;
   --color-primary-light: #61c5bf;    /* exact Tiffany as the light accent */
   --color-primary-reverse: #ffffff;
   --font-main: 'Tajawal', sans-serif;
 
   /* ---- Giftology design tokens (used by all gly- components) ---- */
-  --gly-teal:#61c5bf; --gly-teal-deep:#3f9c96; --gly-teal-ink:#2c6f6a; --gly-teal-wash:#e7f5f3;
+  --gly-teal:#61c5bf; --gly-teal-deep:#35837d; --gly-teal-ink:#25605c; --gly-teal-wash:#e7f5f3;
   --gly-ink:#33302b; --gly-soft:#6b645c; --gly-line:#4a3f35;
   --gly-gold:#c8a24a; --gly-gold-soft:#e7d39a;
   --gly-peach:#f9e6da; --gly-peach-deep:#f4c9b3;

@@ -144,7 +144,7 @@
    Custom gift — contact for quote (§5.5)
    ============================================================ */
 .gly-custom{padding:4rem 0;color:#fff;overflow:hidden}
-.gly-custom::before{content:"";position:absolute;inset:0;background:linear-gradient(150deg,#3f9c96,#2c6f6a);z-index:-2}
+.gly-custom::before{content:"";position:absolute;inset:0;background:linear-gradient(150deg,var(--gly-teal-deep),var(--gly-teal-ink));z-index:-2}
 .gly-custom__deco{position:absolute;inset:0;z-index:-1;background-image:var(--gly-pat);background-size:380px;opacity:.6;mix-blend-mode:overlay}
 .gly-custom__grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;align-items:center}
 .gly-custom h2{font-family:var(--gly-font-display);font-weight:700;font-size:clamp(2rem,3.8vw,3rem);line-height:1.25;margin:.4rem 0 .7rem}
@@ -202,7 +202,7 @@
 .gly-qresult p{margin:0 auto 1.1rem;color:var(--gly-soft)}
 /* finder → random-product result */
 .gly-qloading{display:flex;align-items:center;justify-content:center;gap:.5rem;color:var(--gly-soft);margin:0 auto 1.1rem}
-.gly-qloading::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid rgba(63,156,150,.25);border-top-color:var(--color-primary,#3f9c96);animation:gly-spin .8s linear infinite}
+.gly-qloading::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid rgba(63,156,150,.25);border-top-color:var(--color-primary,#35837d);animation:gly-spin .8s linear infinite}
 @keyframes gly-spin{to{transform:rotate(360deg)}}
 .gly-qpwrap{max-width:240px;margin:.2rem auto 0}
 .gly-qpwrap .s-product-card-entry{margin:0 auto;width:100%}
