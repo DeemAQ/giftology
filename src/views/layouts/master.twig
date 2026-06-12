@@ -86,10 +86,12 @@
     <style>
         :root {
             --font-main: '{{theme.font.name}}';
-            --color-primary: {{ theme.color.primary }};
-            --color-primary-dark: {{ theme.color.darker(0.15) }};
-            --color-primary-light: {{ theme.color.lighter(0.15) }};
-            --color-primary-reverse: {{ theme.color.reverse_text }};
+            /* Giftology brand store color — locked to #35837d (overrides the dashboard color).
+               To make it dashboard-driven again, restore the {{ '{{ theme.color.* }}' }} values. */
+            --color-primary: #35837d;
+            --color-primary-dark: #25605c;
+            --color-primary-light: #61c5bf;
+            --color-primary-reverse: #ffffff;
             /* Giftology watermark pattern */
             --gly-pat: url('{{ 'images/teal_pattern_with_bg.jpg'|asset }}');
         }
