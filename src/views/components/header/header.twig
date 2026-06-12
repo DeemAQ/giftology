@@ -50,6 +50,12 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </button>
 
+      {# language switcher — Salla native modal. Shown only when the store has 2+ languages
+         (otherwise the modal would list currencies only, which isn't a "language" button). #}
+      {% if store.settings.is_multilingual %}
+        <salla-localization-modal class="gly-loc" show-trigger></salla-localization-modal>
+      {% endif %}
+
       {# account — Salla user menu (handles login / profile) #}
       <salla-user-menu avatar-only show-trigger show-header></salla-user-menu>
 

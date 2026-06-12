@@ -1,14 +1,26 @@
 {#
   Giftology — Top promo bar  (§5.1)  — faithful port of the reference topbar.
-  Toggle via setting gly_show_promo (default on). The three phrases are
-  merchant-editable from the dashboard (gly_promo_1/2/3, multilanguage),
-  falling back to the locale strings when left empty.
+  Toggle via setting gly_show_promo (default on). Up to three phrases are
+  merchant-editable (gly_promo_1/2/3, multilanguage). Only the phrases that are
+  actually filled in are shown, so the merchant can use 1, 2 or 3. If ALL three
+  are left empty, the curated locale defaults (wrap / fast / shipping) are used.
+  The last shown phrase is emphasised (bold) when there is more than one.
 #}
 {% if theme.settings.get('gly_show_promo', true) %}
-  {% set gly_promo_1 = theme.settings.get('gly_promo_1') ?: trans('blocks.gly.promo.wrap') %}
-  {% set gly_promo_2 = theme.settings.get('gly_promo_2') ?: trans('blocks.gly.promo.fast') %}
-  {% set gly_promo_3 = theme.settings.get('gly_promo_3') ?: trans('blocks.gly.promo.shipping') %}
+  {% set gly_promos = [] %}
+  {% for key in ['gly_promo_1', 'gly_promo_2', 'gly_promo_3'] %}
+    {% set v = theme.settings.get(key) %}
+    {% if v %}{% set gly_promos = gly_promos|merge([v]) %}{% endif %}
+  {% endfor %}
+  {% if gly_promos is empty %}
+    {% set gly_promos = [trans('blocks.gly.promo.wrap'), trans('blocks.gly.promo.fast'), trans('blocks.gly.promo.shipping')] %}
+  {% endif %}
   <div class="gly-topbar" role="note">
-    ✦ {{ gly_promo_1 }} &nbsp;·&nbsp; {{ gly_promo_2 }} &nbsp;·&nbsp; <b>{{ gly_promo_3 }}</b> ✦
+    ✦&nbsp;
+    {%- for p in gly_promos -%}
+      {%- if not loop.first %} &nbsp;·&nbsp; {% endif -%}
+      {%- if loop.last and gly_promos|length > 1 %}<b>{{ p }}</b>{% else %}{{ p }}{% endif -%}
+    {%- endfor -%}
+    &nbsp;✦
   </div>
 {% endif %}
