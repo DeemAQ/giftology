@@ -47,8 +47,8 @@ importers:
         specifier: ^2.14.457
         version: 2.14.457(@jitsu/protocols@1.10.4)(@types/dlv@1.1.5)(webpack@5.107.1)
       '@salla.sa/twilight-tailwind-theme':
-        specifier: ^2.14.457
-        version: 2.14.457
+        specifier: ^2.14.467
+        version: 2.14.467
       '@tailwindcss/forms':
         specifier: ^0.5.11
         version: 0.5.11(tailwindcss@3.4.19)
@@ -933,42 +933,36 @@ packages:
     engines: {node: '>= 10.0.0'}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
 
   '@parcel/watcher-linux-arm-musl@2.5.6':
     resolution: {integrity: sha512-Ve3gUCG57nuUUSyjBq/MAM0CzArtuIOxsBdQ+ftz6ho8n7s1i9E1Nmk/xmP323r2YL0SONs1EuwqBp2u1k5fxg==}
     engines: {node: '>= 10.0.0'}
     cpu: [arm]
     os: [linux]
-    libc: [musl]
 
   '@parcel/watcher-linux-arm64-glibc@2.5.6':
     resolution: {integrity: sha512-f2g/DT3NhGPdBmMWYoxixqYr3v/UXcmLOYy16Bx0TM20Tchduwr4EaCbmxh1321TABqPGDpS8D/ggOTaljijOA==}
     engines: {node: '>= 10.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@parcel/watcher-linux-arm64-musl@2.5.6':
     resolution: {integrity: sha512-qb6naMDGlbCwdhLj6hgoVKJl2odL34z2sqkC7Z6kzir8b5W65WYDpLB6R06KabvZdgoHI/zxke4b3zR0wAbDTA==}
     engines: {node: '>= 10.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@parcel/watcher-linux-x64-glibc@2.5.6':
     resolution: {integrity: sha512-kbT5wvNQlx7NaGjzPFu8nVIW1rWqV780O7ZtkjuWaPUgpv2NMFpjYERVi0UYj1msZNyCzGlaCWEtzc+exjMGbQ==}
     engines: {node: '>= 10.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@parcel/watcher-linux-x64-musl@2.5.6':
     resolution: {integrity: sha512-1JRFeC+h7RdXwldHzTsmdtYR/Ku8SylLgTU/reMuqdVD7CtLwf0VR1FqeprZ0eHQkO0vqsbvFLXUmYm/uNKJBg==}
     engines: {node: '>= 10.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@parcel/watcher-win32-arm64@2.5.6':
     resolution: {integrity: sha512-3ukyebjc6eGlw9yRt678DxVF7rjXatWiHvTXqphZLvo7aC5NdEgFufVwjFfY51ijYEWpXbqF5jtrK275z52D4Q==}
@@ -1003,6 +997,9 @@ packages:
 
   '@salla.sa/twilight-tailwind-theme@2.14.457':
     resolution: {integrity: sha512-7icbFVSUeJBdGEj+Jcg+43Cct9ekCVOeTbW76WHrViAvHNgjMBropsAN6n9kmaTl+BRtxp029U2lUja+CQc0Pw==}
+
+  '@salla.sa/twilight-tailwind-theme@2.14.467':
+    resolution: {integrity: sha512-AFp7IVger8t0Evjj6E+Ef4sjLReter2BgHT9pa2jz3fXsgLg8EAb6edvf5ZzVU8JCcQXB3JCLIi3lJmvftojYA==}
 
   '@salla.sa/twilight@2.14.457':
     resolution: {integrity: sha512-mXorkJuvtISKelE0aioQqTfwicngVBC3ba6Bo0y87YHN1ym6NigKlTtiu/KuBbtQBanCH1D7tGVk3no2fl6l8w==}
@@ -4105,6 +4102,8 @@ snapshots:
       - webpack
 
   '@salla.sa/twilight-tailwind-theme@2.14.457': {}
+
+  '@salla.sa/twilight-tailwind-theme@2.14.467': {}
 
   '@salla.sa/twilight@2.14.457(@jitsu/protocols@1.10.4)(@types/dlv@1.1.5)(webpack@5.107.1)':
     dependencies:
