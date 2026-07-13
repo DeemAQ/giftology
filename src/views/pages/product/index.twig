@@ -73,6 +73,7 @@
   {% if store.settings.category.testimonial_enabled %}
     {% component 'home.testimonials' %}
   {% endif %}
+  {% hook 'product.index.after_testimonials' %}
 </section>
 {% endblock %}
 

@@ -106,7 +106,7 @@ module.exports = {
                 '-1': '-1',
             },
             screens            : {
-                'xxs': {'min': '380px', 'max': '479px'},
+                'xxs': '380px',
                 'xs': '480px',
             },
             backgroundOpacity  : {
