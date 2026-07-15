@@ -22,7 +22,7 @@
                 <div class="content-entry">
                     {{ page.content|raw }}
                 </div>
-                {% hook 'information_page.information_page' %}
+                <div class="s-blocks-wrapper s-information-page !mt-0">{% hook 'information_page.information_page' %}</div>
                 <salla-comments item-id="{{page.id}}" type="page"></salla-comments>
             </div>
         </div>
