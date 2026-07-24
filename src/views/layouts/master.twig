@@ -146,7 +146,12 @@
         <svg class="gly-msub-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
       </button>
       <div class="gly-msub-panel">
-        {% include 'components.home.gly-cat-links' %}
+        {# live category tree (categories + their subcategories) is fetched from Salla
+           and rendered here by giftology.js → initCatMenu(). The curated tile links
+           stay as the fallback shown until it loads (or if the request fails). #}
+        <div class="gly-catmenu" id="gly-catmenu">
+          {% include 'components.home.gly-cat-links' %}
+        </div>
       </div>
     </div>
   {% endif %}

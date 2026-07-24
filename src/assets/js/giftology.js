@@ -46,6 +46,20 @@
           btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
       });
+      // live category tree (rendered async by initCatMenu): tap a parent to
+      // expand/collapse its subcategories; tap any real link to close the drawer
+      var catbox = document.getElementById('gly-catmenu');
+      if (catbox) {
+        catbox.addEventListener('click', function (e) {
+          var row = e.target.closest('.gly-catrow');
+          if (row) {
+            var open = row.parentNode.classList.toggle('open');
+            row.setAttribute('aria-expanded', open ? 'true' : 'false');
+            return;
+          }
+          if (e.target.closest('a')) closeMenu();
+        });
+      }
     }
 
     /* ---- reveal-on-scroll ---- */
@@ -69,7 +83,50 @@
 
     /* ---- product-list count ("X في هذا القسم") ---- */
     initProductCount();
+
+    /* ---- live category tree in the mobile drawer ---- */
+    initCatMenu();
   });
+
+  /* ===================== CATEGORY MENU ===================== */
+  /* Fetch the store's real category tree (categories + subcategories) from Salla
+     and render it as a gly accordion inside the drawer's "الأقسام" panel. The
+     server-rendered tile links stay as a fallback until this succeeds. */
+  function initCatMenu() {
+    var box = document.getElementById('gly-catmenu');
+    if (!box || typeof salla === 'undefined' || !salla.onReady) return;
+    salla.onReady(function () {
+      if (!salla.api || !salla.api.component || !salla.api.component.getMenus) return;
+      salla.api.component.getMenus().then(function (res) {
+        var menus = res && res.data;
+        if (!menus || !menus.length) return; // keep the fallback tile links
+        var allText = (salla.lang && salla.lang.get) ? salla.lang.get('blocks.home.display_all') : 'الكل';
+        box.innerHTML = '<ul class="gly-catlist">' +
+          menus.map(function (m) { return catNode(m, allText); }).join('') + '</ul>';
+      }).catch(function () { /* leave the fallback tile links in place */ });
+    });
+  }
+
+  // one menu node → <li>; recurses so any depth of subcategories collapses the same way
+  function catNode(m, allText) {
+    var title = esc(m.title || '');
+    var url = esc(m.url || '#');
+    if (!(m.children && m.children.length)) {
+      return '<li class="gly-catitem"><a href="' + url + '">' + title + '</a></li>';
+    }
+    var inner = '<li><a href="' + url + '">' + esc(allText) + '</a></li>' +
+      m.children.map(function (c) { return catNode(c, allText); }).join('');
+    return '<li class="gly-catitem gly-has-sub">' +
+      '<button type="button" class="gly-catrow" aria-expanded="false"><span>' + title + '</span>' +
+      '<svg class="gly-catchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
+      '</button><ul class="gly-subcatlist">' + inner + '</ul></li>';
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
 
   /* keep the toolbar count in sync with the rendered product grid */
   function initProductCount() {

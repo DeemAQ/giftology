@@ -47,22 +47,6 @@
 .gly-menu a{font-weight:700;font-size:1rem;position:relative;padding:.3rem 0;color:var(--gly-ink)}
 .gly-menu a::after{content:"";position:absolute;inset-inline-start:0;bottom:-2px;height:2px;width:0;background:var(--gly-teal-deep);border-radius:2px;transition:.3s}
 .gly-menu a:hover::after,.gly-menu a.has::after{width:100%}
-/* store-category menu (<salla-menu topnav>) blended into the gly nav, with hover dropdowns.
-   Salla renders: ul.s-menu-topnav-list > li.s-menu-topnav-item[.has-children] > a (+ ul.sub-menu) */
-.gly-catmenu{display:inline-flex;align-items:center}
-.gly-catmenu .s-menu-topnav-list{display:flex;align-items:center;gap:1.7rem;margin:0;padding:0;list-style:none}
-.gly-catmenu .s-menu-topnav-item{position:relative}
-.gly-catmenu .s-menu-topnav-item>a{display:inline-flex;align-items:center;gap:.32rem;font-weight:700;font-size:1rem;color:var(--gly-ink);padding:.3rem 0;position:relative;transition:.25s;white-space:nowrap}
-.gly-catmenu .s-menu-topnav-item>a::after{content:"";position:absolute;inset-inline-start:0;bottom:-2px;height:2px;width:0;background:var(--gly-teal-deep);border-radius:2px;transition:.3s}
-.gly-catmenu .s-menu-topnav-item:hover>a{color:var(--gly-teal-deep)}
-.gly-catmenu .s-menu-topnav-item:hover>a::after{width:100%}
-.gly-catmenu .sub-menu{position:absolute;top:100%;inset-inline-start:0;min-width:210px;background:#fff;border:1px solid rgba(74,63,53,.08);border-radius:16px;box-shadow:var(--gly-shadow-md);padding:.5rem;margin:.55rem 0 0;list-style:none;opacity:0;visibility:hidden;transform:translateY(6px);transition:.22s;z-index:80}
-.gly-catmenu .s-menu-topnav-item:hover>.sub-menu{opacity:1;visibility:visible;transform:translateY(0)}
-.gly-catmenu .sub-menu li{position:relative}
-.gly-catmenu .sub-menu a{display:block;padding:.55rem .8rem;border-radius:10px;font-weight:600;font-size:.93rem;color:var(--gly-ink);transition:.2s;white-space:nowrap}
-.gly-catmenu .sub-menu a:hover{background:var(--gly-teal-wash);color:var(--gly-teal-ink)}
-/* deeper nesting opens to the side */
-.gly-catmenu .sub-menu .sub-menu{top:0;inset-inline-start:100%;margin:0 .3rem}
 .gly-icons{display:flex;gap:.9rem;align-items:center}
 .gly-ibtn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--gly-ink);transition:.25s;position:relative;background:none;border:none}
 .gly-ibtn:hover{background:var(--gly-teal-wash);color:var(--gly-teal-ink)}
@@ -104,6 +88,18 @@
 .gly-msub.open .gly-msub-panel{max-height:60vh}
 .gly-msub-panel a{font-family:var(--gly-font-body)!important;font-size:1.12rem!important;font-weight:600!important;padding:.5rem 0 .5rem 1rem!important;border-bottom:none!important;color:var(--gly-soft)!important}
 .gly-msub-panel a:hover{color:var(--gly-teal-deep)!important}
+/* live category tree (categories + subcategories) rendered by giftology.js initCatMenu()
+   inside the drawer "الأقسام" panel. Scoped + !important so it beats .gly-msub-panel a. */
+.gly-msub.open .gly-msub-panel{overflow-y:auto}
+.gly-catmenu .gly-catlist,.gly-catmenu .gly-subcatlist{list-style:none;margin:0;padding:0}
+.gly-catmenu .gly-catitem>a,.gly-catmenu .gly-catrow{display:flex!important;align-items:center;justify-content:space-between;gap:.6rem;width:100%;font-family:var(--gly-font-body)!important;font-weight:700!important;font-size:1.15rem!important;color:var(--gly-soft)!important;padding:.5rem 0!important;background:none;border:none!important;cursor:pointer;text-align:start;text-decoration:none}
+.gly-catmenu .gly-catitem>a:hover,.gly-catmenu .gly-catrow:hover{color:var(--gly-teal-deep)!important}
+.gly-catmenu .gly-catchev{width:18px;height:18px;transition:transform .3s;flex:0 0 auto}
+.gly-catmenu .gly-catitem.open>.gly-catrow .gly-catchev{transform:rotate(180deg)}
+.gly-catmenu .gly-subcatlist{display:none;padding-inline-start:.9rem;margin-inline-start:.3rem;border-inline-start:1.5px solid rgba(74,63,53,.12)}
+.gly-catmenu .gly-catitem.open>.gly-subcatlist{display:block}
+.gly-catmenu .gly-subcatlist a{display:block!important;font-size:1rem!important;font-weight:600!important;color:var(--gly-soft)!important;padding:.4rem 0!important;border:none!important;text-decoration:none}
+.gly-catmenu .gly-subcatlist a:hover{color:var(--gly-teal-deep)!important}
 
 /* ============================================================
    Hero (§5.3)
@@ -283,7 +279,6 @@
   .gly-step:not(:last-child)::after{display:none}
   .gly-menu{display:none}
   /* mobile (incl. home): the inline nav is hidden, so the burger takes over */
-  .gly-catmenu{display:none}
   .gly-burger{display:grid}
   .gly-quiz__mag{display:none}
   .gly-fgrid{grid-template-columns:1fr 1fr}
