@@ -27,6 +27,16 @@
     {% endif %}
     {# kept for products.js (it sets the title on fetch); visually hidden #}
     <h1 id="page-main-title" class="sr-only">{{ (category and category.name) ? category.name : page.title|raw }}</h1>
+
+    {# Subcategory chips — parent categories (e.g. Newborn → Baby Girl / Baby Boy) list their
+       Salla children (category.sub_categories) as pills. Leaf categories have none, so nothing shows. #}
+    {% if category.sub_categories is defined and category.sub_categories is not empty %}
+      <nav class="gly-subcats gly-reveal" aria-label="{{ category.name }}">
+        {% for sc in category.sub_categories %}
+          <a class="gly-subcat" href="{{ sc.url }}">{{ sc.name }}</a>
+        {% endfor %}
+      </nav>
+    {% endif %}
   </div>
 
   <div class="s-blocks-wrapper s-before-products-list !mt-0">{% hook 'product.index.before_products_group_with_filter' %}</div>

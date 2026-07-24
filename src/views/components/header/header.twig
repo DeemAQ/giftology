@@ -35,7 +35,11 @@
         {% endif %}
       </a>
 
-      {# desktop menu — store header menu (dashboard-managed) with fallback #}
+      {# store categories with subcategory dropdowns (dashboard header menu) — shown on
+         every page (unlike the section anchors, which are homepage-only) #}
+      <salla-menu source="header" topnav class="gly-catmenu"></salla-menu>
+
+      {# homepage section links — hidden on inner pages via .gly-header--inner #}
       <div class="gly-menu">
         {% for item in gly_nav %}
           <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.title }}</a>
