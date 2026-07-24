@@ -86,40 +86,75 @@
 
     /* ---- live category tree in the mobile drawer ---- */
     initCatMenu();
+
+    /* ---- subcategory chips on the category page ---- */
+    initSubcatPills();
   });
 
-  /* ===================== CATEGORY MENU ===================== */
-  /* Fetch the store's real category tree (categories + subcategories) from Salla
-     and render it as a gly accordion inside the drawer's "الأقسام" panel. The
-     server-rendered tile links stay as a fallback until this succeeds. */
-  function initCatMenu() {
-    var box = document.getElementById('gly-catmenu');
-    if (!box || typeof salla === 'undefined' || !salla.onReady) return;
-    salla.onReady(function () {
-      if (!salla.api || !salla.api.component || !salla.api.component.getMenus) return;
-      salla.api.component.getMenus().then(function (res) {
-        var menus = res && res.data;
-        if (!menus || !menus.length) return; // keep the fallback tile links
-        var allText = (salla.lang && salla.lang.get) ? salla.lang.get('blocks.home.display_all') : 'الكل';
-        box.innerHTML = '<ul class="gly-catlist">' +
-          menus.map(function (m) { return catNode(m, allText); }).join('') + '</ul>';
-      }).catch(function () { /* leave the fallback tile links in place */ });
+  /* Fetch categories via Salla's category API. `salla.api.product.categories()` returns
+     the whole tree (each node carries `sub_categories`); passing an id returns that one
+     category (with its `sub_categories`). Returns a promise of the raw `data`. */
+  function fetchCategories(id) {
+    if (typeof salla === 'undefined' || !salla.onReady) return Promise.reject();
+    return new Promise(function (resolve, reject) {
+      salla.onReady(function () {
+        if (!salla.api || !salla.api.product || !salla.api.product.categories) { reject(); return; }
+        salla.api.product.categories(id).then(function (res) { resolve(res && res.data); }).catch(reject);
+      });
     });
   }
 
-  // one menu node → <li>; recurses so any depth of subcategories collapses the same way
+  // node name / children are tolerant of both category (name/sub_categories) and menu (title/children) shapes
+  function catName(m) { return m.name || m.title || ''; }
+  function catKids(m) { return m.sub_categories || m.children || []; }
+
+  /* ===================== CATEGORY MENU ===================== */
+  /* Render the real category tree (categories + subcategories) as a gly accordion inside
+     the drawer's "الأقسام" panel. The server-rendered tile links stay as the fallback. */
+  function initCatMenu() {
+    var box = document.getElementById('gly-catmenu');
+    if (!box) return;
+    fetchCategories().then(function (cats) {
+      if (!cats || !cats.length) return; // keep the fallback tile links
+      var allText = (salla.lang && salla.lang.get) ? salla.lang.get('blocks.home.display_all') : 'الكل';
+      box.innerHTML = '<ul class="gly-catlist">' +
+        cats.map(function (m) { return catNode(m, allText); }).join('') + '</ul>';
+    }).catch(function () { /* leave the fallback tile links in place */ });
+  }
+
+  // one category node → <li>; recurses so any depth of subcategories collapses the same way
   function catNode(m, allText) {
-    var title = esc(m.title || '');
+    var title = esc(catName(m));
     var url = esc(m.url || '#');
-    if (!(m.children && m.children.length)) {
+    var kids = catKids(m);
+    if (!kids.length) {
       return '<li class="gly-catitem"><a href="' + url + '">' + title + '</a></li>';
     }
     var inner = '<li><a href="' + url + '">' + esc(allText) + '</a></li>' +
-      m.children.map(function (c) { return catNode(c, allText); }).join('');
+      kids.map(function (c) { return catNode(c, allText); }).join('');
     return '<li class="gly-catitem gly-has-sub">' +
       '<button type="button" class="gly-catrow" aria-expanded="false"><span>' + title + '</span>' +
       '<svg class="gly-catchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
       '</button><ul class="gly-subcatlist">' + inner + '</ul></li>';
+  }
+
+  /* ===================== SUBCATEGORY PILLS ===================== */
+  /* On a category page, show its direct subcategories as pills. Uses server-rendered
+     chips when present; otherwise fetches them via the category id. */
+  function initSubcatPills() {
+    var nav = document.getElementById('gly-subcats');
+    if (!nav || nav.children.length) return; // missing, or already server-rendered
+    var id = nav.getAttribute('data-cat-id');
+    if (!id) return;
+    fetchCategories(id).then(function (data) {
+      // categories(id) → a single category object; be tolerant if an array comes back
+      var cat = Array.isArray(data) ? data[0] : data;
+      var subs = cat && catKids(cat);
+      if (!subs || !subs.length) return;
+      nav.innerHTML = subs.map(function (s) {
+        return '<a class="gly-subcat" href="' + esc(s.url) + '">' + esc(catName(s)) + '</a>';
+      }).join('');
+    }).catch(function () {});
   }
 
   function esc(s) {

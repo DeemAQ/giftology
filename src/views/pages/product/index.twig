@@ -28,13 +28,16 @@
     {# kept for products.js (it sets the title on fetch); visually hidden #}
     <h1 id="page-main-title" class="sr-only">{{ (category and category.name) ? category.name : page.title|raw }}</h1>
 
-    {# Subcategory chips — parent categories (e.g. Newborn → Baby Girl / Baby Boy) list their
-       Salla children (category.sub_categories) as pills. Leaf categories have none, so nothing shows. #}
-    {% if category.sub_categories is defined and category.sub_categories is not empty %}
-      <nav class="gly-subcats gly-reveal" aria-label="{{ category.name }}">
-        {% for sc in category.sub_categories %}
-          <a class="gly-subcat" href="{{ sc.url }}">{{ sc.name }}</a>
-        {% endfor %}
+    {# Subcategory chips (e.g. Newborn → Baby Girl / Baby Boy). If Salla renders
+       category.sub_categories server-side we use it; otherwise giftology.js fills this
+       in via salla.api.product.categories(id). data-cat-id feeds that client-side fetch. #}
+    {% if category and category.id %}
+      <nav class="gly-subcats gly-reveal" id="gly-subcats" data-cat-id="{{ category.id }}" aria-label="{{ category.name }}">
+        {% if category.sub_categories is defined and category.sub_categories is not empty %}
+          {% for sc in category.sub_categories %}
+            <a class="gly-subcat" href="{{ sc.url }}">{{ sc.name }}</a>
+          {% endfor %}
+        {% endif %}
       </nav>
     {% endif %}
   </div>
