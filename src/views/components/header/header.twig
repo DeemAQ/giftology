@@ -38,7 +38,7 @@
       {# desktop menu — store header menu (dashboard-managed) with fallback #}
       <div class="gly-menu">
         {% for item in gly_nav %}
-          <a href="{{ item.url }}"{{ loop.first ? ' class="has"' : '' }}>{{ item.title }}</a>
+          <a href="{{ item.url }}">{{ item.title }}</a>
         {% endfor %}
       </div>
     </div>
