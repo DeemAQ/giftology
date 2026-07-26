@@ -10,6 +10,7 @@
 
 /* subcategory chips (.subcats): a parent category's children as pills (e.g. Newborn → Baby Girl/Boy) */
 .gly-subcats{display:flex;flex-wrap:wrap;gap:.6rem;margin:.4rem 0 1.4rem}
+.gly-subcats:empty{display:none}
 .gly-subcat{display:inline-flex;align-items:center;font-weight:700;font-size:.92rem;padding:.5rem 1.15rem;border-radius:50px;border:1.6px solid rgba(74,63,53,.16);background:#fff;color:var(--gly-ink);transition:.25s;white-space:nowrap}
 .gly-subcat:hover{border-color:var(--gly-teal-deep);color:var(--gly-teal-ink);background:var(--gly-teal-wash)}
 

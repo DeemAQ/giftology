@@ -93,11 +93,16 @@
 .gly-msub.open .gly-msub-panel{overflow-y:auto}
 .gly-catmenu{display:flex;flex-direction:column}  /* fallback tile links stack vertically too */
 .gly-catmenu .gly-catlist,.gly-catmenu .gly-subcatlist{list-style:none;margin:0;padding:0}
-.gly-catmenu .gly-catitem>a,.gly-catmenu .gly-catrow{display:flex!important;align-items:center;justify-content:space-between;gap:.6rem;width:100%;font-family:var(--gly-font-body)!important;font-weight:700!important;font-size:1.15rem!important;color:var(--gly-soft)!important;padding:.5rem 0!important;background:none;border:none!important;cursor:pointer;text-align:start;text-decoration:none}
+/* NOTE: physical left/right + [dir=rtl] overrides on purpose — postcss-preset-env
+   compiles logical props (inline-start / text-align:start) into LTR-only physical CSS,
+   which put the subcategory indent on the wrong side in RTL. */
+.gly-catmenu .gly-catitem>a,.gly-catmenu .gly-catrow{display:flex!important;align-items:center;justify-content:space-between;gap:.6rem;width:100%;font-family:var(--gly-font-body)!important;font-weight:700!important;font-size:1.15rem!important;color:var(--gly-soft)!important;padding:.5rem 0!important;background:none;border:none!important;cursor:pointer;text-align:left;text-decoration:none}
+[dir="rtl"] .gly-catmenu .gly-catitem>a,[dir="rtl"] .gly-catmenu .gly-catrow{text-align:right}
 .gly-catmenu .gly-catitem>a:hover,.gly-catmenu .gly-catrow:hover{color:var(--gly-teal-deep)!important}
 .gly-catmenu .gly-catchev{width:18px;height:18px;transition:transform .3s;flex:0 0 auto}
 .gly-catmenu .gly-catitem.open>.gly-catrow .gly-catchev{transform:rotate(180deg)}
-.gly-catmenu .gly-subcatlist{display:none;padding-inline-start:.9rem;margin-inline-start:.3rem;border-inline-start:1.5px solid rgba(74,63,53,.12)}
+.gly-catmenu .gly-subcatlist{display:none;padding-left:.9rem;margin-left:.3rem;border-left:1.5px solid rgba(74,63,53,.12)}
+[dir="rtl"] .gly-catmenu .gly-subcatlist{padding-left:0;margin-left:0;border-left:0;padding-right:.9rem;margin-right:.3rem;border-right:1.5px solid rgba(74,63,53,.12)}
 .gly-catmenu .gly-catitem.open>.gly-subcatlist{display:block}
 .gly-catmenu .gly-subcatlist a{display:block!important;font-size:1rem!important;font-weight:600!important;color:var(--gly-soft)!important;padding:.4rem 0!important;border:none!important;text-decoration:none}
 .gly-catmenu .gly-subcatlist a:hover{color:var(--gly-teal-deep)!important}

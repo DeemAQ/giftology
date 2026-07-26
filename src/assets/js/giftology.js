@@ -144,7 +144,9 @@
   function initSubcatPills() {
     var nav = document.getElementById('gly-subcats');
     if (!nav || nav.children.length) return; // missing, or already server-rendered
-    var id = nav.getAttribute('data-cat-id');
+    // Twig may not expose category.id — fall back to the /c{id} URL segment
+    var id = nav.getAttribute('data-cat-id') ||
+      (window.location.pathname.match(/\/c(\d+)(?:[\/?#]|$)/) || [])[1];
     if (!id) return;
     fetchCategories(id).then(function (data) {
       // categories(id) → a single category object; be tolerant if an array comes back
