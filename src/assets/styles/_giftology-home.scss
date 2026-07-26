@@ -91,6 +91,7 @@
 /* live category tree (categories + subcategories) rendered by giftology.js initCatMenu()
    inside the drawer "الأقسام" panel. Scoped + !important so it beats .gly-msub-panel a. */
 .gly-msub.open .gly-msub-panel{overflow-y:auto}
+.gly-catmenu{display:flex;flex-direction:column}  /* fallback tile links stack vertically too */
 .gly-catmenu .gly-catlist,.gly-catmenu .gly-subcatlist{list-style:none;margin:0;padding:0}
 .gly-catmenu .gly-catitem>a,.gly-catmenu .gly-catrow{display:flex!important;align-items:center;justify-content:space-between;gap:.6rem;width:100%;font-family:var(--gly-font-body)!important;font-weight:700!important;font-size:1.15rem!important;color:var(--gly-soft)!important;padding:.5rem 0!important;background:none;border:none!important;cursor:pointer;text-align:start;text-decoration:none}
 .gly-catmenu .gly-catitem>a:hover,.gly-catmenu .gly-catrow:hover{color:var(--gly-teal-deep)!important}
